@@ -135,6 +135,6 @@ a {
 }
 
 .options > button:active {
-    transition: 0.4s;
-    background: #0112c7;
-  }
+  transition: 0.4s;
+  background: #0112c7;
+}

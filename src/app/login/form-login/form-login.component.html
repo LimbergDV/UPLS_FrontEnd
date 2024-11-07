@@ -18,15 +18,15 @@
       <button>Iniciar Sesión</button>
     </form>
 
-    <div class="options">
+    <div class="options" *ngIf="flag; else donor">
       <p>¿No tienes cuenta? <a href="">Regístrate</a></p>
-      <button>Soy donador</button>
+      <button (click)="isDonor()">Soy donador</button>
     </div>
 
-    <ng-template>
+    <ng-template #donor>
       <div class="options">
         <p>¿No tienes cuenta? <a href="">Regístrate</a></p>
-        <button>Soy donatario</button>
+        <button (click)="isDonee()">Soy donatario</button>
       </div>
     </ng-template>
   </div>
