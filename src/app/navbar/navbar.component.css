@@ -62,3 +62,6 @@
   filter: brightness(0) saturate(100%) invert(26%) sepia(97%) saturate(7320%) hue-rotate(346deg) brightness(90%) contrast(93%);
 }
 
+.elements-left a:hover{
+  color: rgb(255, 1, 1);
+}
