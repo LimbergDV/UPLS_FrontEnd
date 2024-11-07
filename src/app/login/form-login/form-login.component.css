@@ -111,8 +111,17 @@ form > button:active {
   object-fit: cover;
 }
 
-a {
+.options > p {
+  display: inline;
+}
+
+.link {
   color: #0015ff;
+  text-decoration: underline;
+}
+
+.link:hover {
+  cursor: pointer;
 }
 
 .options > button {
