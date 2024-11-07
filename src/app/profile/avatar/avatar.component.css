@@ -1,0 +1,48 @@
+.card-avatar{
+  display: flex;
+  align-items: center;
+  margin-top: 80px;
+  margin-left: 170px;
+}
+
+
+.image-content{
+  margin-right: 30px;
+}
+
+.name-content{
+  font-family: "Poppins", sans-serif;
+}
+
+.name-content h1 {
+  font-weight: 600;
+}
+
+.name-content h2{
+  font-weight: 300;
+}
+
+.name-content h1,
+.name-content h2 {
+  line-height: .7;
+}
+
+.edit-image-button{
+  border: none;
+  width: 250px;
+  line-height: 2.2;
+  padding: 0 20px;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+  border-radius: 10px;
+  background-color: #4182F9;
+  font-weight: 650;
+  font-family: "Poppins", sans-serif;
+  margin-left: 300px;
+  cursor: pointer;
+}
+
+.edit-image{
+  margin-left: 165px;
+}
