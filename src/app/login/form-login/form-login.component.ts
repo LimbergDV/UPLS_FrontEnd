@@ -10,9 +10,11 @@ export class FormLoginComponent {
 
   isDonor(): void {
     this.flag = false;
+    console.log(this.flag)
   }
 
   isDonee(): void {
     this.flag = true;
+    console.log(this.flag)
   }
 }

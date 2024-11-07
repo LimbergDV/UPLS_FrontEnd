@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormLoginComponent } from './form-login/form-login.component';
-import { ViewComponent } from './view-form/view.component';
-
-
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     FormLoginComponent,
-    ViewComponent
   ],
   imports: [
     CommonModule
