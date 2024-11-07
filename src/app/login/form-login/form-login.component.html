@@ -1,0 +1,37 @@
+<div class="content-login">
+  <div class="form-content">
+    <div class="header-form">
+      <img src="logo.png" alt="logo" />
+      <h1>¡BIENVENIDO!</h1>
+      <p>Por favor, inicia sesión. Si no tienes una cuenta ¡Crea una!</p>
+    </div>
+
+    <form>
+      <div class="input">
+        <label for="">Correo</label> <br />
+        <input type="email" placeholder="Ingresa tu correo" /> <br />
+      </div>
+      <div class="input">
+        <label for="">Contraseña</label> <br />
+        <input type="password" placeholder="Ingresa tu contraseña" /> <br />
+      </div>
+      <button>Iniciar Sesión</button>
+    </form>
+
+    <div class="options" *ngIf="flag; else donor">
+      <p>¿No tienes cuenta? <a href="">Regístrate</a></p>
+      <button (click)="isDonor()">Soy donador</button>
+    </div>
+
+    <ng-template #donor>
+      <div class="options">
+        <p>¿No tienes cuenta? <a href="">Regístrate</a></p>
+        <button (click)="isDonee()">Soy donatario</button>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="image">
+    <img src="Imagelogin.png" alt="imgen" />
+  </div>
+</div>

@@ -3,3 +3,7 @@
 html, body {
   background-color: white;
 }
+body {
+    margin: 0;
+    padding: 0;
+}
