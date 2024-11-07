@@ -1,0 +1,26 @@
+.card-avatar{
+  display: flex;
+  align-items: center;
+}
+
+
+.image-content{
+  margin-right: 30px;
+}
+
+.name-content{
+  font-family: "Poppins", sans-serif;
+}
+
+.name-content h1 {
+  font-weight: 600;
+}
+
+.name-content h2{
+  font-weight: 300;
+}
+
+.name-content h1,
+.name-content h2 {
+  line-height: .7;
+}
