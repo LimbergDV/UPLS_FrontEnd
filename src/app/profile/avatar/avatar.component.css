@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   margin-top: 80px;
-  margin-left: 250px;
+  margin-left: 170px;
 }
 
 
@@ -41,4 +41,8 @@
   font-family: "Poppins", sans-serif;
   margin-left: 300px;
   cursor: pointer;
+}
+
+.edit-image{
+  margin-left: 165px;
 }
