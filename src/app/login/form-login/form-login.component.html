@@ -19,13 +19,13 @@
     </form>
 
     <div class="options" *ngIf="flag; else donor"> <br>
-      <p>¿No tienes cuenta? </p><p class="link" routerLink="/">Regístrate como donatario</p> <br><br>
+      <p>¿No tienes cuenta? </p><p class="link" routerLink="/signUp">Regístrate como donatario</p> <br><br>
       <button (click)="isDonor()">Soy donador</button>
     </div>
 
     <ng-template #donor>
       <div class="options"> <br>
-        <p>¿No tienes cuenta? </p><p class="link" routerLink="/">Regístrate como donador</p> <br> <br>
+        <p>¿No tienes cuenta? </p><p class="link" routerLink="/signUp">Regístrate como donador</p> <br> <br>
         <button (click)="isDonee()">Soy donatario</button>
       </div>
     </ng-template>

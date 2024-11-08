@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormRegisterComponent } from './form-register/form-register.component';
 import { FormsModule } from '@angular/forms'
+import { RouterLink } from '@angular/router';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms'
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterLink
   ],exports: [FormRegisterComponent]
   
 })
