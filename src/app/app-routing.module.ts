@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormLoginComponent } from './login/form-login/form-login.component';
+import { ViewProfileComponent } from './profile/view-profile/view-profile.component';
 
-const routes: Routes = [{ path: '', component: FormLoginComponent }];
+const routes: Routes = [{ path: '', component: FormLoginComponent },
+  {path:'profile', component: ViewProfileComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
