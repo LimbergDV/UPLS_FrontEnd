@@ -1,0 +1,104 @@
+.info-title{
+  margin-left: 20vh;
+  margin-top: 3vh;
+}
+
+.form-account-info{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 160px;
+  margin-top: 50px;
+  font-family: "Poppins", sans-serif;
+}
+
+.input {
+  width: 100%;
+  text-align: start;
+  margin-bottom: 20px;
+}
+
+label {
+  margin-left: .5%;
+  font-weight: 500;
+  font-weight: 400;
+}
+
+input {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 517px;
+  padding: 12px 0 12px 12px;
+  border-radius: 6px;
+  border: none;
+  border: 1px #00000048 solid;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.content-account-rigth, .content-account-left{
+  width: 70%;
+}
+
+.edit-password-button{
+  display: block;
+  border: none;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 250px;
+  border-radius: 10px;
+  border: none;
+  background-color: #4182F9;
+  color: white;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 650;
+  line-height: 2.2;
+  padding: 0 20px;
+  font-size: 20px;
+}
+
+.password-button{
+  margin-top: 20px;
+}
+
+.edit-profile-button {
+  display: block;
+  border: none;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 250px;
+  border-radius: 10px;
+  border: none;
+  background-color: #4182F9;
+  color: white;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 650;
+  line-height: 2.2;
+  padding: 0 20px;
+  font-size: 20px;
+}
+
+.delete-profile-button {
+  display: block;
+  border: none;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 250px;
+  border-radius: 10px;
+  border: none;
+  background-color: #CF0000;
+  color: white;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 650;
+  line-height: 2.2;
+  padding: 0 20px;
+  font-size: 20px;
+}
+
+.profile-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 81%;
+  margin-top: 43px;
+}
