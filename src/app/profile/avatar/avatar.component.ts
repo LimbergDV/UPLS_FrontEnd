@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import Cropper from 'cropperjs';
 import Swal from 'sweetalert2';
 
 @Component({

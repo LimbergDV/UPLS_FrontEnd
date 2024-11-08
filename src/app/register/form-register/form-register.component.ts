@@ -25,7 +25,7 @@ export class FormRegisterComponent {
     first_name: '',
     last_name: '',
     phone_number: '',
-    bloodType: 'O+',
+    blood_type: 'O+',
   };
 
   toggleDonorDonee(event: Event): void {
@@ -86,7 +86,7 @@ export class FormRegisterComponent {
         id_donor = response.id_donor;
         const newProfile: iProfile = {
           id_donor: id_donor,
-          bloodType: this.userData.bloodType || '',
+          bloodType: this.userData.blood_type || '',
         };
 
         this._donorsService.registerProfile(newProfile).subscribe({

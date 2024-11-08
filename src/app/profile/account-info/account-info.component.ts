@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DonorsService } from '../../service/donors.service';
+import { iDonor } from '../../models/i-donor';
 
 @Component({
   selector: 'app-account-info',
@@ -14,7 +15,8 @@ export class AccountInfoComponent implements OnInit{
    this.__sevice.getDonor().subscribe({
     next:(response) => {
       console.log(response);
-    }, error:(error) => {
+    },
+    error:(error) => {
       console.log(error);
     }
    });

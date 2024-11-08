@@ -32,7 +32,7 @@
 
             <div class="input" *ngIf="!flag">
                 <label for="bloodType">Tipo de Sangre</label> <br />
-                <select name="bloodType" [(ngModel)]="userData.bloodType" required>
+                <select name="bloodType" [(ngModel)]="userData" required>
                     <option value="" disabled selected hidden>Selecciona tu tipo de sangre</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
@@ -44,7 +44,7 @@
                     <option value="O-">O-</option>
                 </select>
             </div>
-            
+
 
             <div class="input">
                 <label for="email">Correo</label> <br />
