@@ -14,7 +14,7 @@
   </div>
   <div class="profile-buttons">
     <button class="edit-profile-button">Editar</button>
-    <button class="delete-profile-button">Borrar cuenta</button>
+    <button class="delete-profile-button" (click)="deleteAccount()">Borrar cuenta</button>
   </div>
 </div>
 <div class="content-account-rigth">
@@ -23,7 +23,7 @@
     <input type="text" placeholder="Aquí va la dirección" /> <br />
     <div class="password-button">
       <label for="">Contraseña:</label>
-      <button class="edit-password-button">Editar contraseña</button>
+      <button class="edit-password-button" (click)="editPassword()">Editar contraseña</button>
     </div>
   </div>
 </div>

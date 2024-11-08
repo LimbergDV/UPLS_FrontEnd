@@ -6,7 +6,6 @@ import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { EditAvatarComponent } from './edit-avatar/edit-avatar.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
-import { NavbarComponent } from '../navbar/navbar.component';
 
 
 
@@ -20,7 +19,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
     EditPasswordComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class ProfileModule { }
