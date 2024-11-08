@@ -7,5 +7,12 @@ export interface iDonor {
     locality: string;
     distrit: string;
     phone_number: string;
-  
+    id_donor?: string,
+    address?: string,
+    healt_status?: string,
+    availability?: string,
+    donatios_number?: string,
+    last_donation?: string,
+    blood_type?: string,
+    photo?: string
 }
