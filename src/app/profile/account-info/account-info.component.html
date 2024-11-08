@@ -1,30 +1,46 @@
 <div class="form-account-info">
   <div class="content-account-left">
-  <div class="input">
-    <label for="">Nombre:</label> <br />
-    <input type="text" placeholder="Aquí va el nombre" /> <br />
-  </div>
-  <div class="input">
-    <label for="">Apellidos.</label> <br />
-    <input type="text" placeholder="Aquí van los apellidos" /> <br />
-  </div>
-  <div class="input">
-    <label for="">Teléfono:</label> <br />
-    <input type="text" placeholder="Aquí va el teléfono" /> <br />
-  </div>
-  <div class="profile-buttons">
-    <button class="edit-profile-button">Editar</button>
-    <button class="delete-profile-button" (click)="deleteAccount()">Borrar cuenta</button>
-  </div>
-</div>
-<div class="content-account-rigth">
-  <div class="input">
-    <label for="">Dirección:</label> <br />
-    <input type="text" placeholder="Aquí va la dirección" /> <br />
-    <div class="password-button">
-      <label for="">Contraseña:</label>
-      <button class="edit-password-button" (click)="editPassword()">Editar contraseña</button>
+    <div class="input">
+      <label for="">Nombre:</label> <br />
+      <input type="text" placeholder="Aquí va el nombre" /> <br />
+    </div>
+    <div class="input">
+      <label for="">Apellidos.</label> <br />
+      <input type="text" placeholder="Aquí van los apellidos" /> <br />
+    </div>
+    <div class="input">
+      <label for="">Teléfono:</label> <br />
+      <input type="text" placeholder="Aquí va el teléfono" /> <br />
+    </div>
+    <div class="input">
+      <label for="">Código Postal:</label> <br />
+      <input type="text" placeholder="Aquí va el CP" /> <br />
+    </div>
+    <div class="profile-buttons">
+      <button class="edit-profile-button">Editar</button>
+      <button class="delete-profile-button" (click)="deleteAccount()">
+        Borrar cuenta
+      </button>
     </div>
   </div>
-</div>
+  <div class="content-account-rigth">
+    <div class="input">
+      <label for="">Estado:</label> <br />
+      <input type="text" placeholder="Aquí va el estado" /> <br />
+    </div>
+    <div class="input">
+      <label for="">Municipio:</label> <br />
+      <input type="text" placeholder="Aquí va el municipio" /> <br />
+    </div>
+    <div class="input">
+      <label for="">Colonia:</label> <br />
+      <input type="text" placeholder="Aquí va la colonia" /> <br />
+    </div>
+    <div class="password-button">
+      <label for="">Contraseña:</label>
+      <button class="edit-password-button" (click)="editPassword()">
+        Editar contraseña
+      </button>
+    </div>
+  </div>
 </div>
