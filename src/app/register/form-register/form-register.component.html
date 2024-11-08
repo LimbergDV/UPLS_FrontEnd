@@ -30,7 +30,7 @@
                 <br />
             </div>
 
-            <div class="input">
+            <div class="input" *ngIf="!flag">
                 <label for="bloodType">Tipo de Sangre</label> <br />
                 <select name="bloodType" [(ngModel)]="userData.bloodType" required>
                     <option value="" disabled selected hidden>Selecciona tu tipo de sangre</option>
@@ -69,13 +69,12 @@
         <div class="options">
             <br />
             <p>¿Ya tienes cuenta?</p>
-            <p class="link" routerLink="/login">Inicia sesión</p>
+            <p class="link" routerLink="/">Inicia sesión</p>
         </div>
 
         <div class="options">
             <button type="button" [ngClass]="flag ? 'donatario' : 'donante'" (click)="toggleDonorDonee($event)">
                 {{ flag ? 'Registrar como Donatario' : 'Registrar como Donante' }}
-
             </button>
         </div>
 
