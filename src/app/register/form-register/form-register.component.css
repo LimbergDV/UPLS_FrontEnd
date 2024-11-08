@@ -5,10 +5,14 @@
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   font-style: normal;
+  height:100vh 
 }
 
+/*hay muchos inputs, solo deja los que estan en el maquetado, vamos a ver como insertamos solo una parte en la bd
+para que despues en el apartado de perfil lo pueda agregar despues*/
 .form-content {
-  width: 40%;
+  width: 50%;
+  height: 100%;
   background-color: #fff;
   padding: 3%;
   display: flex;
@@ -19,7 +23,7 @@
 }
 
 .header-form > img {
-  width: 250px;
+  width: 200px;
 }
 
 .header-form > p {
@@ -122,11 +126,12 @@ form > button:active {
 }
 
 .options > button {
+  background-color: #ea454c;
   color: #fff;
   border: none;
   width: 355px;
   padding: 10px 0;
-  border-radius: 12px;  
+  border-radius: 12px;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -135,16 +140,16 @@ form > button:active {
 }
 
 .options > button.donatario {
-  background: #0015ff;
+  background: #0015ff;  /* Azul */
 }
 
 .options > button.donante {
-  background: #ea454c;
+  background: #ea454c;  /* Rojo */
 }
 
 .options > button:hover {
-  transform: scale(0.97); 
-  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.35);  
+  transform: scale(0.97);
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.35);
 }
 
 .options > button:active {
@@ -152,19 +157,19 @@ form > button:active {
 }
 
 .options > button.donatario:active {
-  background: #0015cc;  
+  background: #0015cc;
 }
 
 .options > button.donante:active {
-  background: #b43239;  
+  background: #b43239;
 }
 
 
 .input-group-name, .input-group-location {
   display: flex;
-  gap: 20px; /* Espacio entre los campos dentro de cada grupo */
+  gap: 20px; 
   width: 75%;
-  margin-bottom: 0px; /* Espacio entre los grupos */
+  margin-bottom: 0px; 
 }
 
 /* Estilos generales para los inputs */
@@ -173,7 +178,7 @@ form > button:active {
 }
 
 .input label {
-  margin-left: 3%;
+  margin-left: 1%;
   font-weight: 500;
 }
 
@@ -185,5 +190,42 @@ form > button:active {
   border: 1px solid #00000048;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
 }
+
+/* Estilo para el select */
+.input select {
+  margin-top: 5px;
+  width: 102%;
+  padding: 12px 0 12px 12px;
+  border-radius: 12px;
+  border: 1px solid #00000048;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  background-color: #fff; /* Fondo blanco por defecto */
+  color: #636364; /* Texto gris oscuro por defecto */
+  cursor: pointer;
+}
+
+/* Asegura que el placeholder sea visible en gris claro */
+.input select option[value=""][disabled] {
+  color: #aaa; /* Color gris para el placeholder */
+  font-style: italic; /* Cursiva para el texto del placeholder */
+  background-color: #f5f5f5; /* Color de fondo del select */
+}
+
+/* Estilos para las opciones seleccionables */
+.input select option {
+  color: #000; /* Texto negro para las opciones seleccionables */
+  background-color: #fff; /* Fondo blanco para las opciones seleccionables */
+}
+
+/* Efecto de hover y focus en el select */
+.input select:hover,
+.input select:focus {
+  outline: none;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
 
 
