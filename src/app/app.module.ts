@@ -6,6 +6,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginModule } from './login/login.module';
 import { ProfileModule } from './profile/profile.module';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterModule } from './register/register.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     LoginModule,
     ProfileModule,
-    HttpClientModule
+    HttpClientModule,
+    RegisterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
