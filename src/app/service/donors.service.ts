@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { iAccess } from '../models/iAccess';
 import { iDonor } from '../models/i-donor';
+import { iProfile } from '../models/i-profile';
 
 @Injectable({
   providedIn: 'root',

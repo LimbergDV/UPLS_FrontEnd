@@ -4,11 +4,12 @@ import { DonorsService } from '../../service/donors.service';
 import Swal from 'sweetalert2';
 import { iDonee } from '../../models/i-donee';
 import { iDonor } from '../../models/i-donor';
+import { iProfile } from '../../models/i-profile';
 
 @Component({
   selector: 'app-form-register',
   templateUrl: './form-register.component.html',
-  styleUrls: ['./form-register.component.css']
+  styleUrls: ['./form-register.component.css'],
 })
 export class FormRegisterComponent {
   constructor(
@@ -16,25 +17,21 @@ export class FormRegisterComponent {
     private _donorsService: DonorsService
   ) {}
 
-  // Flag para determinar si es donante o donatario
-  flag: boolean = true; // 'true' para Donatario, 'false' para Donante
+  flag: boolean = true;
 
-  // Dependiendo de la opción, se define uno u otro tipo de objeto
   userData: iDonee | iDonor = {
     email: '',
     password: '',
     first_name: '',
     last_name: '',
-    state: '',
-    locality: '',
-    distrit: '',
     phone_number: '',
+    bloodType: 'O+',
   };
 
-  toggleDonorDonee(event: Event) {
-    event.preventDefault(); 
-    this.flag = !this.flag; 
-}
+  toggleDonorDonee(event: Event): void {
+    event.preventDefault();
+    this.flag = !this.flag;
+  }
 
   // Registrar Donatario
   registerDonee(): void {
@@ -43,10 +40,7 @@ export class FormRegisterComponent {
       password: this.userData.password,
       first_name: this.userData.first_name,
       last_name: this.userData.last_name,
-      state: this.userData.state,
-      locality: this.userData.locality,
-      distrit: this.userData.distrit,
-      phone_number: this.userData.phone_number
+      phone_number: this.userData.phone_number,
     };
 
     this._doneesService.register(newDonee).subscribe({
@@ -54,46 +48,64 @@ export class FormRegisterComponent {
         Swal.fire({
           title: '¡Registro Exitoso!',
           text: 'Te has registrado como Donatario correctamente.',
-          icon: 'success'
+          icon: 'success',
         });
       },
       error: (err) => {
+        console.log(err);
         if (err.status === 400) {
           Swal.fire({
             title: '¡Error!',
             text: 'Hubo un problema con los datos de registro.',
-            icon: 'error'
+            icon: 'error',
           });
         } else {
           Swal.fire({
             title: '¡Opss...!',
             text: 'Hubo un error inesperado, intenta de nuevo más tarde.',
-            icon: 'warning'
+            icon: 'warning',
           });
         }
-      }
+      },
     });
   }
 
   // Registrar Donante
   registerDonor(): void {
+    let id_donor: number = 0;
     const newDonor: iDonor = {
       email: this.userData.email,
       password: this.userData.password,
       first_name: this.userData.first_name,
       last_name: this.userData.last_name,
-      state: this.userData.state,
-      locality: this.userData.locality,
-      distrit: this.userData.distrit,
-      phone_number: this.userData.phone_number
+      phone_number: this.userData.phone_number,
     };
 
     this._donorsService.register(newDonor).subscribe({
       next: (response) => {
-        Swal.fire({
-          title: '¡Registro Exitoso!',
-          text: 'Te has registrado como Donante correctamente.',
-          icon: 'success'
+        id_donor = response.id_donor;
+        const newProfile: iProfile = {
+          id_donor: id_donor,
+          bloodType: this.userData.bloodType || '',
+        };
+
+        this._donorsService.registerProfile(newProfile).subscribe({
+          next: (response) => {
+            console.log(response);
+            Swal.fire({
+              title: '¡Registro Exitoso!',
+              text: 'Te has registrado como Donante correctamente.',
+              icon: 'success',
+            });
+          },
+          error: (err) => {
+            console.log(err);
+            Swal.fire({
+              title: '¡Opss...!',
+              text: 'Hubo un error inesperado, intenta de nuevo más tarde.',
+              icon: 'warning',
+            });
+          },
         });
       },
       error: (err) => {
@@ -101,25 +113,25 @@ export class FormRegisterComponent {
           Swal.fire({
             title: '¡Error!',
             text: 'Hubo un problema con los datos de registro.',
-            icon: 'error'
+            icon: 'error',
           });
         } else {
           Swal.fire({
             title: '¡Opss...!',
             text: 'Hubo un error inesperado, intenta de nuevo más tarde.',
-            icon: 'warning'
+            icon: 'warning',
           });
         }
-      }
+      },
     });
   }
 
   // Función principal de registro, dependiendo de la elección
   signUp(): void {
     if (this.flag) {
-      this.registerDonee();  // Registrar como Donatario
+      this.registerDonee(); // Registrar como Donatario
     } else {
-      this.registerDonor();  // Registrar como Donante
+      this.registerDonor(); // Registrar como Donante
     }
   }
 }
