@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import Cropper from 'cropperjs';
 import { SequenceError } from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -8,48 +9,6 @@ import Swal from 'sweetalert2';
   styleUrl: './account-info.component.css'
 })
 export class AccountInfoComponent {
-  editPassword() {
-    Swal.fire({
-      title: 'Editar Contraseña',
-      html: `
-        <input type="password" id="newPassword" class="swal2-input" placeholder="Nueva Contraseña">
-        <input type="password" id="confirmPassword" class="swal2-input" placeholder="Confirmar Contraseña">
-      `,
-      showCancelButton: true,
-      confirmButtonText: 'Guardar',
-      cancelButtonText: 'Cancelar',
-      preConfirm: () => {
-        const newPassword = (document.getElementById('newPassword') as HTMLInputElement).value;
-        const confirmPassword = (document.getElementById('confirmPassword') as HTMLInputElement).value;
-
-        if (!newPassword || !confirmPassword) {
-          Swal.showValidationMessage('Por favor ingresa ambas contraseñas');
-          return false;
-        }
-        if (newPassword !== confirmPassword) {
-          Swal.showValidationMessage('Las contraseñas no coinciden');
-          return false;
-        }
-
-        return newPassword;
-      }
-    }).then((result) => {
-      if (result.isConfirmed && result.value) {
-        const newPassword = result.value;
-
-        this.updatePassword(newPassword);
-
-        Swal.fire('¡Éxito!', 'Tu contraseña ha sido actualizada.', 'success');
-      }
-    });
-  }
-
-  updatePassword(newPassword: string) {
-    console.log('Nueva contraseña:', newPassword);
-
-  }
-
-
   deleteAccount(){
     Swal.fire({
       title: "¿Estás seguro de eliminar tu cuenta?",
@@ -80,6 +39,5 @@ export class AccountInfoComponent {
       }
     });
   }
-
 
 }
