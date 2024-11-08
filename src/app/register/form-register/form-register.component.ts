@@ -16,25 +16,21 @@ export class FormRegisterComponent {
     private _donorsService: DonorsService
   ) {}
 
-  // Flag para determinar si es donante o donatario
-  flag: boolean = true; // 'true' para Donatario, 'false' para Donante
+  flag: boolean = true; 
 
-  // Dependiendo de la opción, se define uno u otro tipo de objeto
   userData: iDonee | iDonor = {
     email: '',
     password: '',
     first_name: '',
     last_name: '',
-    state: '',
-    locality: '',
-    distrit: '',
     phone_number: '',
+    bloodType: undefined
   };
 
-  toggleDonorDonee(event: Event) {
-    event.preventDefault(); 
-    this.flag = !this.flag; 
-}
+  toggleDonorDonee(event: Event): void {
+    event.preventDefault();  
+    this.flag = !this.flag;
+  }
 
   // Registrar Donatario
   registerDonee(): void {
@@ -43,9 +39,6 @@ export class FormRegisterComponent {
       password: this.userData.password,
       first_name: this.userData.first_name,
       last_name: this.userData.last_name,
-      state: this.userData.state,
-      locality: this.userData.locality,
-      distrit: this.userData.distrit,
       phone_number: this.userData.phone_number
     };
 
@@ -58,6 +51,7 @@ export class FormRegisterComponent {
         });
       },
       error: (err) => {
+        console.log(err);
         if (err.status === 400) {
           Swal.fire({
             title: '¡Error!',
@@ -65,6 +59,7 @@ export class FormRegisterComponent {
             icon: 'error'
           });
         } else {
+          
           Swal.fire({
             title: '¡Opss...!',
             text: 'Hubo un error inesperado, intenta de nuevo más tarde.',
@@ -82,10 +77,8 @@ export class FormRegisterComponent {
       password: this.userData.password,
       first_name: this.userData.first_name,
       last_name: this.userData.last_name,
-      state: this.userData.state,
-      locality: this.userData.locality,
-      distrit: this.userData.distrit,
-      phone_number: this.userData.phone_number
+      phone_number: this.userData.phone_number,
+      bloodType: this.userData.bloodType
     };
 
     this._donorsService.register(newDonor).subscribe({
