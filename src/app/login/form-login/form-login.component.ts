@@ -42,6 +42,7 @@ export class FormLoginComponent {
         next: (response) => {
           const token = response.access_token;
           localStorage.setItem('token', token);
+          localStorage.setItem('rolAccess', 'donee');
         },
         error: (err) => {
           if (err.status == 404) {
@@ -66,6 +67,7 @@ export class FormLoginComponent {
         next: (response) => {
           const token = response.access_token;
           localStorage.setItem('token', token);
+          localStorage.setItem('rolAccess', 'donor');
         },
         error: (err) => {
           if (err.status == 404) {

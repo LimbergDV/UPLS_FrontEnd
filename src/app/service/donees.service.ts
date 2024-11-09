@@ -9,6 +9,7 @@ import { iDonee } from '../models/i-donee';
 })
 export class DoneesService {
   private URL_BASE: string = 'http://localhost:5000/donees';
+  private token: string = localStorage.getItem('token') || '';
 
   constructor(private _http: HttpClient) {}
 
@@ -25,5 +26,11 @@ export class DoneesService {
     });
     return this._http.post(`${this.URL_BASE}/add`, newDonee, { headers });
   }
-  
+
+  getDonee(): Observable<iDonee> {
+    const headers = new HttpHeaders({
+      Authorizacion: `${this.token}`,
+    });
+    return this._http.get<iDonee>(`${this.URL_BASE}/profile`, { headers });
+  }
 }

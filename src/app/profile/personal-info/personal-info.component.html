@@ -4,16 +4,20 @@
 <div class="form-account-info">
   <div class="content-account-left">
     <div class="input">
-      <label for="">Nombre:</label> <br />
-      <input type="text" placeholder="Aquí va el nombre" /> <br />
+      <label for="first_name">Nombre:</label> <br />
+      <input type="text" name="first_name" [(ngModel)]="userData.first_name" /> <br />
     </div>
     <div class="input">
-      <label for="">Apellidos:</label> <br />
-      <input type="text" placeholder="Aquí van los apellidos" /> <br />
+      <label for="last_name">Apellidos:</label> <br />
+      <input type="text" name="last_name" [(ngModel)]="userData.last_name" /> <br />
     </div>
     <div class="input">
-      <label for="">Teléfono:</label> <br />
-      <input type="text" placeholder="Aquí va el teléfono" /> <br />
+      <label for="phone_number">Teléfono:</label> <br />
+      <input type="text" name="phone_number" [(ngModel)]="userData.phone_number" /> <br />
+    </div>
+    <div class="input">
+      <label for="email">Correo Electrónico:</label> <br />
+      <input type="email" [(ngModel)]="userData.email" /> <br />
     </div>
     <div class="password-button">
     </div>
@@ -28,8 +32,9 @@
   <div class="content-account-rigth">
     <div class="input">
       <label for="">Código Postal:</label> <br />
-      <input type="text" placeholder="Aquí va el CP" [(ngModel)]="postalCode"/> <br />
+      <input type="text" placeholder="Aquí va el CP" [(ngModel)]="postalCode"/> 
       <button (click)="searchAddress()">Buscar</button>
+      <br />
     </div>
     <div class="input">
       <label for="">Estado:</label> <br />

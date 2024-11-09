@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AddressService } from '../../service/address.service';
 import { iAddress } from '../../models/iAddress';
+import { iDonee } from '../../models/i-donee';
+import { iDonor } from '../../models/i-donor';
 
 @Component({
   selector: 'app-personal-info',
@@ -15,6 +17,15 @@ export class PersonalInfoComponent {
     locality: '',
     postal_code: '',
     distrits: [],
+  };
+
+  userData: iDonee | iDonor = {
+    email: '',
+    password: '',
+    first_name: '',
+    last_name: '',
+    phone_number: '',
+    blood_type: 'O+',
   };
 
   constructor(private _addressService: AddressService) {}

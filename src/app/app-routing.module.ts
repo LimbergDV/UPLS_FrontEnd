@@ -5,7 +5,7 @@ import { ViewProfileComponent } from './profile/view-profile/view-profile.compon
 import { FormRegisterComponent } from './register/form-register/form-register.component';
 
 const routes: Routes = [
-  { path: '', component: FormLoginComponent },
+  { path: 'signIn', component: FormLoginComponent },
   {path:'profile', component: ViewProfileComponent},
   {path: 'signUp', component: FormRegisterComponent}
 ];
