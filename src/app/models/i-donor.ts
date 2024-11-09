@@ -11,9 +11,9 @@ export interface iDonor {
     postal_code: string;
     distrit: string;
   };
-  healt_status?: string;
+  health_status?: string;
   availability?: string;
-  donatios_number?: string;
+  donations_number?: string;
   last_donation?: string;
   blood_type?: string;
   photo?: string;

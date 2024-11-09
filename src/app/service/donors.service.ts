@@ -10,7 +10,7 @@ import { iProfile } from '../models/i-profile';
 })
 export class DonorsService {
   private URL_BASE: string = 'http://localhost:5000/donors';
-  private token: string = localStorage.getItem('token') || "";
+  private token: string = localStorage.getItem('token') || '';
 
   constructor(private _http: HttpClient) {}
 
@@ -32,13 +32,27 @@ export class DonorsService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this._http.post(`http://localhost:5000/profile/add`, profile, { headers });
+    return this._http.post(`http://localhost:5000/profile/add`, profile, {
+      headers,
+    });
   }
 
-  getDonor(): Observable<iDonor>{
+  getDonor(): Observable<iDonor> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`,
+      Authorization: `Bearer ${this.token}`,
     });
-    return this._http.get<iDonor>(`http://localhost:5000/profile/profile`, { headers})
+    return this._http.get<iDonor>(`http://localhost:5000/profile/profile`, {
+      headers,
+    });
+  }
+
+  getPhoto() {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    return this._http.get(`http://localhost:5000/profile/photo`, {
+      headers,
+      responseType: 'blob',
+    });
   }
 }

@@ -112,4 +112,9 @@ select {
   justify-content: space-between;
   width: 81%;
   margin-top: 45px;
+  gap: 15px;
+}
+
+input:disabled, select:disabled, option:disabled {
+  color: #000;
 }

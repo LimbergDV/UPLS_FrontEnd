@@ -114,3 +114,7 @@ select {
   margin-top: 43px;
   gap: 15px;
 }
+
+input:disabled, select:disabled, option:disabled {
+  color: #000;
+}

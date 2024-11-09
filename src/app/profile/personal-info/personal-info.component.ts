@@ -48,13 +48,12 @@ export class PersonalInfoComponent {
         this.address.postal_code = this.userData.address?.postal_code || '';
         this.address.state = this.userData.address?.state || '';
         this.address.locality = this.userData.address?.locality || '';
-        this.address.distrits.push(this.userData.address?.distrit || '')
+        this.address.distrits.push(this.userData.address?.distrit || '');
       },
       error: (err) => {
         console.log(err);
       },
     });
-    
   }
 
   editPassword() {
@@ -113,4 +112,11 @@ export class PersonalInfoComponent {
       },
     });
   }
+
+  idDisabled: boolean = true;
+  editPersonalInfo() {
+    this.idDisabled = false;
+  }
+
+  saveInfo() {}
 }

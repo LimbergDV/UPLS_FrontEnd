@@ -5,24 +5,25 @@
   <div class="content-account-left">
     <div class="input">
       <label for="first_name">Nombre:</label> <br />
-      <input type="text" name="first_name" [(ngModel)]="userData.first_name" /> <br />
+      <input type="text" name="first_name" [(ngModel)]="userData.first_name" [disabled]="idDisabled"/> <br />
     </div>
     <div class="input">
       <label for="last_name">Apellidos:</label> <br />
-      <input type="text" name="last_name" [(ngModel)]="userData.last_name" /> <br />
+      <input type="text" name="last_name" [(ngModel)]="userData.last_name" [disabled]="idDisabled" /> <br />
     </div>
     <div class="input">
       <label for="phone_number">Teléfono:</label> <br />
-      <input type="text" name="phone_number" [(ngModel)]="userData.phone_number" /> <br />
+      <input type="text" name="phone_number" [(ngModel)]="userData.phone_number" [disabled]="idDisabled" /> <br />
     </div>
     <div class="input">
       <label for="email">Correo Electrónico:</label> <br />
-      <input type="email" [(ngModel)]="userData.email" /> <br />
+      <input type="email" [(ngModel)]="userData.email" [disabled]="idDisabled" /> <br />
     </div>
     <div class="password-button">
     </div>
     <div class="profile-buttons">
-      <button class="edit-profile-button">Editar</button>
+      <button class="edit-profile-button" (click)="editPersonalInfo()">Editar</button>
+      <button class="edit-profile-button" (click)="saveInfo()" [disabled]="idDisabled">Guardar</button>
       <button class="edit-password-button" (click)="editPassword()">
         Editar contraseña
       </button>
@@ -32,21 +33,21 @@
   <div class="content-account-rigth">
     <div class="input">
       <label for="postal_code">Código Postal:</label> <br />
-      <input type="text" name="postal_code" placeholder="000000" [(ngModel)]="address.postal_code"/> 
-      <button (click)="searchAddress()">Buscar</button>
+      <input type="text" name="postal_code" [disabled]="idDisabled" [(ngModel)]="address.postal_code"/> 
+      <button (click)="searchAddress()" [disabled]="idDisabled">Buscar</button>
       <br />
     </div>
     <div class="input">
       <label for="state">Estado:</label> <br />
-      <input type="text" name="state" placeholder="Estado" [(ngModel)]="address.state"/> <br />
+      <input type="text" name="state" [disabled]="idDisabled" [(ngModel)]="address.state"/> <br />
     </div>
     <div class="input">
       <label for="locality">Municipio:</label> <br />
-      <input type="text" name="locality" placeholder="Municipio" [(ngModel)]="address.locality" /> <br />
+      <input type="text" name="locality" [disabled]="idDisabled" [(ngModel)]="address.locality" /> <br />
     </div>
     <div class="input">
       <label for="distrit">Colonia:</label> <br />
-      <select name="distrit" [(ngModel)]="address.distrits[1]">
+      <select name="distrit" [(ngModel)]="address.distrits[1]" [disabled]="idDisabled">
         <option *ngFor="let distrit of address.distrits" [value]="distrit">{{ distrit }}</option>
       </select>
     </div>
