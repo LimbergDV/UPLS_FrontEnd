@@ -123,6 +123,46 @@ export class AvatarComponent implements OnInit {
   // Guarda la imagen recortada
   saveCroppedImage(croppedImage: string) {
     // Aquí puedes guardar la imagen recortada
-    console.log('Imagen recortada:', croppedImage);
+    const file = this.base64ToFile(croppedImage, `${this.donor.last_name}.png`);
+
+    // Ahora, envía el archivo al servicio
+    this._donorsService.addPhoto(file).subscribe(
+      (response) => {
+        console.log('Imagen enviada exitosamente', response);
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Foto actualizada',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      },
+      (error) => {
+        console.error('Error al enviar la imagen', error);
+        Swal.fire({
+          position: 'top',
+          icon: 'error',
+          title: 'Ocurrió un error',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    );
+  }
+
+  base64ToFile(base64: string, filename: string): File {
+    const arr = base64.split(',');
+    const match = arr[0].match(/:(.*?);/);
+    const mime = match ? match[1] : 'application/octet-stream'; // Proporciona un valor predeterminado
+
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
   }
 }

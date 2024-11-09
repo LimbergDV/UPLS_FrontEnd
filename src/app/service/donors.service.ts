@@ -55,4 +55,16 @@ export class DonorsService {
       responseType: 'blob',
     });
   }
+
+  addPhoto(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('photo', file); 
+  
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+  
+    return this._http.post(`http://localhost:5000/donors/photo`, formData, { headers });
+  }
+  
 }

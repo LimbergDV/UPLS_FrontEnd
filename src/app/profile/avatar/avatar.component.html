@@ -1,12 +1,14 @@
 <div class="card-avatar">
   <div class="image-content">
-    <img [src]="imagenSrc" alt="photo" class="img">
+    <img [src]="imagenSrc" alt="photo" class="img" />
   </div>
   <div class="name-content">
-    <h1>{{donor.first_name}} {{donor.last_name}}</h1>
-    <h2>{{donor.email}}</h2>
+    <h1>{{ donor.first_name }} {{ donor.last_name }}</h1>
+    <h2>{{ donor.email }}</h2>
   </div>
   <div class="edit-image">
-    <button class="edit-image-button" (click)="openImageEditor()">Editar foto</button>
+    <button class="edit-image-button" (click)="openImageEditor()">
+      Editar foto
+    </button>
   </div>
 </div>
