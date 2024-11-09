@@ -34,6 +34,17 @@ input {
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
+select {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 530px;
+  padding: 12px 0 12px 12px;
+  border-radius: 6px;
+  border: none;
+  border: 1px #00000048 solid;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
 .content-account-rigth, .content-account-left{
   width: 70%;
 }
@@ -101,4 +112,5 @@ input {
   justify-content: space-between;
   width: 81%;
   margin-top: 43px;
+  gap: 15px;
 }

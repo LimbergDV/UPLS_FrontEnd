@@ -37,8 +37,8 @@ export class DonorsService {
 
   getDonor(): Observable<iDonor>{
     const headers = new HttpHeaders({
-      'Authorizacion': `${this.token}`,
+      'Authorization': `Bearer ${this.token}`,
     });
-    return this._http.get<iDonor>(`${this.URL_BASE}/profile`, { headers})
+    return this._http.get<iDonor>(`http://localhost:5000/profile/profile`, { headers})
   }
 }

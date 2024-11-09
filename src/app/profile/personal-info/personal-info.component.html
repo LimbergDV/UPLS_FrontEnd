@@ -31,22 +31,24 @@
 
   <div class="content-account-rigth">
     <div class="input">
-      <label for="">Código Postal:</label> <br />
-      <input type="text" placeholder="Aquí va el CP" [(ngModel)]="postalCode"/> 
+      <label for="postal_code">Código Postal:</label> <br />
+      <input type="text" name="postal_code" placeholder="000000" [(ngModel)]="address.postal_code"/> 
       <button (click)="searchAddress()">Buscar</button>
       <br />
     </div>
     <div class="input">
-      <label for="">Estado:</label> <br />
-      <input type="text" placeholder="Aquí va el estado" /> <br />
+      <label for="state">Estado:</label> <br />
+      <input type="text" name="state" placeholder="Estado" [(ngModel)]="address.state"/> <br />
     </div>
     <div class="input">
-      <label for="">Municipio:</label> <br />
-      <input type="text" placeholder="Aquí va el municipio" /> <br />
+      <label for="locality">Municipio:</label> <br />
+      <input type="text" name="locality" placeholder="Municipio" [(ngModel)]="address.locality" /> <br />
     </div>
     <div class="input">
-      <label for="">Colonia:</label> <br />
-      <input type="text" placeholder="Aquí va la colonia" /> <br />
+      <label for="distrit">Colonia:</label> <br />
+      <select name="distrit" [(ngModel)]="address.distrits[1]">
+        <option *ngFor="let distrit of address.distrits" [value]="distrit">{{ distrit }}</option>
+      </select>
     </div>
   </div>
 </div>
