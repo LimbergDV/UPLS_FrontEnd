@@ -5,6 +5,8 @@ import { iAddress } from '../../models/iAddress';
 import { iDonee } from '../../models/i-donee';
 import { iDonor } from '../../models/i-donor';
 import { DonorsService } from '../../service/donors.service';
+import { Router } from '@angular/router';
+import { iAccess } from '../../models/iAccess';
 
 @Component({
   selector: 'app-personal-info',
@@ -36,7 +38,8 @@ export class PersonalInfoComponent {
 
   constructor(
     private _addressService: AddressService,
-    private _donorsService: DonorsService
+    private _donorsService: DonorsService,
+    private router: Router
   ) {
     this.getDonor();
   }
@@ -52,6 +55,9 @@ export class PersonalInfoComponent {
       },
       error: (err) => {
         console.log(err);
+        if (err.status == 401) {
+          this.router.navigate(['/signIn']);
+        }
       },
     });
   }
@@ -82,7 +88,6 @@ export class PersonalInfoComponent {
           Swal.showValidationMessage('Las contraseñas no coinciden');
           return false;
         }
-
         return newPassword;
       },
     }).then((result) => {
@@ -90,14 +95,26 @@ export class PersonalInfoComponent {
         const newPassword = result.value;
 
         this.updatePassword(newPassword);
-
-        Swal.fire('¡Éxito!', 'Tu contraseña ha sido actualizada.', 'success');
       }
     });
   }
 
   updatePassword(newPassword: string) {
-    console.log('Nueva contraseña:', newPassword);
+    const newAccess = {
+      credentials: {
+        email: this.userData.email,
+        password: newPassword,
+      },
+    };
+    this._donorsService.updatePersonalPSW(newAccess).subscribe({
+      next: (response) => {
+        Swal.fire('¡Éxito!', 'Tu contraseña ha sido actualizada.', 'success');
+        console.log(response);
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    });
   }
 
   searchAddress(): void {
@@ -118,5 +135,34 @@ export class PersonalInfoComponent {
     this.idDisabled = false;
   }
 
-  saveInfo() {}
+  saveInfo() {
+    const newData: iDonor = {
+      first_name: this.userData.first_name,
+      last_name: this.userData.last_name,
+      email: this.userData.email,
+      phone_number: this.userData.phone_number,
+      address: {
+        state: this.address.state,
+        locality: this.address.locality,
+        postal_code: this.address.postal_code,
+        distrit: this.address.distrits[1],
+      },
+    };
+    this._donorsService.updatePersonalInfo(newData).subscribe({
+      next: (response) => {
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Datos Actualizados',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        console.log(response);
+        this.idDisabled = true;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }

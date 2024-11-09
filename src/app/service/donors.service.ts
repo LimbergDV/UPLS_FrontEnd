@@ -58,13 +58,28 @@ export class DonorsService {
 
   addPhoto(file: File): Observable<any> {
     const formData = new FormData();
-    formData.append('photo', file); 
-  
+    formData.append('photo', file);
+
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-  
-    return this._http.post(`http://localhost:5000/donors/photo`, formData, { headers });
+
+    return this._http.post(`http://localhost:5000/donors/photo`, formData, {
+      headers,
+    });
   }
-  
+
+  updatePersonalInfo(newData: iDonor): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    return this._http.put(`${this.URL_BASE}/update`, newData, { headers });
+  }
+
+  updatePersonalPSW(newPSW: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    return this._http.put(`${this.URL_BASE}/update`, newPSW, { headers });
+  }
 }
