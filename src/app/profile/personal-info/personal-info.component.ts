@@ -112,8 +112,8 @@ export class PersonalInfoComponent {
         console.log(response);
       },
       error: (err) => {
-        console.log(err)
-      }
+        console.log(err);
+      },
     });
   }
 
@@ -158,11 +158,12 @@ export class PersonalInfoComponent {
           timer: 1500,
         });
         console.log(response);
-        this.idDisabled = true;
       },
       error: (err) => {
         console.log(err);
       },
     });
+
+    this.idDisabled = true;
   }
 }

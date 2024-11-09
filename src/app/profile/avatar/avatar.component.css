@@ -49,3 +49,8 @@
 .edit-image{
   margin-left: 165px;
 }
+
+button:hover {
+  transition: 0.4s;
+  transform: scale(0.95);
+}

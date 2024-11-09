@@ -118,3 +118,8 @@ select {
 input:disabled, select:disabled, option:disabled {
   color: #000;
 }
+
+button:hover {
+  transition: 0.4s;
+  transform: scale(0.95);
+}

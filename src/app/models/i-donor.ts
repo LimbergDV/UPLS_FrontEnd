@@ -1,9 +1,9 @@
 export interface iDonor {
-  first_name: string;
-  last_name: string;
-  email: string;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
   password?: string;
-  phone_number: string;
+  phone_number?: string;
   id_donor?: string;
   address?: {
     state: string;

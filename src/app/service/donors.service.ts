@@ -82,4 +82,11 @@ export class DonorsService {
     });
     return this._http.put(`${this.URL_BASE}/update`, newPSW, { headers });
   }
+
+  updateAccountInfo(newData: iDonor): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    return this._http.put(`http://localhost:5000/profile/update`, newData, { headers });
+  }
 }

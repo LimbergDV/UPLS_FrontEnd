@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DonorsService } from '../../service/donors.service';
 import { iDonor } from '../../models/i-donor';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-account-info',
@@ -9,17 +10,15 @@ import { iDonor } from '../../models/i-donor';
 })
 export class AccountInfoComponent implements OnInit {
   donor: iDonor = {
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: '',
-    phone_number: '',
+    blood_type: '',
+    health_status: '',
+    availability: '',
   };
 
-  constructor(private __sevice: DonorsService) {}
+  constructor(private _sevice: DonorsService) {}
 
   ngOnInit(): void {
-    this.__sevice.getDonor().subscribe({
+    this._sevice.getDonor().subscribe({
       next: (response) => {
         this.donor = response;
         console.log(this.donor);
@@ -36,5 +35,28 @@ export class AccountInfoComponent implements OnInit {
   }
 
   saveInfo() {
+    const newData: iDonor = {
+      health_status: this.donor.health_status,
+      blood_type: this.donor.blood_type,
+      availability: this.donor.availability,
+    };
+    console.log(newData);
+    this._sevice.updateAccountInfo(newData).subscribe({
+      next: (response) => {
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Datos Actualizados',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        console.log(response);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+
+    this.idDisabled = true;
   }
 }
