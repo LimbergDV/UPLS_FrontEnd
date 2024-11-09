@@ -28,7 +28,8 @@
   <div class="content-account-rigth">
     <div class="input">
       <label for="">Código Postal:</label> <br />
-      <input type="text" placeholder="Aquí va el CP" /> <br />
+      <input type="text" placeholder="Aquí va el CP" [(ngModel)]="postalCode"/> <br />
+      <button (click)="searchAddress()">Buscar</button>
     </div>
     <div class="input">
       <label for="">Estado:</label> <br />

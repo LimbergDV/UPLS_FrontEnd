@@ -28,6 +28,13 @@ export class DonorsService {
     return this._http.post(`${this.URL_BASE}/add`, newDonor, { headers });
   }
 
+  registerProfile(profile: iProfile): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this._http.post(`http://localhost:5000/profile/add`, profile, { headers });
+  }
+
   getDonor(): Observable<iDonor>{
     const headers = new HttpHeaders({
       'Authorizacion': `${this.token}`,

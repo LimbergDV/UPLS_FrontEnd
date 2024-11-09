@@ -6,6 +6,7 @@ import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { EditAvatarComponent } from './edit-avatar/edit-avatar.component';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -20,6 +21,7 @@ import { EditPasswordComponent } from './edit-password/edit-password.component';
   ],
   imports: [
     CommonModule,
+    FormsModule
   ]
 })
 export class ProfileModule { }

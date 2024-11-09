@@ -4,5 +4,5 @@ export interface iDonee {
     email: string;
     password: string;
     phone_number: string;
-    bloodType?: string;
+    blood_type?: string;
 }

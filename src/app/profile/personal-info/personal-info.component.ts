@@ -1,12 +1,24 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
+import { AddressService } from '../../service/address.service';
+import { iAddress } from '../../models/iAddress';
 
 @Component({
   selector: 'app-personal-info',
   templateUrl: './personal-info.component.html',
-  styleUrl: './personal-info.component.css'
+  styleUrl: './personal-info.component.css',
 })
 export class PersonalInfoComponent {
+  postalCode: string = '';
+  address: iAddress = {
+    state: '',
+    locality: '',
+    postal_code: '',
+    distrits: [],
+  };
+
+  constructor(private _addressService: AddressService) {}
+
   editPassword() {
     Swal.fire({
       title: 'Editar Contraseña',
@@ -18,8 +30,12 @@ export class PersonalInfoComponent {
       confirmButtonText: 'Guardar',
       cancelButtonText: 'Cancelar',
       preConfirm: () => {
-        const newPassword = (document.getElementById('newPassword') as HTMLInputElement).value;
-        const confirmPassword = (document.getElementById('confirmPassword') as HTMLInputElement).value;
+        const newPassword = (
+          document.getElementById('newPassword') as HTMLInputElement
+        ).value;
+        const confirmPassword = (
+          document.getElementById('confirmPassword') as HTMLInputElement
+        ).value;
 
         if (!newPassword || !confirmPassword) {
           Swal.showValidationMessage('Por favor ingresa ambas contraseñas');
@@ -31,7 +47,7 @@ export class PersonalInfoComponent {
         }
 
         return newPassword;
-      }
+      },
     }).then((result) => {
       if (result.isConfirmed && result.value) {
         const newPassword = result.value;
@@ -45,7 +61,18 @@ export class PersonalInfoComponent {
 
   updatePassword(newPassword: string) {
     console.log('Nueva contraseña:', newPassword);
-
   }
 
+  searchAddress(): void {
+    const postalCode = this.postalCode;
+    this._addressService.getAddress(postalCode).subscribe({
+      next: (response) => {
+        this.address = response;
+        console.log(this.address);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }
