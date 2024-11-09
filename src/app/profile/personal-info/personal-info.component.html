@@ -27,6 +27,9 @@
       <button class="edit-password-button" (click)="editPassword()">
         Editar contraseña
       </button>
+      <button class="delete-profile-button" (click)="deleteAccount()" *ngIf="rol_access == 'donee'">
+        Borrar cuenta
+      </button>
     </div>
   </div>
 

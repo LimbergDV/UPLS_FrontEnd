@@ -14,7 +14,7 @@
     <div class="profile-buttons">
       <button class="edit-profile-button" (click)="editAccountInfo()">Editar</button>
       <button class="edit-profile-button" (click)="saveInfo()" [disabled]="idDisabled">Guardar</button>
-      <button class="delete-profile-button" >
+      <button class="delete-profile-button" (click)="deleteAccount()">
         Borrar cuenta
       </button>
     </div>

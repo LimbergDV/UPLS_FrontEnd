@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DonorsService } from '../../service/donors.service';
 import { iDonor } from '../../models/i-donor';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-info',
@@ -15,7 +16,7 @@ export class AccountInfoComponent implements OnInit {
     availability: '',
   };
 
-  constructor(private _sevice: DonorsService) {}
+  constructor(private _sevice: DonorsService, private router: Router) {}
 
   ngOnInit(): void {
     this._sevice.getDonor().subscribe({
@@ -58,5 +59,39 @@ export class AccountInfoComponent implements OnInit {
     });
 
     this.idDisabled = true;
+  }
+
+  deleteAccount(): void {
+    Swal.fire({
+      title: '¿Estás seguro de que quieres eliminar tu cuenta?',
+      text: 'Todos los datos se borrarán y tendrás que empezar de nuevo!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar cuenta!',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._sevice.deleteAccount().subscribe({
+          next: (response) => {
+            console.log(response);
+            Swal.fire({
+              title: 'Eliminado!',
+              text: 'Gracias por ser parte del movimeinto.',
+              icon: 'success',
+            });
+            this.router.navigate(['/signUp']);
+          },
+          error: (err) => {
+            console.log(err);
+            Swal.fire({
+              title: 'Ocurrió un error!',
+              icon: 'error',
+            });
+          },
+        });
+      }
+    });
   }
 }

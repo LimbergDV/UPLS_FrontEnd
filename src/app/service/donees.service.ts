@@ -29,8 +29,39 @@ export class DoneesService {
 
   getDonee(): Observable<iDonee> {
     const headers = new HttpHeaders({
-      Authorizacion: `${this.token}`,
+      Authorization: `Bearer ${this.token}`,
     });
     return this._http.get<iDonee>(`${this.URL_BASE}/profile`, { headers });
+  }
+
+  getPhoto() {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    return this._http.get(`${this.URL_BASE}/photo`, {
+      headers,
+      responseType: 'blob',
+    });
+  }
+
+  updatePersonalInfo(newData: iDonee): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    return this._http.put(`${this.URL_BASE}/update`, newData, { headers });
+  }
+
+  updatePersonalPSW(newPSW: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    return this._http.put(`${this.URL_BASE}/update`, newPSW, { headers });
+  }
+
+  deleteAccount(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    return this._http.delete(`${this.URL_BASE}/deleteAccount`, { headers });
   }
 }

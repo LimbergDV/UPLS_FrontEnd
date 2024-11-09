@@ -7,6 +7,7 @@ import { iDonor } from '../../models/i-donor';
 import { DonorsService } from '../../service/donors.service';
 import { Router } from '@angular/router';
 import { iAccess } from '../../models/iAccess';
+import { DoneesService } from '../../service/donees.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -14,6 +15,8 @@ import { iAccess } from '../../models/iAccess';
   styleUrl: './personal-info.component.css',
 })
 export class PersonalInfoComponent {
+  rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
+
   address: iAddress = {
     state: '',
     locality: '',
@@ -39,13 +42,37 @@ export class PersonalInfoComponent {
   constructor(
     private _addressService: AddressService,
     private _donorsService: DonorsService,
+    private _doneesService: DoneesService,
     private router: Router
   ) {
-    this.getDonor();
+    if (this.rol_access == 'donor') {
+      this.getDonor();
+    }
+    if (this.rol_access == 'donee') {
+      this.getDonoe();
+    }
   }
 
   getDonor(): void {
     this._donorsService.getDonor().subscribe({
+      next: (respose) => {
+        this.userData = respose;
+        this.address.postal_code = this.userData.address?.postal_code || '';
+        this.address.state = this.userData.address?.state || '';
+        this.address.locality = this.userData.address?.locality || '';
+        this.address.distrits.push(this.userData.address?.distrit || '');
+      },
+      error: (err) => {
+        console.log(err);
+        if (err.status == 401) {
+          this.router.navigate(['/signIn']);
+        }
+      },
+    });
+  }
+
+  getDonoe(): void {
+    this._doneesService.getDonee().subscribe({
       next: (respose) => {
         this.userData = respose;
         this.address.postal_code = this.userData.address?.postal_code || '';
@@ -106,15 +133,31 @@ export class PersonalInfoComponent {
         password: newPassword,
       },
     };
-    this._donorsService.updatePersonalPSW(newAccess).subscribe({
-      next: (response) => {
-        Swal.fire('¡Éxito!', 'Tu contraseña ha sido actualizada.', 'success');
-        console.log(response);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+
+    if (this.rol_access == 'donor') {
+      this._donorsService.updatePersonalPSW(newAccess).subscribe({
+        next: (response) => {
+          Swal.fire('¡Éxito!', 'Tu contraseña ha sido actualizada.', 'success');
+          console.log(response);
+        },
+        error: (err) => {
+          console.log(err);
+          Swal.fire('Opss...!', 'Ocurrió un error.', 'error');
+        },
+      });
+    }
+    if (this.rol_access == 'donee') {
+      this._doneesService.updatePersonalPSW(newAccess).subscribe({
+        next: (response) => {
+          Swal.fire('¡Éxito!', 'Tu contraseña ha sido actualizada.', 'success');
+          console.log(response);
+        },
+        error: (err) => {
+          console.log(err);
+          Swal.fire('Opss...!', 'Ocurrió un error.', 'error');
+        },
+      });
+    }
   }
 
   searchAddress(): void {
@@ -148,22 +191,78 @@ export class PersonalInfoComponent {
         distrit: this.address.distrits[1],
       },
     };
-    this._donorsService.updatePersonalInfo(newData).subscribe({
-      next: (response) => {
-        Swal.fire({
-          position: 'top',
-          icon: 'success',
-          title: 'Datos Actualizados',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        console.log(response);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
 
-    this.idDisabled = true;
+    if (this.rol_access == 'donor') {
+      this._donorsService.updatePersonalInfo(newData).subscribe({
+        next: (response) => {
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Datos Actualizados',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          console.log(response);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+
+      this.idDisabled = true;
+    }
+    if (this.rol_access == 'donee') {
+      this._doneesService.updatePersonalInfo(newData).subscribe({
+        next: (response) => {
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Datos Actualizados',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          console.log(response);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+
+      this.idDisabled = true;
+    }
+  }
+
+  deleteAccount(): void {
+    Swal.fire({
+      title: '¿Estás seguro de que quieres eliminar tu cuenta?',
+      text: 'Todos los datos se borrarán y tendrás que empezar de nuevo!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar cuenta!',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._doneesService.deleteAccount().subscribe({
+          next: (response) => {
+            console.log(response);
+            Swal.fire({
+              title: 'Eliminado!',
+              text: 'Gracias por ser parte del movimeinto.',
+              icon: 'success',
+            });
+            this.router.navigate(['/signUp']);
+          },
+          error: (err) => {
+            console.log(err);
+            Swal.fire({
+              title: 'Ocurrió un error!',
+              icon: 'error',
+            });
+          },
+        });
+      }
+    });
   }
 }

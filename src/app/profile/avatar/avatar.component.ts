@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import { DonorsService } from '../../service/donors.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { iDonor } from '../../models/i-donor';
+import { DoneesService } from '../../service/donees.service';
+import { iDonee } from '../../models/i-donee';
 
 @Component({
   selector: 'app-avatar',
@@ -12,7 +14,9 @@ import { iDonor } from '../../models/i-donor';
 })
 export class AvatarComponent implements OnInit {
   imagenSrc: any;
-  donor: iDonor = {
+  rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
+
+  userData: iDonor | iDonee = {
     first_name: '',
     last_name: '',
     email: '',
@@ -22,10 +26,20 @@ export class AvatarComponent implements OnInit {
 
   constructor(
     private _donorsService: DonorsService,
+    private _doneesService: DoneesService,
     private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
+    if (this.rol_access == 'donor') {
+      this.sessionDonor();
+    }
+    if (this.rol_access == 'donee') {
+      this.sessionDonee();
+    }
+  }
+
+  sessionDonor(): void {
     this._donorsService.getPhoto().subscribe({
       next: (imgBlob) => {
         const objectURL = URL.createObjectURL(imgBlob);
@@ -37,7 +51,27 @@ export class AvatarComponent implements OnInit {
     });
     this._donorsService.getDonor().subscribe({
       next: (response) => {
-        this.donor = response;
+        this.userData = response;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  sessionDonee(): void {
+    this._doneesService.getPhoto().subscribe({
+      next: (imgBlob) => {
+        const objectURL = URL.createObjectURL(imgBlob);
+        this.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this._doneesService.getDonee().subscribe({
+      next: (response) => {
+        this.userData = response;
       },
       error: (err) => {
         console.log(err);
@@ -123,7 +157,10 @@ export class AvatarComponent implements OnInit {
   // Guarda la imagen recortada
   saveCroppedImage(croppedImage: string) {
     // Aquí puedes guardar la imagen recortada
-    const file = this.base64ToFile(croppedImage, `${this.donor.last_name}.png`);
+    const file = this.base64ToFile(
+      croppedImage,
+      `${this.userData.last_name}.png`
+    );
 
     // Ahora, envía el archivo al servicio
     this._donorsService.addPhoto(file).subscribe(

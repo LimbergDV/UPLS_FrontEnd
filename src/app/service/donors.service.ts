@@ -87,6 +87,15 @@ export class DonorsService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this._http.put(`http://localhost:5000/profile/update`, newData, { headers });
+    return this._http.put(`http://localhost:5000/profile/update`, newData, {
+      headers,
+    });
+  }
+
+  deleteAccount(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    return this._http.delete(`${this.URL_BASE}/deleteAccount`, { headers });
   }
 }
