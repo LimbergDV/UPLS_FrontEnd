@@ -1,12 +1,13 @@
 .card-avatar{
   display: flex;
   align-items: center;
-  margin-top: 80px;
-  margin-left: 170px;
+  width: 90%;
+  padding: 5% 5% 0 5%;
 }
 
 .img {
-  height: 100px;
+  height: 150px;
+  border-radius: 50%;
 }
 
 .image-content{
@@ -47,7 +48,7 @@
 }
 
 .edit-image{
-  margin-left: 165px;
+  margin-right: 5%;
 }
 
 button:hover {
