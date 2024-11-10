@@ -8,7 +8,7 @@ import { iAddress } from '../models/iAddress';
 })
 export class AddressService {
   private URL_BASE: string =
-    'http://localhost:5000/address/';
+    'https://unidosporlasangreapi.integrador.xyz/address/';
 
   constructor(private _http: HttpClient) {}
 
