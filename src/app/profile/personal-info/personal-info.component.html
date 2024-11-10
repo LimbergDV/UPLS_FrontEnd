@@ -4,43 +4,114 @@
 <div class="form-account-info">
   <div class="content-account-left">
     <div class="input">
-      <label for="">Nombre:</label> <br />
-      <input type="text" placeholder="Aquí va el nombre" /> <br />
+      <label for="first_name">Nombre:</label> <br />
+      <input
+        type="text"
+        name="first_name"
+        [(ngModel)]="userData.first_name"
+        [disabled]="idDisabled"
+      />
+      <br />
     </div>
     <div class="input">
-      <label for="">Apellidos:</label> <br />
-      <input type="text" placeholder="Aquí van los apellidos" /> <br />
+      <label for="last_name">Apellidos:</label> <br />
+      <input
+        type="text"
+        name="last_name"
+        [(ngModel)]="userData.last_name"
+        [disabled]="idDisabled"
+      />
+      <br />
     </div>
     <div class="input">
-      <label for="">Teléfono:</label> <br />
-      <input type="text" placeholder="Aquí va el teléfono" /> <br />
+      <label for="phone_number">Teléfono:</label> <br />
+      <input
+        type="tel"
+        name="phone_number"
+        [(ngModel)]="userData.phone_number"
+        [disabled]="idDisabled"
+      />
+      <br />
     </div>
-    <div class="password-button">
+    <div class="input">
+      <label for="email">Correo Electrónico:</label> <br />
+      <input
+        type="email"
+        [(ngModel)]="userData.email"
+        [disabled]="idDisabled"
+      />
+      <br />
     </div>
-    <div class="profile-buttons">
-      <button class="edit-profile-button">Editar</button>
-      <button class="edit-password-button" (click)="editPassword()">
-        Editar contraseña
-      </button>
-    </div>
+    <div class="password-button"></div>
   </div>
 
   <div class="content-account-rigth">
     <div class="input">
-      <label for="">Código Postal:</label> <br />
-      <input type="text" placeholder="Aquí va el CP" /> <br />
+      <label for="postal_code">Código Postal:</label> <br />
+      <input
+        type="text"
+        name="postal_code"
+        [disabled]="idDisabled"
+        [(ngModel)]="address.postal_code"
+      />
+      <br />
+      <button (click)="searchAddress()" [disabled]="idDisabled">Buscar</button>
+      <br />
     </div>
     <div class="input">
-      <label for="">Estado:</label> <br />
-      <input type="text" placeholder="Aquí va el estado" /> <br />
+      <label for="state">Estado:</label> <br />
+      <input
+        type="text"
+        name="state"
+        [disabled]="idDisabled"
+        [(ngModel)]="address.state"
+      />
+      <br />
     </div>
     <div class="input">
-      <label for="">Municipio:</label> <br />
-      <input type="text" placeholder="Aquí va el municipio" /> <br />
+      <label for="locality">Municipio:</label> <br />
+      <input
+        type="text"
+        name="locality"
+        [disabled]="idDisabled"
+        [(ngModel)]="address.locality"
+      />
+      <br />
     </div>
     <div class="input">
-      <label for="">Colonia:</label> <br />
-      <input type="text" placeholder="Aquí va la colonia" /> <br />
+      <label for="distrit">Colonia:</label> <br />
+      <select
+        name="distrit"
+        [(ngModel)]="address.distrits[1]"
+        [disabled]="idDisabled"
+      >
+        <option *ngFor="let distrit of address.distrits" [value]="distrit">
+          {{ distrit }}
+        </option>
+      </select>
     </div>
   </div>
+</div>
+
+<div class="profile-buttons">
+  <button class="edit-profile-button" (click)="editPersonalInfo()">
+    Editar
+  </button>
+  <button
+    class="edit-profile-button"
+    (click)="saveInfo()"
+    [disabled]="idDisabled"
+  >
+    Guardar
+  </button>
+  <button class="edit-password-button" (click)="editPassword()">
+    Editar contraseña
+  </button>
+  <button
+    class="delete-profile-button"
+    (click)="deleteAccount()"
+    *ngIf="rol_access == 'donee'"
+  >
+    Borrar cuenta
+  </button>
 </div>

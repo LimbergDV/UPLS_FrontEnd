@@ -1,12 +1,14 @@
 <div class="card-avatar">
   <div class="image-content">
-    <img src="assets/imagen-avatar.png" alt="">
+    <img [src]="imagenSrc" alt="photo" class="img" />
   </div>
   <div class="name-content">
-    <h1>André Gabriel</h1>
-    <h2>andresantexample.com</h2>
+    <h1>{{ userData.first_name }}</h1>
+    <h2>{{ userData.email }}</h2>
   </div>
   <div class="edit-image">
-    <button class="edit-image-button" (click)="openImageEditor()">Editar foto</button>
+    <button class="edit-image-button" (click)="openImageEditor()">
+      Editar foto
+    </button>
   </div>
 </div>

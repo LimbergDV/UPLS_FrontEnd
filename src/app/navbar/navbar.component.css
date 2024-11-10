@@ -2,24 +2,23 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 50px;
   background-color: #fff;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
   position: relative;
   bottom: 8px;
-  margin-left: -10px;
-  margin-right: -10px;
+  width: 100%;
+  padding: 15px 0 15px 0;
 }
 
 .elements-left {
   display: flex;
   align-items: center;
+  margin-left: 5%;
 }
 
 .elements-left .logo {
-  width: 96px;
-  height: 93px;
-  margin-left: 20px;
+  width: 76px;
+  height: 73px;
 }
 
 .menu {
@@ -37,21 +36,23 @@
 .menu a {
   color: #000;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 20px;
   font-family: "Poppins", sans-serif;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 
 .elements-right {
   display: flex;
   gap: 50px;
+  margin-right: 5%;
 }
 
 .elements-right img{
-  height: 50px;
-  width: 50px;
+  height: 35px;
+  width: 35px;
 }
+
 
 .icon-img1:hover,
 .icon-img2:hover,
@@ -65,3 +66,5 @@
 .elements-left a:hover{
   color: rgb(255, 1, 1);
 }
+
+

@@ -1,14 +1,83 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Cropper from 'cropperjs';
 import Swal from 'sweetalert2';
+import { DonorsService } from '../../service/donors.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { iDonor } from '../../models/i-donor';
+import { DoneesService } from '../../service/donees.service';
+import { iDonee } from '../../models/i-donee';
 
 @Component({
   selector: 'app-avatar',
   templateUrl: './avatar.component.html',
-  styleUrl: './avatar.component.css'
+  styleUrl: './avatar.component.css',
 })
-export class AvatarComponent {
+export class AvatarComponent implements OnInit {
+  imagenSrc: any;
+  rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
 
+  userData: iDonor | iDonee = {
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    phone_number: '',
+  };
+
+  constructor(
+    private _donorsService: DonorsService,
+    private _doneesService: DoneesService,
+    private sanitizer: DomSanitizer,
+  ) {}
+
+  ngOnInit(): void {
+    if (this.rol_access == 'donor') {
+      this.sessionDonor();
+    }
+    if (this.rol_access == 'donee') {
+      this.sessionDonee();
+    }
+  }
+
+  sessionDonor(): void {
+    this._donorsService.getPhoto().subscribe({
+      next: (imgBlob) => {
+        const objectURL = URL.createObjectURL(imgBlob);
+        this.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this._donorsService.getDonor().subscribe({
+      next: (response) => {
+        this.userData = response;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  sessionDonee(): void {
+    this._doneesService.getPhoto().subscribe({
+      next: (imgBlob) => {
+        const objectURL = URL.createObjectURL(imgBlob);
+        this.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this._doneesService.getDonee().subscribe({
+      next: (response) => {
+        this.userData = response;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
   private cropper: Cropper | null = null;
 
@@ -25,8 +94,12 @@ export class AvatarComponent {
       confirmButtonText: 'Guardar',
       cancelButtonText: 'Cancelar',
       didOpen: () => {
-        const input = document.getElementById('uploadImage') as HTMLInputElement;
-        input?.addEventListener('change', (event: any) => this.loadImage(event));
+        const input = document.getElementById(
+          'uploadImage'
+        ) as HTMLInputElement;
+        input?.addEventListener('change', (event: any) =>
+          this.loadImage(event)
+        );
       },
       preConfirm: () => {
         return new Promise((resolve) => {
@@ -35,7 +108,7 @@ export class AvatarComponent {
               width: 200,
               height: 200,
               imageSmoothingEnabled: true,
-              imageSmoothingQuality: 'high'
+              imageSmoothingQuality: 'high',
             });
             const croppedImage = croppedCanvas.toDataURL('image/png');
             resolve(croppedImage); // Devuelve la imagen recortada
@@ -43,7 +116,7 @@ export class AvatarComponent {
             resolve(null);
           }
         });
-      }
+      },
     }).then((result) => {
       if (result.isConfirmed && result.value) {
         const croppedImage = result.value;
@@ -58,7 +131,9 @@ export class AvatarComponent {
     if (!file) return;
 
     const imageUrl = URL.createObjectURL(file);
-    const imageElement = document.getElementById('imagePreview') as HTMLImageElement;
+    const imageElement = document.getElementById(
+      'imagePreview'
+    ) as HTMLImageElement;
     imageElement.src = imageUrl;
     imageElement.style.display = 'block';
 
@@ -75,14 +150,82 @@ export class AvatarComponent {
       movable: true,
       rotatable: false,
       cropBoxResizable: true,
-      cropBoxMovable: true
+      cropBoxMovable: true,
     });
   }
 
   // Guarda la imagen recortada
   saveCroppedImage(croppedImage: string) {
     // Aquí puedes guardar la imagen recortada
-    console.log('Imagen recortada:', croppedImage);
+    const file = this.base64ToFile(
+      croppedImage,
+      `${this.userData.last_name}.png`
+    );
+
+    if (this.rol_access == 'donor') {
+      // Ahora, envía el archivo al servicio
+      this._donorsService.addPhoto(file).subscribe(
+        (response) => {
+          console.log('Imagen enviada exitosamente', response);
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Foto actualizada',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        },
+        (error) => {
+          console.error('Error al enviar la imagen', error);
+          Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: 'Ocurrió un error',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      );
+    }
+    if (this.rol_access == 'donee') {
+      this._doneesService.addPhoto(file).subscribe(
+        (response) => {
+          console.log('Imagen enviada exitosamente', response);
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Foto actualizada',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        },
+        (error) => {
+          console.error('Error al enviar la imagen', error);
+          Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: 'Ocurrió un error',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      );
+    }
   }
 
+  base64ToFile(base64: string, filename: string): File {
+    const arr = base64.split(',');
+    const match = arr[0].match(/:(.*?);/);
+    const mime = match ? match[1] : 'application/octet-stream'; // Proporciona un valor predeterminado
+
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+  }
 }

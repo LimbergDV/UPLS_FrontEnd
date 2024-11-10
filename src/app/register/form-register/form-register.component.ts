@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { iDonee } from '../../models/i-donee';
 import { iDonor } from '../../models/i-donor';
 import { iProfile } from '../../models/i-profile';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-register',
@@ -14,7 +15,8 @@ import { iProfile } from '../../models/i-profile';
 export class FormRegisterComponent {
   constructor(
     private _doneesService: DoneesService,
-    private _donorsService: DonorsService
+    private _donorsService: DonorsService,
+    private router: Router
   ) {}
 
   flag: boolean = true;
@@ -50,6 +52,8 @@ export class FormRegisterComponent {
           text: 'Te has registrado como Donatario correctamente.',
           icon: 'success',
         });
+        console.log(response);
+        this.router.navigate(['/signIn']);
       },
       error: (err) => {
         console.log(err);
@@ -97,6 +101,7 @@ export class FormRegisterComponent {
               text: 'Te has registrado como Donante correctamente.',
               icon: 'success',
             });
+            this.router.navigate(['/signIn']);
           },
           error: (err) => {
             console.log(err);

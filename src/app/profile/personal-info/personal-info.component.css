@@ -4,15 +4,23 @@
 }
 
 .form-account-info{
+  width: 90%;
+  padding: 0 5% 0 5%;
   display: flex;
   justify-content: space-between;
-  margin-left: 160px;
-  margin-top: 50px;
   font-family: "Poppins", sans-serif;
 }
 
+.content-account-left {
+  width: 45%;
+}
+
+.content-account-rigth {
+  width: 45%;
+}
+
 .input {
-  width: 100%;
+  width: 95%;
   text-align: start;
   margin-bottom: 20px;
 }
@@ -26,7 +34,7 @@ label {
 input {
   margin-top: 5px;
   margin-bottom: 10px;
-  width: 517px;
+  width: 100%;
   padding: 12px 0 12px 12px;
   border-radius: 6px;
   border: none;
@@ -34,8 +42,15 @@ input {
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
-.content-account-rigth, .content-account-left{
-  width: 70%;
+select {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 103%;
+  padding: 12px 0 12px 12px;
+  border-radius: 6px;
+  border: none;
+  border: 1px #00000048 solid;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .edit-password-button{
@@ -98,7 +113,16 @@ input {
 
 .profile-buttons {
   display: flex;
-  justify-content: space-between;
-  width: 81%;
-  margin-top: 43px;
+  justify-content: space-around;
+  width: 90%;
+  padding: 2% 5% 2% 5%;
+}
+
+input:disabled, select:disabled, option:disabled {
+  color: #000;
+}
+
+button:hover {
+  transition: 0.4s;
+  transform: scale(0.95);
 }

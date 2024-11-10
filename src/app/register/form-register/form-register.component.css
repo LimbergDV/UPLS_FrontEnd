@@ -5,11 +5,9 @@
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   font-style: normal;
-  height:100vh 
+  height: 100vh;
 }
 
-/*hay muchos inputs, solo deja los que estan en el maquetado, vamos a ver como insertamos solo una parte en la bd
-para que despues en el apartado de perfil lo pueda agregar despues*/
 .form-content {
   width: 50%;
   height: 100%;
@@ -59,7 +57,7 @@ label {
 
 input {
   margin-top: 5px;
-  width: 100%;  /* Ajustar para alinear todos los inputs */
+  width: 100%; /* Ajustar para alinear todos los inputs */
   padding: 12px 0 12px 12px;
   border-radius: 12px;
   border: 1px solid #00000048;
@@ -101,7 +99,7 @@ form > button:active {
 
 .image {
   width: 60%;
-  height: 120%;
+  height: 100vh;
   overflow: hidden;
   object-position: center;
 }
@@ -141,11 +139,11 @@ form > button:active {
 }
 
 .options > button.donatario {
-  background: #0015ff;  /* Azul */
+  background: #0015ff; /* Azul */
 }
 
 .options > button.donante {
-  background: #ea454c;  /* Rojo */
+  background: #ea454c; /* Rojo */
 }
 
 .options > button:hover {
@@ -165,12 +163,12 @@ form > button:active {
   background: #b43239;
 }
 
-
-.input-group-name, .input-group-location {
+.input-group-name,
+.input-group-location {
   display: flex;
-  gap: 20px; 
+  gap: 20px;
   width: 75%;
-  margin-bottom: 0px; 
+  margin-bottom: 0px;
 }
 
 .input {
@@ -201,19 +199,19 @@ form > button:active {
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   font-style: normal;
-  background-color: #fff; 
-  color: #636364; 
+  background-color: #fff;
+  color: #636364;
   cursor: pointer;
 }
 
 .input select option[value=""][disabled] {
-  color: #aaa; 
-  font-style: italic; 
-  background-color: #f5f5f5; 
+  color: #aaa;
+  font-style: italic;
+  background-color: #f5f5f5;
 }
 
 .input select option {
-  color: #000; 
+  color: #000;
   background-color: #fff;
 }
 
@@ -221,4 +219,19 @@ form > button:active {
 .input select:focus {
   outline: none;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-height: 700px) {
+  .header-form {
+    margin-top: 20px;
+  }
+  .image {
+    height: 110%;
+  }
+}
+
+@media (max-height: 900px) {
+  .hidden {
+    display: none;
+  }
 }

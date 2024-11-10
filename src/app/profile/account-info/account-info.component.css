@@ -6,13 +6,13 @@
 .form-account-info{
   display: flex;
   justify-content: space-between;
-  margin-left: 160px;
-  margin-top: 8vh;
+  padding: 2% 5% 2% 5%;
   font-family: "Poppins", sans-serif;
+  width: 90%;
 }
 
 .input {
-  width: 100%;
+  width: 95%;
   text-align: start;
   margin-bottom: 20px;
 }
@@ -26,7 +26,7 @@ label {
 input {
   margin-top: 5px;
   margin-bottom: 10px;
-  width: 517px;
+  width: 100%;
   padding: 12px 0 12px 12px;
   border-radius: 6px;
   border: none;
@@ -37,7 +37,7 @@ input {
 select {
   margin-top: 5px;
   margin-bottom: 10px;
-  width: 530px;
+  width: 103%;
   padding: 12px 0 12px 12px;
   border-radius: 6px;
   border: none;
@@ -46,7 +46,7 @@ select {
 }
 
 .content-account-rigth, .content-account-left{
-  width: 70%;
+  width: 45%;
 }
 
 .edit-password-button{
@@ -109,7 +109,16 @@ select {
 
 .profile-buttons {
   display: flex;
-  justify-content: space-between;
-  width: 81%;
-  margin-top: 45px;
+  justify-content: space-around;
+  width: 90%;
+  padding: 2% 5% 2% 5%;
+}
+
+input:disabled, select:disabled, option:disabled {
+  color: #000;
+}
+
+button:hover {
+  transition: 0.4s;
+  transform: scale(0.95);
 }
