@@ -64,4 +64,17 @@ export class DoneesService {
     });
     return this._http.delete(`${this.URL_BASE}/deleteAccount`, { headers });
   }
+
+  addPhoto(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('photo', file);
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+
+    return this._http.post(`${this.URL_BASE}/addPhoto`, formData, {
+      headers,
+    });
+  }
 }

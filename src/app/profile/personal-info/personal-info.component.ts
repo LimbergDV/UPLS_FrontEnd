@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { AddressService } from '../../service/address.service';
 import { iAddress } from '../../models/iAddress';
@@ -14,7 +14,7 @@ import { DoneesService } from '../../service/donees.service';
   templateUrl: './personal-info.component.html',
   styleUrl: './personal-info.component.css',
 })
-export class PersonalInfoComponent {
+export class PersonalInfoComponent implements OnInit {
   rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
 
   address: iAddress = {
@@ -44,7 +44,9 @@ export class PersonalInfoComponent {
     private _donorsService: DonorsService,
     private _doneesService: DoneesService,
     private router: Router
-  ) {
+  ) {}
+  
+  ngOnInit(): void {
     if (this.rol_access == 'donor') {
       this.getDonor();
     }

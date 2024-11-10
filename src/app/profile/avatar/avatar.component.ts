@@ -27,7 +27,7 @@ export class AvatarComponent implements OnInit {
   constructor(
     private _donorsService: DonorsService,
     private _doneesService: DoneesService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
   ) {}
 
   ngOnInit(): void {
@@ -162,29 +162,55 @@ export class AvatarComponent implements OnInit {
       `${this.userData.last_name}.png`
     );
 
-    // Ahora, envía el archivo al servicio
-    this._donorsService.addPhoto(file).subscribe(
-      (response) => {
-        console.log('Imagen enviada exitosamente', response);
-        Swal.fire({
-          position: 'top',
-          icon: 'success',
-          title: 'Foto actualizada',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      },
-      (error) => {
-        console.error('Error al enviar la imagen', error);
-        Swal.fire({
-          position: 'top',
-          icon: 'error',
-          title: 'Ocurrió un error',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    );
+    if (this.rol_access == 'donor') {
+      // Ahora, envía el archivo al servicio
+      this._donorsService.addPhoto(file).subscribe(
+        (response) => {
+          console.log('Imagen enviada exitosamente', response);
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Foto actualizada',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        },
+        (error) => {
+          console.error('Error al enviar la imagen', error);
+          Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: 'Ocurrió un error',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      );
+    }
+    if (this.rol_access == 'donee') {
+      this._doneesService.addPhoto(file).subscribe(
+        (response) => {
+          console.log('Imagen enviada exitosamente', response);
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Foto actualizada',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        },
+        (error) => {
+          console.error('Error al enviar la imagen', error);
+          Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: 'Ocurrió un error',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      );
+    }
   }
 
   base64ToFile(base64: string, filename: string): File {

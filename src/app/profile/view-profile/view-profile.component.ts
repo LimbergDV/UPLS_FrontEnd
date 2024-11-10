@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,19 +6,19 @@ import { Router } from '@angular/router';
   templateUrl: './view-profile.component.html',
   styleUrl: './view-profile.component.css',
 })
-export class ViewProfileComponent {
+export class ViewProfileComponent implements OnInit {
   rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
   flag: boolean = false;
 
-  constructor(router: Router) {
+  constructor(private router: Router) {}
+  ngOnInit(): void {
+    
     if (this.rol_access === 'NoAccess') {
-      router.navigate(['/signIn']);
-    } 
+      this.router.navigate(['/signIn']);
+    }
 
-    if(this.rol_access === 'donor') {
+    if (this.rol_access === 'donor') {
       this.flag = true;
     }
   }
-
-  
 }
