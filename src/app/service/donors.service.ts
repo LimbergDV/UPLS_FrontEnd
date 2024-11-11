@@ -9,7 +9,7 @@ import { iProfile } from '../models/i-profile';
   providedIn: 'root',
 })
 export class DonorsService {
-  private URL_BASE: string = 'https://unidosporlasangreapi.integrador.xyz/donors';
+  private URL_BASE: string = 'http://localhost:5000/donors';
   private token: string = localStorage.getItem('token') || '';
 
   constructor(private _http: HttpClient) {}
@@ -32,7 +32,7 @@ export class DonorsService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this._http.post(`https://unidosporlasangreapi.integrador.xyz/profile/add`, profile, {
+    return this._http.post(`http://localhost:5000/profile/add`, profile, {
       headers,
     });
   }
@@ -41,7 +41,7 @@ export class DonorsService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this._http.get<iDonor>(`https://unidosporlasangreapi.integrador.xyz/profile/profile`, {
+    return this._http.get<iDonor>(`http://localhost:5000/profile/profile`, {
       headers,
     });
   }
@@ -50,7 +50,7 @@ export class DonorsService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this._http.get(`https://unidosporlasangreapi.integrador.xyz/profile/photo`, {
+    return this._http.get(`http://localhost:5000/profile/photo`, {
       headers,
       responseType: 'blob',
     });
@@ -64,7 +64,7 @@ export class DonorsService {
       Authorization: `Bearer ${this.token}`,
     });
 
-    return this._http.post(`https://unidosporlasangreapi.integrador.xyz/donors/photo`, formData, {
+    return this._http.post(`http://localhost:5000/donors/photo`, formData, {
       headers,
     });
   }
@@ -87,7 +87,7 @@ export class DonorsService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this._http.put(`https://unidosporlasangreapi.integrador.xyz/profile/update`, newData, {
+    return this._http.put(`http://localhost:5000/profile/update`, newData, {
       headers,
     });
   }
