@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterModule } from './register/register.module';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { PublicationsModule } from './publications/publications.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HomeComponent } from './home/home.component';
     ProfileModule,
     HttpClientModule,
     RegisterModule,
-    RouterModule
+    RouterModule,
+    PublicationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
