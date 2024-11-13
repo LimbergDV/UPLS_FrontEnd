@@ -36,7 +36,7 @@ export class MapComponent implements OnInit {
 
   mapConstructor(): void {
     // Construcción del mapa
-    const map = new Map('map').setView([16.7569, -93.1292], 8);
+    const map = new Map('map').setView([16.510742971586264, -92.70662557658262], 7);
     tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
     // Por cada punto se hará lo sigiente:

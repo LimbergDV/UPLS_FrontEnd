@@ -16,11 +16,7 @@ export class PointInfoComponent implements OnChanges {
     name_place: '',
     phone_number: '',
     address: {
-      street: '',
-      distrit: '',
-      locality: '',
-      postal_code: '',
-      state: '',
+      locationText: ''
     },
   };
 
