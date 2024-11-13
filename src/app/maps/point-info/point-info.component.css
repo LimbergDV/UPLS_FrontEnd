@@ -1,0 +1,30 @@
+.content {
+  width: 80%;
+  height: 200px;
+  border-radius: 24px;  
+  background-image: url('/../../Frame.png');
+  background-size: cover;
+}
+
+
+.info {
+    margin-left: 28%;
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+h1 {
+    
+    margin-bottom: 0;
+}
+
+p {
+    margin: 0;
+}
+
+h4 {
+    margin-bottom: 0;
+}

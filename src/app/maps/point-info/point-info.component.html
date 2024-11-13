@@ -1,0 +1,17 @@
+<div class="content">
+  <div class="info">
+    <h1 *ngIf="place.name_place != ''; else msg">{{ place.name_place }}</h1>
+
+    <ng-template #msg>
+      <h1>Selecciona una ubicación</h1>
+    </ng-template>
+
+    <p>
+      {{ place.address.street }} {{ place.address.distrit }}
+      {{ place.address.locality }} {{ place.address.postal_code }}
+      {{ place.address.state }}
+    </p>
+    <h4>Teléfono:</h4>
+    <p>{{ place.phone_number }}</p>
+  </div>
+</div>

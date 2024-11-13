@@ -5,13 +5,14 @@ import { ViewProfileComponent } from './profile/view-profile/view-profile.compon
 import { FormRegisterComponent } from './register/form-register/form-register.component';
 import { HomeComponent } from './home/home.component';
 import { MapComponent } from './maps/map/map.component';
+import { ViewMapComponent } from './maps/view-map/view-map.component';
 
 const routes: Routes = [
   { path: 'signIn', component: FormLoginComponent },
   { path: 'profile', component: ViewProfileComponent },
   { path: 'signUp', component: FormRegisterComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'maps', component: MapComponent },
+  { path: 'maps', component: ViewMapComponent },
 ];
 
 @NgModule({

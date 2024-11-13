@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { iFeatureMaps } from '../models/iFeatureMap';
 import { iDataPlace } from '../models/iDataPlace';
+import { iBankInfo } from '../models/iBankInfo';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,9 @@ export class MapsService {
 
   constructor(private _http: HttpClient) {}
 
-  getPlacesMap() {}
+  getDetailisPlace(id_bank: number): Observable<iBankInfo> {
+    return this._http.get<iBankInfo>(`${this.URL_BASE}/${id_bank}`);
+  }
 
   getUbicationPlaces(): Observable<iFeatureMaps[]> {
     return this._http.get<iDataPlace[]>(`${this.URL_BASE}/`).pipe(
@@ -26,7 +29,7 @@ export class MapsService {
             },
             properties: {
               popupContent: location.name_place,
-              name: location.id_blood_bank
+              name: location.id_blood_bank,
             },
           } as iFeatureMaps;
         });
