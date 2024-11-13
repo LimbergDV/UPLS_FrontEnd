@@ -9,9 +9,9 @@ export class ViewMapComponent {
   id_bank: number = 0;
   flag: boolean = false
 
+  // Funcion que va al output
   setId(id: number): void {
     this.id_bank = id;
     this.flag = true
   }
-
 }
