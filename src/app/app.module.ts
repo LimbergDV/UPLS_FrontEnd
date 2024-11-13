@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterModule } from './register/register.module';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { MapsModule } from './maps/maps.module';
 import { PublicationsModule } from './publications/publications.module';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { PublicationsModule } from './publications/publications.module';
     HttpClientModule,
     RegisterModule,
     RouterModule,
+    MapsModule,
     PublicationsModule
   ],
   providers: [],
