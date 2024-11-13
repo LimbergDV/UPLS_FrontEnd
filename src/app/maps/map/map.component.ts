@@ -22,19 +22,20 @@ export class MapComponent implements OnInit {
   constructor(private _mapsService: MapsService) {}
 
   ngOnInit(): void {
-    this.getPlaces();
-
-    setTimeout(() => {
-      this.mapConstructor();
-    }, 0);
+    this._mapsService.getUbicationPlaces().subscribe({
+      next: (features) => {
+        this.geojsonFeature = features;
+        this.mapConstructor();
+      },
+      error: (err) => {
+        console.error('Error al cargar los datos:', err);
+      },
+    });
   }
 
-  getPlaces(): void {
-    this.geojsonFeature = this._mapsService.getUbicationPlaces();
-    console.log(this.geojsonFeature);
-  }
 
   mapConstructor(): void {
+    
     // Construcción del mapa
     const map = new Map('map').setView([16.7569, -93.1292], 8);
     tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
@@ -43,7 +44,7 @@ export class MapComponent implements OnInit {
     this.geojsonFeature.forEach((feature: iFeatureMaps) => {
       const coordinates = feature.geometry.coordinates;
       const popupContent = feature.properties.popupContent;
-
+  
       // Crear el ícono personalizado
       const customIcon = icon({
         iconUrl: 'logo.png', // URL de un ícono personalizado (puedes poner una URL a una imagen)
@@ -61,7 +62,7 @@ export class MapComponent implements OnInit {
 
       // Callbacks
       marker.on('click', () => {
-        alert('Hola Mundo');
+        map.setView([coordinates[1], coordinates[0]], 16);
       });
     });
 

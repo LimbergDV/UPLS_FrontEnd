@@ -1,5 +1,6 @@
 export interface iDataPlace {
-  latitud: number;
-  longitud: number;
-  id_place: number;
+  latitude: number;
+  longitude: number;
+  id_blood_bank: number;
+  name_place: string;
 }

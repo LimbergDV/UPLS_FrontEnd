@@ -6,5 +6,6 @@ export interface iFeatureMaps {
   };
   properties: {
     popupContent: string;
+    name: number,
   };
 }

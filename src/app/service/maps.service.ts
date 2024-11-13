@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { iFeatureMaps } from '../models/iFeatureMap';
 import { iDataPlace } from '../models/iDataPlace';
 
@@ -8,32 +8,29 @@ import { iDataPlace } from '../models/iDataPlace';
   providedIn: 'root',
 })
 export class MapsService {
-  private dataPreview: iDataPlace[] = [
-    {
-      latitud: -92.63844,
-      longitud: 16.73744,
-      id_place: 1,
-    },
-  ];
+  private URL_BASE: string = 'http://localhost:5000/locations';
 
-  private listPalcesMap: iFeatureMaps[] = [];
+  constructor(private _http: HttpClient) {}
 
   getPlacesMap() {}
 
-  getUbicationPlaces(): iFeatureMaps[] {
-    this.dataPreview.forEach((dataMap) => {
-        const placeMap: iFeatureMaps = {
+  getUbicationPlaces(): Observable<iFeatureMaps[]> {
+    return this._http.get<iDataPlace[]>(`${this.URL_BASE}/`).pipe(
+      map((response) => {
+        return response.map((location) => {
+          return {
             type: 'Feature',
             geometry: {
-                type: 'Point',
-                coordinates: [dataMap.latitud, dataMap.longitud]
+              type: 'Point',
+              coordinates: [location.longitude, location.latitude],
             },
             properties: {
-                popupContent: 'Centro de donación'
-            }
-        }
-        this.listPalcesMap.push(placeMap);
-    });
-    return this.listPalcesMap;
+              popupContent: location.name_place,
+              name: location.id_blood_bank
+            },
+          } as iFeatureMaps;
+        });
+      })
+    );
   }
 }
