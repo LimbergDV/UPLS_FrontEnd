@@ -64,7 +64,7 @@ export class DonorsService {
       Authorization: `Bearer ${this.token}`,
     });
 
-    return this._http.post(`http://localhost:5000/donors/photo`, formData, {
+    return this._http.post(`http://localhost:5000/donors/addPhoto`, formData, {
       headers,
     });
   }
