@@ -10,6 +10,7 @@ import { IPublications } from '../../models/i-publications';
 })
 
 export class AddPublicationComponent {
+  id_donee = 12;
   title = '';
   description = '';
   image: File | null = null; // almacenar la imagen
@@ -34,12 +35,12 @@ export class AddPublicationComponent {
   onSubmit(): void {
     // Preparamos el objeto con los datos del formulario
     const newPublication: IPublications = {
-      id_donee: 1, // Generar un ID temporal
+      id_donee: this.id_donee, // Generar un ID temporal
       title: this.title,
       description: this.description,
       image: this.image ? this.image.name : '', 
       date_limit: new Date(this.date_limit),
-      blood_type: '',
+      blood_type: this.blood_type,
     };
 
     // Llamada al servicio para enviar la publicación al backend
