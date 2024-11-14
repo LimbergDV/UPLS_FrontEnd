@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AddPublicationComponent } from './add-publication/add-publication.component';
 import { ViewPublicationComponent } from './view-publication/view-publication.component';
 import { PostPublicationComponent } from './post-publication/post-publication.component';
+import { ListPublicationsComponent } from './list-publications/list-publications.component';
 
 
 
@@ -10,7 +11,8 @@ import { PostPublicationComponent } from './post-publication/post-publication.co
   declarations: [
     AddPublicationComponent,
     ViewPublicationComponent,
-    PostPublicationComponent
+    PostPublicationComponent,
+    ListPublicationsComponent
   ],
   imports: [
     CommonModule
