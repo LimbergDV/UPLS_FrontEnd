@@ -25,8 +25,8 @@ export class ListPublicationsComponent implements OnInit {
   }
 
 
-  deletePublications(id: string): void {
-    this.publicationService.deletePublication(id).subscribe({
+  deletePublications(id: number): void {
+    this.publicationService.deletePublication(id.toString()).subscribe({
       next: () => {
         console.log('Publicación eliminada');
         this.loadPublications();

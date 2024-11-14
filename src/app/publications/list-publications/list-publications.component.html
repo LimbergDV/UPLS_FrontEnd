@@ -1,2 +1,25 @@
+<div class="publications-list">
+  <h2>Publicaciones</h2>
 
-  
+  <div *ngIf="publications.length === 0" class="no-publications">
+    <p>No hay publicaciones disponibles.</p>
+  </div>
+
+  <div *ngFor="let publication of publications" class="publication-card">
+    <div class="publication-content">
+      <h3>{{ publication.title }}</h3>
+      <p class="description">{{ publication.description }}</p>
+
+      <div class="image-display">
+        <img *ngIf="publication.image" [src]="publication.image" alt="Imagen de publicación">
+      </div>
+
+      <div class="details">
+        <p><strong>Fecha límite:</strong> {{ publication.date_limit | date }}</p>
+        <p><strong>Tipo de sangre:</strong> {{ publication.blood_type }}</p>
+        <p><strong>Donantes requeridos:</strong> {{ publication.donors_number }}</p>
+      </div>
+
+    </div>
+  </div>
+</div>

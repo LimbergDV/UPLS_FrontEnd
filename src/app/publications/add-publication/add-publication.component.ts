@@ -38,7 +38,7 @@ export class AddPublicationComponent {
       id_donee: this.id_donee, // Generar un ID temporal
       title: this.title,
       description: this.description,
-      image: this.image ? this.image.name : '', 
+      image: this.image ? this.image.name : '',
       date_limit: new Date(this.date_limit),
       blood_type: this.blood_type,
     };
