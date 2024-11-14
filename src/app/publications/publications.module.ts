@@ -4,6 +4,7 @@ import { AddPublicationComponent } from './add-publication/add-publication.compo
 import { ViewPublicationComponent } from './view-publication/view-publication.component';
 import { PostPublicationComponent } from './post-publication/post-publication.component';
 import { ListPublicationsComponent } from './list-publications/list-publications.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { ListPublicationsComponent } from './list-publications/list-publications
     ListPublicationsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class PublicationsModule { }

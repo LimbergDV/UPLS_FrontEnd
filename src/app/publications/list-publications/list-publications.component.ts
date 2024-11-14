@@ -17,8 +17,23 @@ export class ListPublicationsComponent implements OnInit {
     this.loadPublications();
   }
 
-  loadPublications(): void{
-
-
+  loadPublications(): void {
+    this.publicationService.getAllPublications().subscribe({
+      next: (data) => (this.publications = data),
+      error: (error) => console.error('Error al cargar publicaciones:', error)
+    });
   }
+
+
+  deletePublications(id: string): void {
+    this.publicationService.deletePublication(id).subscribe({
+      next: () => {
+        console.log('Publicación eliminada');
+        this.loadPublications();
+      },
+      error: (error) => console.error('Error al eliminar publicación', error)
+    });
+  }
+
+
 }

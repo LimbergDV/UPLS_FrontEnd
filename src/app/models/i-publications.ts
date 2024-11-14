@@ -3,8 +3,8 @@ export interface IPublications {
   title: string;
   description: string;
   image: string;
-  date_limit: Date;
-  blood_type: "A+" | "A-" | "B+" | "B-" | "AB+" | "AB-" | "O+" | "O-";
+  date_limit?: Date;
+  blood_type: string;
   donors_number?: number;
   comments?: string[];
 }
