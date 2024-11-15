@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DonorsService } from '../../service/donors.service';
 import { iParams } from '../../models/iParams';
 import { iDonorSearch } from '../../models/iDonorSearch';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'filters',
@@ -11,6 +11,7 @@ import { iDonorSearch } from '../../models/iDonorSearch';
 })
 export class FiltersComponent implements OnInit {
   @Output() setDonors = new EventEmitter<iDonorSearch[]>();
+  @Output() setNotFoud = new EventEmitter<boolean>();
 
   bloodTypes: string[] = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
   localities: string[] = [];
@@ -61,6 +62,14 @@ export class FiltersComponent implements OnInit {
   caseSearch(): void {
     const { bloodType, locality, compatibility } = this.params;
 
+    if (bloodType == '' && locality == '' && compatibility == '') {
+      Swal.fire({
+        title: '¡Opss...!',
+        text: 'Esta ves intenta seleccionar algún filtro',
+        icon: 'warning',
+      });
+    }
+
     if (bloodType != '' && locality == '' && compatibility == '') {
       console.log('Solo tipo de sangre');
       this._donorsService.getByBloodType(bloodType).subscribe({
@@ -69,6 +78,7 @@ export class FiltersComponent implements OnInit {
         },
         error: (err) => {
           if (err.status == 404) {
+            this.setNotFoud.emit(true);
             return console.log('No hubo resultados');
           }
           console.log(err);
@@ -83,6 +93,7 @@ export class FiltersComponent implements OnInit {
         },
         error: (err) => {
           if (err.status == 404) {
+            this.setNotFoud.emit(true);
             return console.log('No hubo resultados');
           }
           console.log(err);
@@ -97,6 +108,7 @@ export class FiltersComponent implements OnInit {
         },
         error: (err) => {
           if (err.status == 404) {
+            this.setNotFoud.emit(true);
             return console.log('No hubo resultados');
           }
           console.log(err);
@@ -113,6 +125,7 @@ export class FiltersComponent implements OnInit {
           },
           error: (err) => {
             if (err.status == 404) {
+              this.setNotFoud.emit(true);
               return console.log('No hubo resultados');
             }
             console.log(err);
@@ -129,6 +142,7 @@ export class FiltersComponent implements OnInit {
           },
           error: (err) => {
             if (err.status == 404) {
+              this.setNotFoud.emit(true);
               return console.log('No hubo resultados');
             }
             console.log(err);

@@ -5,7 +5,6 @@
   background-image: url("/../../Frame.png");
   background-size: cover;
   box-shadow: 0px 4px 10px 0px rgba(234, 69, 76, 1);
-
 }
 
 .info {
@@ -22,18 +21,30 @@
 
 h2 {
   margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  margin-top: 15px;
+  font-size: 30px;
+  line-height: 35px;
 }
 
 p {
-  margin: 0;
+  margin-bottom: 0;
 }
 
 h4 {
   margin-top: 0;
   margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: 0;
+  font-size: 18px;
 }
 
 .tel {
   display: flex;
   gap: 2%;
+  align-items: center;
 }

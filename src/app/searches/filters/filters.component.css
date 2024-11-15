@@ -1,1 +1,70 @@
+.content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
 
+.selectOption1 {
+  width: 18%;
+  border-radius: 15px;
+  background: #9F0000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  color: #fff;
+}
+
+.selectOption2 {
+  width: 33%;
+  border-radius: 15px;
+  background: #9F0000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  color: #fff;
+}
+
+.selectOption1:focus-within, .selectOption2:focus-within {
+    background-color: #ff7600;
+}
+
+select {
+  background: none;
+  border: none;
+  color: #fff;
+}
+
+select:focus {
+    outline: none;
+}
+
+option {
+  background: #000;
+}
+
+button {
+  width: 22%;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  background: #ea454c;
+  padding: 10px 0 10px 0px;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: scale(0.97);
+  transition: 0.4s;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.35);
+}
+
+button:active {
+  transition: 0.4s;
+  background: #b43239;
+}

@@ -1,6 +1,6 @@
 .content {
-  padding: 5%;
-  width: 90%;
+  padding: 0 3%;
+  width: 94%;
 }
 
 table {
@@ -16,3 +16,15 @@ td,
 th {
   width: 25%;
 }
+
+th {
+  background: #ea454c;
+  color: #fff;
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  padding-left: 15px;
+}
+
+
