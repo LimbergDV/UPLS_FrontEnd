@@ -12,11 +12,18 @@
 
     <div class="form-group image-upload">
       <label for="image" class="image-label">
-        <div class="upload-icon">⬆️</div>
+        <div class="upload-icon">
+          <img src="/assets/Upload icon.svg" alt="">
+        </div>
         <p>Sube tu imagen</p>
         <small>Soporta formatos: JPEG, PNG</small>
       </label>
       <input type="file" id="image" (change)="onFileSelected($event)" accept="image/jpeg, image/png" />
+    </div>
+
+    <div *ngIf="imagePreview" class="image-preview">
+      <p>Vista previa de la imagen:</p>
+      <img [src]="imagePreview" alt="" class="preview-image" />
     </div>
 
     <div class="form-row">
@@ -34,7 +41,7 @@
 
       <div class="form-group">
         <label for="donors-required">Donantes req:</label>
-        <input type="number" id="donors-required" [(ngModel)]="donors_number" name="donors_number" min="0" value="0" />
+        <input type="number" id="donors-required" [(ngModel)]="donors_number" name="donors_number" />
       </div>
     </div>
 

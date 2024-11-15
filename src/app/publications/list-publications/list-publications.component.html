@@ -6,6 +6,10 @@
   </div>
 
   <div *ngFor="let publication of publications" class="publication-card">
+    <div class="profile-header">
+      <img src="ruta-de-tu-imagen.jpg" alt="Foto de perfil" class="profile-image">
+      <span class="profile-name">Jesus Madero Ruíz</span>
+    </div>
     <div class="publication-content">
       <h3>{{ publication.title }}</h3>
       <p class="description">{{ publication.description }}</p>
