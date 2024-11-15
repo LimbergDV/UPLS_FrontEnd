@@ -23,7 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatInputModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule,
+    MatPaginatorModule
   ],
 })
 export class SearchesModule {}

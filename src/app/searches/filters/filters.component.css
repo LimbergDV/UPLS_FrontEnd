@@ -27,7 +27,7 @@
 }
 
 .selectOption1:focus-within, .selectOption2:focus-within {
-    background-color: #ff7600;
+    background-color: #ea454c;
 }
 
 select {

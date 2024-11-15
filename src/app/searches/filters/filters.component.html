@@ -1,5 +1,10 @@
 <div class="content">
-  <div class="selectOption1">
+  <div
+    class="selectOption1"
+    [ngStyle]="{
+      color: isBloodTypeDisabled() ? '#730000' : '#FFF',
+    }"
+  >
     <label>Tipo de sangre</label>
     <select
       [(ngModel)]="params.bloodType"
@@ -21,7 +26,12 @@
     </select>
   </div>
 
-  <div class="selectOption1">
+  <div
+    class="selectOption1"
+    [ngStyle]="{
+      color: isCompatibilityDisabled() ? '#730000' : '#FFF',
+    }"
+  >
     <label>Compatible con</label>
     <select
       [(ngModel)]="params.compatibility"
