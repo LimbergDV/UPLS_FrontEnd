@@ -6,7 +6,7 @@
 }
 
 .img {
-  height: 150px;
+  height: 130px;
   border-radius: 50%;
 }
 
@@ -54,4 +54,19 @@
 button:hover {
   transition: 0.4s;
   transform: scale(0.95);
+}
+
+h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 50px;
+}
+
+h2 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  margin-bottom: 0;
+  font-size: 28px;
 }

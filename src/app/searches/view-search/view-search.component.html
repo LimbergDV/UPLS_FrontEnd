@@ -1,0 +1,74 @@
+<div class="content">
+  <div class="header">
+    <div class="btn-return">
+      <div class="return-content">
+        <img src="return.png" alt="volver" />
+        <p routerLink="/home">Volver</p>
+      </div>
+    </div>
+
+    <div class="info-header">
+      <h1>Búsquedas</h1>
+      <div class="msg-info">
+        <img src="info.png" alt="info" />
+        <p>
+          Usa los filtros de búsqueda para encontrar donadores, aplica uno o dos
+        </p>
+      </div>
+    </div>
+
+    <div class="img-header">
+      <img src="busquedaH.png" alt="buscando" />
+    </div>
+  </div>
+
+  <div class="filters">
+    <filters
+      (setDonors)="getParams($event)"
+      (setNotFoud)="notFoudDonors($event)"
+    ></filters>
+  </div>
+
+  <div class="results">
+    <div class="init" *ngIf="initImage">
+      <div class="img-notf">
+        <img src="searchInit.png" alt="img-init" />
+      </div>
+      <div class="info-notf">
+        <h3>Tips para la búsqueda</h3>
+        <ul>
+          <li>Selecciona más de un filto de búsquda</li>
+          <li>Puedes hacer consultas individuales</li>
+          <li>
+            Si no encuentras a donadores puedes ver nuestro mapa para encontrar
+            a un banco de sangre <br />
+            <a routerLink="/maps">Ver ubicaciones</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="init" *ngIf="notFoud">
+      <div class="img-notf">
+        <img src="notFound.png" alt="img" id="notF"/>
+      </div>
+      <div class="info-notf">
+        <h3>Tips para la búsqueda</h3>
+        <ul>
+          <li>Selecciona más de un filto de búsquda</li>
+          <li>Puedes hacer consultas individuales</li>
+          <li>
+            Si no encuentras a donadores puedes ver nuestro mapa para encontrar
+            a un banco de sangre <br />
+            <a routerLink="/maps">Ver ubicaciones</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <view-results
+      [donors]="this.donors"
+      *ngIf="!notFoud && !initImage"
+    ></view-results>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="content">
+  <div class="msg">
+    <img src="info.png" alt="info" />
+    <h3>Haz click sobre algunos de los puntos</h3>
+  </div>
+
+  <div class="map">
+    <map (setId)="setId($event)"></map>
+  </div>
+
+  <div class="info">
+    <point-info [id_blood_bank]="id_bank" [flag]="flag" />
+  </div>
+</div>

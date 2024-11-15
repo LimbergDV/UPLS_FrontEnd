@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { iAccess } from '../../models/iAccess';
 import { DoneesService } from '../../service/donees.service';
 import { DonorsService } from '../../service/donors.service';
