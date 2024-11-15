@@ -11,10 +11,11 @@ import Swal from 'sweetalert2';
 })
 
 export class AddPublicationComponent {
-  id_donee= 23
+  id_donee= 0 //creo que esto está mal por el object id que genera automaticamente mongodb o tambien puede ser por el unique que le puse
   title = '';
   description = '';
   image: File | null = null; // almacenar la imagen
+  imagePreview: string | ArrayBuffer | null = null;
   date_limit = '';
   blood_type = ''; // valor por defecto
   donors_number = 0;
@@ -30,6 +31,12 @@ export class AddPublicationComponent {
     if (file) {
       this.image = file;
     }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(file);
   }
 
   // Método para agregar una publicación
