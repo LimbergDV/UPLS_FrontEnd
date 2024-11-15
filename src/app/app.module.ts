@@ -13,6 +13,8 @@ import { MapsModule } from './maps/maps.module';
 import { PublicationsModule } from './publications/publications.module';
 import { SearchesModule } from './searches/searches.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatTooltip } from '@angular/material/tooltip';
+
 
 
 
@@ -29,7 +31,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MapsModule,
     PublicationsModule,
     SearchesModule,
-    
+    MatTooltip
   ],
   providers: [
     provideAnimationsAsync()
