@@ -4,12 +4,14 @@ import { Observable } from 'rxjs';
 import { iAccess } from '../models/iAccess';
 import { iDonor } from '../models/i-donor';
 import { iProfile } from '../models/i-profile';
+import { iLocalities } from '../models/iLocalities';
+import { iDonorSearch } from '../models/iDonorSearch';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DonorsService {
-  private URL_BASE: string = 'http://localhost:5000/donors';
+  private URL_BASE: string = 'http://localhost:5000';
   private token: string = localStorage.getItem('token') || '';
 
   constructor(private _http: HttpClient) {}
@@ -18,21 +20,25 @@ export class DonorsService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this._http.post(`${this.URL_BASE}/login`, credentials, { headers });
+    return this._http.post(`${this.URL_BASE}/donors/login`, credentials, {
+      headers,
+    });
   }
 
   register(newDonor: iDonor): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this._http.post(`${this.URL_BASE}/add`, newDonor, { headers });
+    return this._http.post(`${this.URL_BASE}/donors/add`, newDonor, {
+      headers,
+    });
   }
 
   registerProfile(profile: iProfile): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this._http.post(`http://localhost:5000/profile/add`, profile, {
+    return this._http.post(`${this.URL_BASE}/profile/add`, profile, {
       headers,
     });
   }
@@ -41,7 +47,7 @@ export class DonorsService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this._http.get<iDonor>(`http://localhost:5000/profile/profile`, {
+    return this._http.get<iDonor>(`${this.URL_BASE}/profile/profile`, {
       headers,
     });
   }
@@ -50,7 +56,7 @@ export class DonorsService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this._http.get(`http://localhost:5000/profile/photo`, {
+    return this._http.get(`${this.URL_BASE}/profile/photo`, {
       headers,
       responseType: 'blob',
     });
@@ -64,7 +70,7 @@ export class DonorsService {
       Authorization: `Bearer ${this.token}`,
     });
 
-    return this._http.post(`http://localhost:5000/donors/addPhoto`, formData, {
+    return this._http.post(`${this.URL_BASE}/donors/addPhoto`, formData, {
       headers,
     });
   }
@@ -73,21 +79,25 @@ export class DonorsService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this._http.put(`${this.URL_BASE}/update`, newData, { headers });
+    return this._http.put(`${this.URL_BASE}/donors/update`, newData, {
+      headers,
+    });
   }
 
   updatePersonalPSW(newPSW: any): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this._http.put(`${this.URL_BASE}/update`, newPSW, { headers });
+    return this._http.put(`${this.URL_BASE}/donors/update`, newPSW, {
+      headers,
+    });
   }
 
   updateAccountInfo(newData: iDonor): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this._http.put(`http://localhost:5000/profile/update`, newData, {
+    return this._http.put(`${this.URL_BASE}/profile/update`, newData, {
       headers,
     });
   }
@@ -96,6 +106,41 @@ export class DonorsService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this._http.delete(`${this.URL_BASE}/deleteAccount`, { headers });
+    return this._http.delete(`${this.URL_BASE}/donors/deleteAccount`, {
+      headers,
+    });
+  }
+
+  getLocalities(): Observable<iLocalities[]> {
+    return this._http.get<iLocalities[]>(`${this.URL_BASE}/donors/localities`);
+  }
+
+  // Búsquedas
+  getByBloodType(type: string): Observable<iDonorSearch[]> {
+    return this._http.get<iDonorSearch[]>(`${this.URL_BASE}/profile/searchByBlood/${type}`); 
+  }
+
+  getByLocality(locality: string): Observable<iDonorSearch[]> {
+    return this._http.get<iDonorSearch[]>(`${this.URL_BASE}/profile/searchByLocality/${locality}`);
+  }
+
+  getByCompatibility(type: string): Observable<iDonorSearch[]> {
+    return this._http.get<iDonorSearch[]>(`${this.URL_BASE}/profile/searchByCompatibility/${type}`);
+  }
+  
+  getByBloodTypeLocality(type: string, locality: string): Observable<iDonorSearch[]> {
+    const body = {
+      blood_type: type,
+      locality: locality
+    }
+    return this._http.post<iDonorSearch[]>(`${this.URL_BASE}/profile/BloodLocality`, body);
+  }
+
+  getByCompatibilityLocality(type: string, locality: string): Observable<iDonorSearch[]> {
+    const body = {
+      blood_type: type,
+      locality: locality
+    }
+    return this._http.post<iDonorSearch[]>(`${this.URL_BASE}/profile/CompatibilityLocality`, body);
   }
 }

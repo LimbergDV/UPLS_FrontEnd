@@ -11,13 +11,13 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MapsModule } from './maps/maps.module';
 import { PublicationsModule } from './publications/publications.module';
+import { SearchesModule } from './searches/searches.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    HomeComponent
-  ],
+  declarations: [AppComponent, NavbarComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,9 +27,13 @@ import { PublicationsModule } from './publications/publications.module';
     RegisterModule,
     RouterModule,
     MapsModule,
-    PublicationsModule
+    PublicationsModule,
+    SearchesModule,
+    
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    provideAnimationsAsync()
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

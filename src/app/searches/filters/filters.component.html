@@ -1,0 +1,33 @@
+<div class="content">
+  <div class="selectOption">
+    <label>Tipo de sangre</label>
+    <select [(ngModel)]="params.bloodType"  [disabled]="isBloodTypeDisabled()" matTooltip="Info about the action"  aria-label="Button that displays a tooltip when focused or hovered over">
+      <option *ngFor="let bloodType of bloodTypes" [value]="bloodType">
+        {{ bloodType }}
+      </option>
+    </select>
+  </div>
+
+  <div class="selectOption">
+    <label>Ubicación</label>
+    <select [(ngModel)]="params.locality">
+      <option *ngFor="let locality of localities" [value]="locality">
+        {{ locality }}
+      </option>
+    </select>
+  </div>
+
+  <div class="selectOption">
+    <label>Conpatible con</label>
+    <select
+      [(ngModel)]="params.compatibility"
+      [disabled]="isCompatibilityDisabled()"
+    >
+      <option *ngFor="let bloodType of bloodTypes" [value]="bloodType">
+        {{ bloodType }}
+      </option>
+    </select>
+  </div>
+
+  <button mat-raised-button matTooltip="Precioname Jeje"   (click)="initSearch()">Buscar</button>
+</div>

@@ -103,7 +103,7 @@ export class AvatarComponent implements OnInit {
       },
       preConfirm: () => {
         return new Promise((resolve) => {
-          if (this.cropper) {
+          if (this.cropper) { 
             const croppedCanvas = this.cropper.getCroppedCanvas({
               width: 200,
               height: 200,

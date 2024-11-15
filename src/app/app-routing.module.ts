@@ -6,6 +6,8 @@ import { FormRegisterComponent } from './register/form-register/form-register.co
 import { HomeComponent } from './home/home.component';
 import { ViewMapComponent } from './maps/view-map/view-map.component';
 import { ViewPublicationComponent } from './publications/view-publication/view-publication.component';
+import { FiltersComponent } from './searches/filters/filters.component';
+import { ViewSearchComponent } from './searches/view-search/view-search.component';
 
 const routes: Routes = [
   { path: 'signIn', component: FormLoginComponent },
@@ -13,7 +15,8 @@ const routes: Routes = [
   { path: 'signUp', component: FormRegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'maps', component: ViewMapComponent },
-  { path: 'publications', component: ViewPublicationComponent},
+  { path: 'publications', component: ViewPublicationComponent },
+  { path: 'search', component: ViewSearchComponent },
 ];
 
 @NgModule({
