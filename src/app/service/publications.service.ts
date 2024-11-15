@@ -30,4 +30,15 @@ export class PublicationService {
   deletePublication(id: string): Observable<{ message: string }> {
     return this.http.delete<{ message: string }>(`${this.apiUrl}/${id}`);
   }
+
+  addImg(file: File | null): Observable<{ fileId: string }> {
+    if (!file) {
+      throw new Error('No se ha seleccionado ningún archivo');
+    }
+  
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    return this.http.post<{ fileId: string }>(`${this.apiUrl}/upload`, formData);
+  }
 }

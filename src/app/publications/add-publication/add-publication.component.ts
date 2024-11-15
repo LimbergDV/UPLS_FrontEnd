@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PublicationService } from '../../service/publications.service';
 import { IPublications } from '../../models/i-publications';
+import { switchMap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 
 export class AddPublicationComponent {
-  id_donee= 0 //creo que esto está mal por el object id que genera automaticamente mongodb o tambien puede ser por el unique que le puse
+  id_donee= 33;
   title = '';
   description = '';
   image: File | null = null; // almacenar la imagen
@@ -41,19 +42,36 @@ export class AddPublicationComponent {
 
   // Método para agregar una publicación
   onSubmit(): void {
-    // Preparamos el objeto con los datos del formulario
-    const newPublication: IPublications = {
-      id_donee: this.id_donee, // Generar un ID temporal
+    if (!this.image) {
+      console.error('No se ha seleccionado ninguna imagen');
+      return; // Detener el proceso si no hay imagen
+    }
+  
+    // Preparamos el objeto base con los datos de la publicación sin la imagen
+    const newPublication: Omit<IPublications, 'image'> = {
+      id_donee: this.id_donee,
       title: this.title,
       description: this.description,
-      image: this.image ? this.image.name : '',
       date_limit: new Date(this.date_limit),
       blood_type: this.blood_type,
       donors_number: this.donors_number
     };
-
-    // Llamada al servicio para enviar la publicación al backend
-    this.publicationService.addPublication(newPublication).subscribe({
+  
+    // Subir la imagen primero
+    this.publicationService.addImg(this.image).pipe(
+      switchMap((response: { fileId: string }) => {
+        console.log('ID de imagen recibido:', response.fileId);
+  
+        // Creamos el objeto de publicación completo con el fileId de la imagen
+        const completePublication: IPublications = {
+          ...newPublication,
+          image: response.fileId, // Agregamos el ID de la imagen aquí
+        };
+  
+        // Retornamos el observable para guardar la publicación
+        return this.publicationService.addPublication(completePublication);
+      })
+    ).subscribe({
       next: (response) => {
 
         console.log('Publicación agregada:', response);
@@ -78,4 +96,8 @@ export class AddPublicationComponent {
       },
     });
   }
+  
 }
+
+
+
