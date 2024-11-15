@@ -59,7 +59,7 @@ body {
   border: 1px dashed #ccc;
   padding: 20px;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: #F8F8FF;
   cursor: pointer;
   position: relative;
 }
@@ -69,12 +69,12 @@ body {
 }
 
 .image-label {
-  color: #666;
+  color: #333333;
 }
 
 .upload-icon {
   font-size: 30px;
-  color: #777;
+  color: #000000;
 }
 
 .form-row {
@@ -109,4 +109,22 @@ body {
 .publish {
   background-color: #d9534f;
   color: white;
+}
+
+.image-preview {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.image-preview p {
+  font-size: 14px;
+  color: #555;
+}
+
+.preview-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
