@@ -110,3 +110,50 @@ h3 {
 .profile-name {
   font-weight: bold;
 }
+
+.comment-section {
+  margin-top: 20px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.comment-input {
+  width: 90%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.submit-comment {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 4px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comments-list {
+  margin-top: 15px;
+}
+
+.comment {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.comment .timestamp {
+  display: block;
+  font-size: 0.8em;
+  color: #666;
+}
+
+.comment p {
+  font-size: 14px;
+}
