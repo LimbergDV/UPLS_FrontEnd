@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 
 export class AddPublicationComponent {
-  id_donee= 33;
+  id_donee= 45;
   title = '';
   description = '';
   image: File | null = null; // almacenar la imagen
@@ -46,7 +46,7 @@ export class AddPublicationComponent {
       console.error('No se ha seleccionado ninguna imagen');
       return; // Detener el proceso si no hay imagen
     }
-  
+
     // Preparamos el objeto base con los datos de la publicación sin la imagen
     const newPublication: Omit<IPublications, 'image'> = {
       id_donee: this.id_donee,
@@ -56,18 +56,18 @@ export class AddPublicationComponent {
       blood_type: this.blood_type,
       donors_number: this.donors_number
     };
-  
+
     // Subir la imagen primero
     this.publicationService.addImg(this.image).pipe(
       switchMap((response: { fileId: string }) => {
         console.log('ID de imagen recibido:', response.fileId);
-  
+
         // Creamos el objeto de publicación completo con el fileId de la imagen
         const completePublication: IPublications = {
           ...newPublication,
           image: response.fileId, // Agregamos el ID de la imagen aquí
         };
-  
+
         // Retornamos el observable para guardar la publicación
         return this.publicationService.addPublication(completePublication);
       })
@@ -96,7 +96,7 @@ export class AddPublicationComponent {
       },
     });
   }
-  
+
 }
 
 

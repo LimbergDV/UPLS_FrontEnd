@@ -18,6 +18,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 
 
 
+
 @NgModule({
   declarations: [AppComponent, NavbarComponent, HomeComponent],
   imports: [
@@ -31,7 +32,7 @@ import { MatTooltip } from '@angular/material/tooltip';
     MapsModule,
     PublicationsModule,
     SearchesModule,
-    MatTooltip
+    MatTooltip,
   ],
   providers: [
     provideAnimationsAsync()
