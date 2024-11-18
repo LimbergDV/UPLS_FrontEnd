@@ -8,6 +8,7 @@ import { ViewMapComponent } from './maps/view-map/view-map.component';
 import { ViewPublicationComponent } from './publications/view-publication/view-publication.component';
 import { FiltersComponent } from './searches/filters/filters.component';
 import { ViewSearchComponent } from './searches/view-search/view-search.component';
+import { ViewPrincipalComponent } from './principal/view-principal/view-principal.component';
 
 const routes: Routes = [
   { path: 'signIn', component: FormLoginComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'maps', component: ViewMapComponent },
   { path: 'publications', component: ViewPublicationComponent },
   { path: 'search', component: ViewSearchComponent },
+  { path: 'principal', component: ViewPrincipalComponent}
 ];
 
 @NgModule({
