@@ -3,6 +3,7 @@
   background-repeat: no-repeat;
   min-height: 100vh;
   box-shadow: 0 100px 20px red;
+  display: flex;
 }
 
 .left-content img{
@@ -18,10 +19,45 @@
   font-weight: 300;
   line-height: 140%;
   color: white;
-  margin-left: 12vh;
-  margin-right: 85vh;
+  margin-left: 13vh;
+  margin-right: 55vh;
   margin-top: 5vh;
   text-align: justify;
 }
 
+.right-content{
+  text-align: center;
+  width: 40%;
+  margin-left: auto;
+}
 
+.login-btn span{
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+
+.login-btn{
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);;
+  border: 1px solid white;
+  color: white;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-top: 2vh;
+  margin-right: 10vh;
+  width: 180px;
+  height: 37px;
+}
+
+.login-btn img {
+  margin-left: 5px;
+}
+
+.login-icon{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
