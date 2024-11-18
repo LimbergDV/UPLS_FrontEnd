@@ -1,0 +1,39 @@
+<div>
+  <h1>Chat en Tiempo Real</h1>
+
+  <form (submit)="setUserId($event)">
+    <input
+      name="userId"
+      type="text"
+      [(ngModel)]="userId"
+      placeholder="Ingresa tu usuario"
+      required
+    />
+    <button type="submit">Ingresar</button>
+  </form>
+
+  <div *ngIf="conversations.length > 0">
+    <h3>Mis Conversaciones</h3>
+    <ul>
+      <li
+        *ngFor="let conversation of conversations"
+        (click)="joinConversation(conversation._id)"
+      >
+        Conversación con: {{ conversation.participants.join(", ") }}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="currentConversationId">
+    <h3>Conversación</h3>
+    <ul>
+      <li *ngFor="let message of messages">
+        {{ message.senderId }}: {{ message.content }}
+      </li>
+    </ul>
+    <form (submit)="sendMessage($event)">
+      <input name="message" type="text" [(ngModel)]="newMessage" placeholder="Escribe un mensaje..." required />
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+</div>
