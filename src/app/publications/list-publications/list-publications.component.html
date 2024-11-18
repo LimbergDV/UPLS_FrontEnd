@@ -15,7 +15,8 @@
       <p class="description">{{ publication.description }}</p>
 
       <div class="image-display">
-        <img *ngIf="publication.image" [src]="publication.image" alt="Imagen de publicación">
+        <!-- Usamos el método createImageFromBlob pasando el atributo "image" -->
+        <img *ngIf="createImageFromBlob(publication.image)" [src]="createImageFromBlob(publication.image)" alt="Imagen de publicación">
       </div>
 
       <div class="details">
@@ -23,7 +24,6 @@
         <p><strong>Tipo de sangre:</strong> {{ publication.blood_type }}</p>
         <p><strong>Donantes requeridos:</strong> {{ publication.donors_number }}</p>
       </div>
-
     </div>
   </div>
 </div>
