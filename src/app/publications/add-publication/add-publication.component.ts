@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 
 export class AddPublicationComponent {
-  id_donee= 33;
+  id_donee= 36;
   title = '';
   description = '';
   image: File | null = null; // almacenar la imagen

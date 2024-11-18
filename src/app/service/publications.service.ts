@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IPublications } from './../models/i-publications';
 
 @Injectable({
@@ -41,4 +41,14 @@ export class PublicationService {
   
     return this.http.post<{ fileId: string }>(`${this.apiUrl}/upload`, formData);
   }
+
+  showImg(image: string): Observable<Blob> {
+    if (!image) {
+      throw new Error('No se ha proporcionado el ID de la imagen');
+    }
+  
+    return this.http.get(`${this.apiUrl}/download/${image}`, { responseType: 'blob' });
+  }
+  
+  
 }
