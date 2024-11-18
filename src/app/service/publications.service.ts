@@ -35,10 +35,10 @@ export class PublicationService {
     if (!file) {
       throw new Error('No se ha seleccionado ningún archivo');
     }
-  
+
     const formData = new FormData();
     formData.append('file', file);
-  
+
     return this.http.post<{ fileId: string }>(`${this.apiUrl}/upload`, formData);
   }
 
@@ -46,9 +46,9 @@ export class PublicationService {
     if (!image) {
       throw new Error('No se ha proporcionado el ID de la imagen');
     }
-  
+
     return this.http.get(`${this.apiUrl}/download/${image}`, { responseType: 'blob' });
   }
-  
-  
+
+
 }
