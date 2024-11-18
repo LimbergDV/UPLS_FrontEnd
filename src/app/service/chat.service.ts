@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { from, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +9,9 @@ import { from, Observable } from 'rxjs';
 export class ChatService {
   private socket: Socket;
   private URL_BASE = 'http://localhost:3000'; // URL de tu backend
+  private token = localStorage.getItem('token');
 
-  constructor() {
+  constructor(private _http: HttpClient) {
     this.socket = io(this.URL_BASE);
   }
 
@@ -26,6 +28,15 @@ export class ChatService {
       this.socket.on('newMessage', (message) => {
         observer.next(message);
       });
+    });
+  }
+
+  createConversation(id_donor: number): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+    return this._http.post(`${this.URL_BASE}/conversations/add/${id_donor}`, {
+      headers,
     });
   }
 }

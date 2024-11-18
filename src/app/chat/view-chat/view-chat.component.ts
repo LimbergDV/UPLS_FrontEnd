@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChatService } from '../../service/chat.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-chat',
@@ -8,11 +8,12 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './view-chat.component.css',
 })
 export class ViewChatComponent implements OnInit {
-  userId: string = '';
+  userId: number = 0;
   conversations: any[] = [];
   currentConversationId: string | null = null;
   messages: any[] = [];
   newMessage: string = '';
+  private token = localStorage.getItem('token')
 
   constructor(private http: HttpClient, private socketService: ChatService) {}
 
@@ -26,16 +27,24 @@ export class ViewChatComponent implements OnInit {
 
   setUserId(event: Event) {
     event.preventDefault();
-    if (this.userId.trim()) {
+    if (this.userId) {
       this.loadConversations();
     }
   }
 
   loadConversations() {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+
     this.http
-      .get<any[]>(`http://localhost:3000/conversations/${this.userId}`)
+      .get<any[]>(`http://localhost:3000/conversations/donee`, {headers})
       .subscribe(
-        (conversations) => (this.conversations = conversations),
+        (conversations) => {
+          console.log(conversations);
+
+          this.conversations = conversations;
+        },
         (error) => console.error('Error al cargar las conversaciones:', error)
       );
   }

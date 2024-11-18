@@ -4,7 +4,7 @@
   <form (submit)="setUserId($event)">
     <input
       name="userId"
-      type="text"
+      type="number"
       [(ngModel)]="userId"
       placeholder="Ingresa tu usuario"
       required
@@ -19,7 +19,7 @@
         *ngFor="let conversation of conversations"
         (click)="joinConversation(conversation._id)"
       >
-        Conversación con: {{ conversation.participants.join(", ") }}
+        Conversación con: {{ conversation.participants.id_donee }}, {{ conversation.participants.id_donor }}
       </li>
     </ul>
   </div>
@@ -32,7 +32,13 @@
       </li>
     </ul>
     <form (submit)="sendMessage($event)">
-      <input name="message" type="text" [(ngModel)]="newMessage" placeholder="Escribe un mensaje..." required />
+      <input
+        name="message"
+        type="text"
+        [(ngModel)]="newMessage"
+        placeholder="Escribe un mensaje..."
+        required
+      />
       <button type="submit">Enviar</button>
     </form>
   </div>
