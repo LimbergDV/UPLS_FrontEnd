@@ -1,5 +1,5 @@
 export interface IPublications {
-  id_donee: number;
+  id_donee?: number;
   title: string;
   description: string;
   image: string;

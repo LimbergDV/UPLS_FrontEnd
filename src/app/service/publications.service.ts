@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { IPublications } from './../models/i-publications';
 
@@ -11,6 +11,19 @@ export class PublicationService {
 
   constructor(private http: HttpClient) {}
 
+
+  private token: string = localStorage.getItem('token') || '';
+
+
+  addPublication(publication: IPublications): Observable<any> {
+    const token = this.token;  // Obtener el token
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.post(`${this.apiUrl}/add`, publication, { headers });
+  }
+
   getAllPublications(): Observable<IPublications[]> {
     return this.http.get<IPublications[]>(this.apiUrl);
   }
@@ -19,9 +32,6 @@ export class PublicationService {
     return this.http.get<IPublications>(`${this.apiUrl}/${id}`);
   }
 
-  addPublication(publication: IPublications): Observable<IPublications> {
-    return this.http.post<IPublications>(`${this.apiUrl}/add`, publication);
-  }
 
   updatePublication(id: string, publication: IPublications): Observable<IPublications> {
     return this.http.put<IPublications>(`${this.apiUrl}/${id}`, publication);
