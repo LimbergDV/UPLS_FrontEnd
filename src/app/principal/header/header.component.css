@@ -2,7 +2,6 @@
   background-image: url(../../../../public/assets/headerPrincipal.png);
   background-repeat: no-repeat;
   min-height: 100vh;
-  box-shadow: 0 100px 20px red;
   display: flex;
   justify-content: space-between;
   align-items: flex-start; /
@@ -105,3 +104,100 @@
   height: 40px;
 }
 
+@media (max-width: 1024px) {
+  .principal-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px; /* Añade espacio para evitar que el contenido salga */
+  }
+
+  .left-content img {
+    max-width: 80%;
+    height: auto;
+    margin: 20px 0;
+  }
+
+  .left-content p {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+
+  .right-content {
+    width: 100%;
+    margin: 0;
+  }
+
+  .text-subtitle h2 {
+    font-size: 1.8rem;
+    margin: 15px 0;
+  }
+
+  .buttons-group {
+    gap: 10px;
+    width: 100%; /* Ocupa todo el ancho */
+    margin: 10px 0;
+  }
+
+  .buttons-group .first-button,
+  .buttons-group .second-button {
+    width: 90%;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-content img {
+    max-width: 90%;
+    margin: 15px 0;
+  }
+
+  .left-content p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  .right-content {
+    position: absolute;
+    margin-top: 40vh;
+    margin-left: 10vh;
+  }
+
+  .text-subtitle h2 {
+    font-size: 1.5rem;
+  }
+
+  .buttons-group .first-button,
+  .buttons-group .second-button {
+    font-size: 14px;
+    height: 40px;
+    width: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-content img {
+    max-width: 90%;
+    margin: 15px 0;
+  }
+
+  .left-content p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  .right-content {
+    position: absolute;
+    margin-top: 40vh;
+    margin-left: 10vh;
+  }
+
+  .text-subtitle h2 {
+    font-size: 1.5rem;
+  }
+
+  .buttons-group .first-button,
+  .buttons-group .second-button {
+    font-size: 14px;
+    height: 40px;
+    width: 85%;
+  }
+}
