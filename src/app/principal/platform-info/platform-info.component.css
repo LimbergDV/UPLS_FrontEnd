@@ -1,0 +1,25 @@
+.principal-content {
+  background-image: url("../../../../public/assets/background-info.png");
+  min-height: 100vh;
+  background-repeat: no-repeat;
+}
+
+.principal-title {
+  position: relative;
+  padding-top: 50px;
+}
+
+.principal-title h2 {
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 1vh;
+  margin-left: 20vh;
+  font-size: 50px;
+  font-weight: 500;
+}
+
+.white-line {
+  border: none;
+  border-top: 4px solid white;
+  margin-left: -1vh;
+  width: 71%;
+}

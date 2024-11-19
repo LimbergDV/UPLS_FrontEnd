@@ -1,7 +1,6 @@
 .principal-container {
   background-image: url(../../../../public/assets/headerPrincipal.png);
   background-repeat: no-repeat;
-  min-height: 100vh;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
