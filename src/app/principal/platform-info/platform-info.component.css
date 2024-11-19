@@ -23,3 +23,30 @@
   margin-left: -1vh;
   width: 71%;
 }
+
+.container-cards {
+
+}
+
+.container-1{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 11vh;
+}
+
+.container-2{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 11vh;
+}
+
+.card {
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  height: 183px;
+  width: 370px;
+  margin-top: 4vh;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
