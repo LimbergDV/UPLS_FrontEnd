@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ChatService } from '../../service/chat.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'view-results',
@@ -53,6 +54,10 @@ export class ViewResultsComponent implements AfterViewInit {
       },
       error: (error) => {
         console.log(error);
+        if (error.status != 400) {
+          Swal.fire('Opss...!', 'Ocurrió un error.', 'error');
+        }
+        this.router.navigate(['/chats']);
       },
     });
   }

@@ -35,7 +35,7 @@ export class ChatService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
-    return this._http.post(`${this.URL_BASE}/conversations/add/${id_donor}`, {
+    return this._http.get(`${this.URL_BASE}/conversations/add/${id_donor}`, {
       headers,
     });
   }

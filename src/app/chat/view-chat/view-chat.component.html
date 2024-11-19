@@ -1,17 +1,6 @@
 <div>
   <h1>Chat en Tiempo Real</h1>
 
-  <form (submit)="setUserId($event)">
-    <input
-      name="userId"
-      type="number"
-      [(ngModel)]="userId"
-      placeholder="Ingresa tu usuario"
-      required
-    />
-    <button type="submit">Ingresar</button>
-  </form>
-
   <div *ngIf="conversations.length > 0">
     <h3>Mis Conversaciones</h3>
     <ul>
@@ -28,7 +17,7 @@
     <h3>Conversación</h3>
     <ul>
       <li *ngFor="let message of messages">
-        {{ message.senderId }}: {{ message.content }}
+        {{ message.senderId }}: {{ message.content }} <small>{{message.timestamp}}</small>
       </li>
     </ul>
     <form (submit)="sendMessage($event)">
