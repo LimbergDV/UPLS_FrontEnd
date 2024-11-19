@@ -4,7 +4,7 @@
   min-height: 100vh;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /
+  align-items: flex-start;
 }
 
 .left-content img{
@@ -160,6 +160,10 @@
     position: absolute;
     margin-top: 40vh;
     margin-left: 10vh;
+  }
+  .login-btn{
+    position: relative;
+    margin-left: 20vh;
   }
 
   .text-subtitle h2 {
