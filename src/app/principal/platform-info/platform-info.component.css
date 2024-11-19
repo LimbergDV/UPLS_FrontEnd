@@ -50,3 +50,65 @@
   margin-top: 4vh;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+.card-content{
+  display: flex;
+  width: 100%;
+}
+
+.card-image{
+  margin-left: 2vh;
+  margin-top: 5vh;
+}
+
+.card-text{
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 2vh;
+  font-family: "Poppins", sans-serif;
+}
+
+.card-description {
+  font-size: 20px;
+  margin-right: 5vh;
+  font-family: "League Spartan", sans-serif;
+  text-align: justify;
+  color: #000000;
+}
+
+
+.card-content2{
+  display: flex;
+  width: 100%;
+}
+
+.card-image2{
+  margin-left: 2vh;
+  margin-top: 3vh;
+}
+
+.card-text2{
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title2 {
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 100%;
+  margin-top: 2vh;
+  font-family: "Poppins", sans-serif;
+}
+
+.card-description2 {
+  font-size: 20px;
+  margin-right: 5vh;
+  font-family: "League Spartan", sans-serif;
+  text-align: justify;
+  color: #000000;
+}
