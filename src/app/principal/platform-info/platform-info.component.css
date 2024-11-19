@@ -1,6 +1,6 @@
 .principal-content {
   background-image: url("../../../../public/assets/background-info.png");
-  min-height: 100vh;
+  min-height: 80vh;
   background-repeat: no-repeat;
 }
 
@@ -98,7 +98,7 @@
 }
 
 .card-title2 {
-  font-size: 25px;
+  font-size: 27px;
   font-weight: 600;
   line-height: 100%;
   margin-top: 2vh;
