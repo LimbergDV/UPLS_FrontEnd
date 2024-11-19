@@ -12,7 +12,6 @@ import Swal from 'sweetalert2';
 })
 
 export class AddPublicationComponent {
-  id_donee= 37;
   title = '';
   description = '';
   image: File | null = null; // almacenar la imagen
@@ -43,51 +42,54 @@ export class AddPublicationComponent {
   // Método para agregar una publicación
   onSubmit(): void {
     if (!this.image) {
-      console.error('No se ha seleccionado ninguna imagen');
-      return; // Detener el proceso si no hay imagen
+      Swal.fire({
+        title: 'Error',
+        text: 'No se ha seleccionado ninguna imagen.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
     }
-
-    // Preparamos el objeto base con los datos de la publicación sin la imagen
-    const newPublication: Omit<IPublications, 'image'> = {
-      id_donee: this.id_donee,
+  
+    // Crear el objeto base sin la imagen
+    const newPublicationBase = {
       title: this.title,
       description: this.description,
       date_limit: new Date(this.date_limit),
       blood_type: this.blood_type,
       donors_number: this.donors_number
     };
-
-    // Subir la imagen primero
+  
+    // Subir la imagen primero y luego completar el objeto
     this.publicationService.addImg(this.image).pipe(
       switchMap((response: { fileId: string }) => {
         console.log('ID de imagen recibido:', response.fileId);
-
-        // Creamos el objeto de publicación completo con el fileId de la imagen
-        const completePublication: IPublications = {
-          ...newPublication,
-          image: response.fileId, // Agregamos el ID de la imagen aquí
+  
+        // Crear el objeto completo con la imagen
+        const newPublication: IPublications = {
+          ...newPublicationBase,
+          image: response.fileId // Añadir la imagen (ID)
         };
-
-        // Retornamos el observable para guardar la publicación
-        return this.publicationService.addPublication(completePublication);
+  
+        // Retornar el observable para agregar la publicación
+        return this.publicationService.addPublication(newPublication);
       })
     ).subscribe({
       next: (response) => {
-
         console.log('Publicación agregada:', response);
-
+  
         Swal.fire({
           title: '¡Éxito!',
           text: 'Tu publicación ha sido realizada con éxito.',
           icon: 'success',
           confirmButtonText: 'Aceptar'
         });
-        this.router.navigate(['/publications']); // Navegar a la lista de publicaciones
+        this.router.navigate(['/publications']);
       },
       error: (error) => {
         console.error('Error al agregar publicación:', error);
-
-         Swal.fire({
+  
+        Swal.fire({
           title: 'Error',
           text: 'Hubo un problema al agregar la publicación. Intenta nuevamente.',
           icon: 'error',
@@ -98,6 +100,3 @@ export class AddPublicationComponent {
   }
 
 }
-
-
-
