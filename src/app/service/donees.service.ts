@@ -77,4 +77,14 @@ export class DoneesService {
       headers,
     });
   }
+
+  getDoneeNT(id_donee: number): Observable<iDonee> {
+    return this._http.get<iDonee>(`${this.URL_BASE}/search/${id_donee}`);
+  }
+
+  getPhotoNT(id: string) {
+    return this._http.get(`${this.URL_BASE}/photo/${id}`, {
+      responseType: 'blob',
+    });
+  }
 }

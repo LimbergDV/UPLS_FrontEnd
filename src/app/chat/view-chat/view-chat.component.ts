@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../../service/chat.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-chat',
@@ -13,14 +13,11 @@ export class ViewChatComponent implements OnInit {
   currentConversationId: string | null = null;
   messages: any[] = [];
   newMessage: string = '';
-  private token = localStorage.getItem('token');
+  
   private rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
+  private token = localStorage.getItem('token');
 
-  constructor(
-    private http: HttpClient,
-    private socketService: ChatService,
-    private rouoter: Router
-  ) {}
+  constructor(private socketService: ChatService, private rouoter: Router) {}
 
   ngOnInit() {
     if (this.rol_access == 'NoAccess') {
@@ -35,56 +32,40 @@ export class ViewChatComponent implements OnInit {
   }
 
   loadConversations() {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`,
-    });
+    this.socketService.getConversations(this.rol_access).subscribe(
+      (conversations) => {
+        console.log(conversations);
+        this.conversations = conversations;
 
-    if (this.rol_access == 'donee') {
-      this.http
-        .get<any[]>(`http://localhost:3000/conversations/donee`, { headers })
-        .subscribe(
-          (conversations) => {
-            console.log(conversations);
-
-            this.conversations = conversations;
-          },
-          (error) => console.error('Error al cargar las conversaciones:', error)
-        );
-    }
-
-    if (this.rol_access == 'donor') {
-      this.http
-        .get<any[]>(`http://localhost:3000/conversations/donor`, { headers })
-        .subscribe(
-          (conversations) => {
-            console.log(conversations);
-
-            this.conversations = conversations;
-          },
-          (error) => console.error('Error al cargar las conversaciones:', error)
-        );
-    }
+      },
+      (error) => {
+        console.error('Error al cargar las conversaciones:', error);
+        Swal.fire({
+          title: '¡Opss...!',
+          text: 'Occurrió un error',
+          icon: 'error',
+        });
+      }
+    );
   }
 
   joinConversation(conversationId: string) {
     this.currentConversationId = conversationId;
     this.messages = [];
 
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`,
-    });
-
     this.socketService.joinConversation(conversationId);
 
-    this.http
-      .get<any[]>(
-        `http://localhost:3000/conversations/${conversationId}/messages`,
-        { headers }
-      )
-      .subscribe(
-        (messages) => (this.messages = messages),
-        (error) => console.error('Error al cargar los mensajes:', error)
-      );
+    this.socketService.getConversations(conversationId).subscribe(
+      (messages) => (this.messages = messages),
+      (error) => {
+        console.error('Error al cargar las conversaciones:', error);
+        Swal.fire({
+          title: '¡Opss...!',
+          text: 'Occurrió un error',
+          icon: 'error',
+        });
+      }
+    );
   }
 
   sendMessage(event: Event) {

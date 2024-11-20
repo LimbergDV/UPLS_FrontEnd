@@ -39,4 +39,27 @@ export class ChatService {
       headers,
     });
   }
+
+  getConversations(rol: string): Observable<any[]> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+
+    return this._http.get<any[]>(`${this.URL_BASE}/conversations/${rol}`, {
+      headers,
+    });
+  }
+
+  getMessagesConversation(conversationId: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+
+    return this._http.get<any[]>(
+      `${this.URL_BASE}/conversations/${conversationId}/messages`,
+      { headers }
+    );
+  }
+
+  
 }
