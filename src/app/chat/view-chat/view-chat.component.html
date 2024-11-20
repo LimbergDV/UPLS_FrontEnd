@@ -1,5 +1,56 @@
-<div>
-  <h1>Chat en Tiempo Real</h1>
+<div class="content">
+  <div class="msg">
+    <img src="info.png" alt="info" />
+    <h3>Toca en algún chat para continuar la conversación</h3>
+  </div>
+
+  <div class="chat-box">
+    <div class="title"><p>Chats</p></div>
+
+    <div class="c-box-messages">
+      <div class="conversations">
+        <div class="conversation">
+          <img src="searchInit.png" alt="photo" />
+          <p>Alexis Leonel Guzmán González</p>
+        </div>
+      </div>
+
+      <div class="box-messages">
+        <div class="messages"></div>
+        <div class="sendMessage">
+          <form (submit)="sendMessage($event)">
+            <input
+              name="message"
+              type="text"
+              [(ngModel)]="newMessage"
+              placeholder="Escribe un mensaje..."
+              required
+            />
+            <button type="submit">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#EA454C"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-send-2"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M4.698 4.034l16.302 7.966l-16.302 7.966a.503 .503 0 0 1 -.546 -.124a.555 .555 0 0 1 -.12 -.568l2.468 -7.274l-2.468 -7.274a.555 .555 0 0 1 .12 -.568a.503 .503 0 0 1 .546 -.124z"
+                />
+                <path d="M6.5 12h14.5" />
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div *ngIf="conversations.length > 0">
     <h3>Mis Conversaciones</h3>
@@ -8,7 +59,8 @@
         *ngFor="let conversation of conversations"
         (click)="joinConversation(conversation._id)"
       >
-        Conversación con: {{ conversation.participants.id_donee }}, {{ conversation.participants.id_donor }}
+        Conversación con: {{ conversation.participants.id_donee }},
+        {{ conversation.participants.id_donor }}
       </li>
     </ul>
   </div>
@@ -17,18 +69,9 @@
     <h3>Conversación</h3>
     <ul>
       <li *ngFor="let message of messages">
-        {{ message.senderId }}: {{ message.content }} <small>{{message.timestamp}}</small>
+        {{ message.senderId }}: {{ message.content }}
+        <small>{{ message.timestamp }}</small>
       </li>
     </ul>
-    <form (submit)="sendMessage($event)">
-      <input
-        name="message"
-        type="text"
-        [(ngModel)]="newMessage"
-        placeholder="Escribe un mensaje..."
-        required
-      />
-      <button type="submit">Enviar</button>
-    </form>
   </div>
 </div>
