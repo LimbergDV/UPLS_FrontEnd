@@ -51,7 +51,7 @@
 .card:hover {
   transform: scale(1.05);
   color: #000000;
-  text-shadow: 5px 5px 5px #a61414;
+  text-shadow: 5px 5px 5px #535353;
   transition: text-shadow 0.5s ease, color 0.1s ease;
   outline: 5px solid #a61414;
 }
