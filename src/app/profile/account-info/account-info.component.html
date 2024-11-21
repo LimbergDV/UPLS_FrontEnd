@@ -1,0 +1,73 @@
+<div class="info-title">
+  <h2>Información de la cuenta</h2>
+</div>
+<div class="form-account-info">
+  <div class="content-account-left">
+    <div class="input">
+      <label for="last_donation">Última donación:</label> <br />
+      <input type="text" [(ngModel)]="donor.last_donation" disabled /> <br />
+    </div>
+    <div class="input">
+      <label for="">Número de donaciones:</label> <br />
+      <h1>{{ donor.donations_number }}</h1>
+      <br />
+    </div>
+  </div>
+
+  <div class="content-account-rigth">
+    <div class="input">
+      <label for="blood_type">Tipo de sangre:</label> <br />
+      <select
+        name="bloodType"
+        [(ngModel)]="donor.blood_type"
+        [disabled]="idDisabled"
+      >
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+      </select>
+    </div>
+    <div class="input">
+      <label for="health_status">Estado de salud:</label> <br />
+      <select
+        name="health_status"
+        [(ngModel)]="donor.health_status"
+        [disabled]="idDisabled"
+      >
+        <option value="Good">Bueno</option>
+        <option value="Recovery">En recuperación</option>
+      </select>
+    </div>
+    <div class="input">
+      <label for="availability">Disponibilidad:</label> <br />
+      <select
+        name="availability"
+        [(ngModel)]="donor.availability"
+        [disabled]="idDisabled"
+      >
+        <option value="morning">Por la mañana</option>
+        <option value="afternoon">Por la tarde</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="profile-buttons">
+  <button class="edit-profile-button" (click)="editAccountInfo()">
+    Editar
+  </button>
+  <button
+    class="edit-profile-button"
+    (click)="saveInfo()"
+    [disabled]="idDisabled"
+  >
+    Guardar
+  </button>
+  <button class="delete-profile-button" (click)="deleteAccount()">
+    Borrar cuenta
+  </button>
+</div>

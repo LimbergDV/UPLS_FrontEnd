@@ -1,0 +1,135 @@
+h2 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 28px;
+}
+
+.info-title{
+  margin-left: 20vh;
+  margin-top: 3vh;
+}
+
+.form-account-info{
+  width: 90%;
+  padding: 0 5% 0 5%;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Poppins", sans-serif;
+}
+
+.content-account-left {
+  width: 45%;
+}
+
+.content-account-rigth {
+  width: 45%;
+}
+
+.input {
+  width: 95%;
+  text-align: start;
+  margin-bottom: 20px;
+}
+
+label {
+  margin-left: .5%;
+  font-weight: 500;
+  font-weight: 400;
+}
+
+input {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 12px 0 12px 12px;
+  border-radius: 6px;
+  border: none;
+  border: 1px #00000048 solid;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+select {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 103%;
+  padding: 12px 0 12px 12px;
+  border-radius: 6px;
+  border: none;
+  border: 1px #00000048 solid;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.edit-password-button{
+  display: block;
+  border: none;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 250px;
+  border-radius: 10px;
+  border: none;
+  background-color: #4182F9;
+  color: white;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 650;
+  line-height: 2.2;
+  padding: 0 20px;
+  font-size: 20px;
+}
+
+.password-button{
+  margin-top: 20px;
+}
+
+.edit-profile-button {
+  display: block;
+  border: none;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 250px;
+  border-radius: 10px;
+  border: none;
+  background-color: #4182F9;
+  color: white;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 650;
+  line-height: 2.2;
+  padding: 0 20px;
+  font-size: 20px;
+}
+
+.delete-profile-button {
+  display: block;
+  border: none;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 250px;
+  border-radius: 10px;
+  border: none;
+  background-color: #CF0000;
+  color: white;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 650;
+  line-height: 2.2;
+  padding: 0 20px;
+  font-size: 20px;
+}
+
+.profile-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  padding: 2% 5% 2% 5%;
+}
+
+input:disabled, select:disabled, option:disabled {
+  color: #000;
+}
+
+button:hover {
+  transition: 0.4s;
+  transform: scale(0.95);
+}

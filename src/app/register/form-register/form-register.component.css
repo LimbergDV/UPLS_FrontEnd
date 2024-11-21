@@ -1,0 +1,242 @@
+.content-register {
+  display: flex;
+  width: 100%;
+  background: #8fafa9;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  height: 100vh;
+}
+
+.form-content {
+  width: 50%;
+  height: 100%;
+  background-color: #fff;
+  padding: 0 3%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-form > img {
+  width: 200px;
+}
+
+.header-form > p {
+  margin-top: 0;
+  color: #636364;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  margin-bottom: 0;
+  font-size: 45px;
+}
+
+.header-form {
+  width: 300px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  width: 75%;
+  text-align: start;
+  margin-bottom: 15px; /* Añadir margen inferior para consistencia */
+}
+
+label {
+  margin-left: 3%;
+  font-weight: 500;
+}
+
+input {
+  margin-top: 5px;
+  width: 100%; /* Ajustar para alinear todos los inputs */
+  padding: 12px 0 12px 12px;
+  border-radius: 12px;
+  border: 1px solid #00000048;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+input::placeholder {
+  color: #636364;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+form > button {
+  width: 75%;
+  margin-top: 10px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  background: #ea454c;
+  padding: 10px 0;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+}
+
+form > button:hover {
+  cursor: pointer;
+  transform: scale(0.97);
+  transition: 0.4s;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.35);
+}
+
+form > button:active {
+  transition: 0.4s;
+  background: #b43239;
+}
+
+.image {
+  width: 60%;
+  height: 100vh;
+  overflow: hidden;
+  object-position: center;
+}
+
+.image > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.options > p {
+  display: inline;
+}
+
+.link {
+  color: #0015ff;
+  text-decoration: underline;
+}
+
+.link:hover {
+  cursor: pointer;
+}
+
+.options > button {
+  margin-top: 10px;
+  background-color: #ea454c;
+  color: #fff;
+  border: none;
+  width: 248px;
+  padding: 10px 0;
+  border-radius: 12px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  transition: background 0.4s ease;
+  cursor: pointer;
+}
+
+.options > button.donatario {
+  background: #0015ff; /* Azul */
+}
+
+.options > button.donante {
+  background: #ea454c; /* Rojo */
+}
+
+.options > button:hover {
+  transform: scale(0.97);
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.35);
+}
+
+.options > button:active {
+  transition: 0.4s;
+}
+
+.options > button.donatario:active {
+  background: #0015cc;
+}
+
+.options > button.donante:active {
+  background: #b43239;
+}
+
+.input-group-name,
+.input-group-location {
+  display: flex;
+  gap: 20px;
+  width: 75%;
+  margin-bottom: 0px;
+}
+
+.input {
+  flex: 1;
+}
+
+.input label {
+  margin-left: 1%;
+  font-weight: 500;
+}
+
+.input input {
+  margin-top: 0px;
+  width: 100%;
+  padding: 12px 0 12px 12px;
+  border-radius: 12px;
+  border: 1px solid #00000048;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.input select {
+  margin-top: 5px;
+  width: 103.5%;
+  padding: 12px 0 12px 12px;
+  border-radius: 12px;
+  border: 1px solid #00000048;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  background-color: #fff;
+  color: #636364;
+  cursor: pointer;
+}
+
+.input select option[value=""][disabled] {
+  color: #aaa;
+  font-style: italic;
+  background-color: #f5f5f5;
+}
+
+.input select option {
+  color: #000;
+  background-color: #fff;
+}
+
+.input select:hover,
+.input select:focus {
+  outline: none;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-height: 700px) {
+  .header-form {
+    margin-top: 20px;
+  }
+  .image {
+    height: 110%;
+  }
+}
+
+@media (max-height: 900px) {
+  .hidden {
+    display: none;
+  }
+}
