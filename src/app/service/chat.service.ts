@@ -56,7 +56,7 @@ export class ChatService {
     });
 
     return this._http.get<any[]>(
-      `${this.URL_BASE}/conversations/${conversationId}/messages`,
+      `${this.URL_BASE}/conversations/messages/${conversationId}`,
       { headers }
     );
   }
