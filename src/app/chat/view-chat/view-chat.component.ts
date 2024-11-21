@@ -1,17 +1,24 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ChatService } from '../../service/chat.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { DonorsService } from '../../service/donors.service';
 import { iDonor } from '../../models/i-donor';
 import { DoneesService } from '../../service/donees.service';
+import { CheckJWTService } from '../../service/check-jwt.service';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './view-chat.component.html',
   styleUrl: './view-chat.component.css',
 })
-export class ViewChatComponent implements OnInit {
+export class ViewChatComponent implements OnInit, AfterViewChecked {
   conversations: any[] = [];
   currentConversationId: string | null = null;
   messages: any[] = [];
@@ -20,21 +27,34 @@ export class ViewChatComponent implements OnInit {
   contactsView: any[] = [];
   idConversacion: string = '';
   photoUrls: { [id: string]: string } = {};
+  selectedIndex: number | null = null;
 
   rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
-  private token = localStorage.getItem('token');
 
   constructor(
     private socketService: ChatService,
-    private rouoter: Router,
+    private router: Router,
     private _donors: DonorsService,
-    private _donees: DoneesService
+    private _donees: DoneesService,
+    private _check: CheckJWTService
   ) {}
 
   ngOnInit() {
+    this._check.checkToken().subscribe({
+      next(value) {
+        console.log(value.ok);
+      },
+      error: (err) => {
+        if (err.status == 403) {
+          this.router.navigate(['/signIn']);
+        }
+      },
+    });
+
     if (this.rol_access == 'NoAccess') {
-      this.rouoter.navigate(['/signIn']);
-    }
+      this.router.navigate(['/signIn']);
+    } 
+
     this.loadConversations();
     this.socketService.onNewMessage().subscribe((message) => {
       if (message.conversationId === this.currentConversationId) {
@@ -131,7 +151,7 @@ export class ViewChatComponent implements OnInit {
     });
   }
 
-  joinConversation(conversationId: string) {
+  joinConversation(conversationId: string, index: number) {
     this.currentConversationId = conversationId;
     this.messages = [];
 
@@ -148,6 +168,12 @@ export class ViewChatComponent implements OnInit {
         });
       }
     );
+
+    if (this.selectedIndex === index) {
+      this.selectedIndex = null; // Si haces clic en el mismo, deseleccionarlo
+    } else {
+      this.selectedIndex = index; // Si haces clic en otro div, seleccionarlo
+    }
   }
 
   sendMessage(event: Event) {
@@ -168,9 +194,13 @@ export class ViewChatComponent implements OnInit {
     this.scrollToBottom();
   }
 
-  @ViewChild('messageContainer') messageContainer!: ElementRef;
-  scrollToBottom(): void {
-    const container = this.messageContainer.nativeElement;
-    container.scrollTop = container.scrollHeight;
+  @ViewChild('messageContainer') private messageContainer:
+    | ElementRef
+    | undefined;
+  scrollToBottom() {
+    if (this.messageContainer?.nativeElement) {
+      this.messageContainer.nativeElement.scrollTop =
+        this.messageContainer.nativeElement.scrollHeight;
+    }
   }
 }

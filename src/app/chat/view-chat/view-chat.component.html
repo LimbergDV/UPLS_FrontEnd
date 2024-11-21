@@ -11,16 +11,21 @@
       <div class="conversations">
         <div
           class="conversation"
-          *ngFor="let viewContact of contactsView"
-          (click)="joinConversation(viewContact.conversationId)"
+          *ngFor="let viewContact of contactsView; let i = index"
+          (click)="joinConversation(viewContact.conversationId, i)"
+          [ngClass]="{ selected: selectedIndex === i }"
         >
           <img [src]="photoUrls[viewContact.photo]" alt="photo" />
           <p>{{ viewContact.name }}</p>
         </div>
       </div>
 
-      <div class="box-messages" *ngIf="currentConversationId">
-        <ul class="messages" #messageContainer *ngIf="rol_access === 'donor'; else donee">
+      <div class="box-messages" *ngIf="currentConversationId; else image">
+        <ul
+          class="messages"
+          #messageContainer
+          *ngIf="rol_access === 'donor'; else donee"
+        >
           <li
             *ngFor="let message of messages"
             [class]="
@@ -98,6 +103,13 @@
           </form>
         </div>
       </div>
+
+      <ng-template #image>
+        <div class="content-img">
+          <img src="message1.png" alt="photo" />
+          <h1>Espera por mensajes</h1>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
