@@ -1,0 +1,51 @@
+.principal-title {
+  position: absolute;
+  padding-bottom: 100vh;
+}
+
+.principal-title h2 {
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 1vh;
+  margin-left: 11vh;
+  font-size: 50px;
+  font-weight: 500;
+}
+
+.principal-title p{
+  margin-top: 3vh;
+  display: flex;
+  margin-left: 11vh;
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+}
+
+.principal-title img{
+  margin-right: 1vh;
+}
+
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel {
+  margin-top: 20vh;
+  display: flex;
+  animation: slide 8s linear infinite;
+}
+
+.carousel img {
+  width: 150px;
+  height: 150px;
+  margin-right: 50px;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+

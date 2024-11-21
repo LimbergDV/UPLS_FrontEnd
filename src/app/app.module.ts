@@ -15,6 +15,8 @@ import { SearchesModule } from './searches/searches.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ChatModule } from './chat/chat.module';
+import { PrincipalModule } from './principal/principal.module';
+
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, HomeComponent],
@@ -31,7 +33,9 @@ import { ChatModule } from './chat/chat.module';
     SearchesModule,
     MatTooltip,
     ChatModule,
+    PrincipalModule
   ],
+
   providers: [provideAnimationsAsync(), ChatModule],
   bootstrap: [AppComponent],
 })

@@ -15,7 +15,8 @@
       <p class="description">{{ publication.description }}</p>
 
       <div class="image-display">
-        <img *ngIf="publication.image" [src]="publication.image" alt="Imagen de publicación">
+        <!-- Usamos el método createImageFromBlob pasando el atributo "image" -->
+        <img *ngIf="createImageFromBlob(publication.image)" [src]="createImageFromBlob(publication.image)" alt="Imagen de publicación">
       </div>
 
       <div class="details">
@@ -24,6 +25,27 @@
         <p><strong>Donantes requeridos:</strong> {{ publication.donors_number }}</p>
       </div>
 
+      <div class="comment-section">
+        <form >
+          <div class="form-group">
+            <input
+              type="text"
+              name="comment"
+              placeholder="Escribe tu comentario..."
+              required
+              class="comment-input">
+            <button type="submit" class="btn submit-comment"><img src="/assets/paper-airplane.svg" alt=""></button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Lista de comentarios -->
+      <div class="comments-list">
+        <div *ngFor="let comment of publication.comments" class="comment">
+          <p></p>
+          <span class="timestamp"></span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
