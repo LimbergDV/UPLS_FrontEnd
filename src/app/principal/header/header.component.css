@@ -1,0 +1,206 @@
+.principal-container {
+  background-image: url(../../../../public/assets/headerPrincipal.png);
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.left-content img{
+  width: 700px;
+  height: 300px;
+  margin-left: 12vh;
+  margin-top: 10vh;
+}
+
+.left-content p{
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 140%;
+  color: white;
+  margin-left: 13vh;
+  margin-right: 16vh;
+  margin-top: 5vh;
+  text-align: justify;
+}
+
+.right-content{
+  text-align: center;
+  width: 40%;
+}
+
+.login-btn span{
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+
+.login-btn{
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);;
+  border: 1px solid white;
+  color: white;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-top: 3vh;
+  margin-left: 26vh;
+  width: 180px;
+  height: 37px;
+}
+
+.login-btn img {
+  margin-left: 5px;
+}
+
+.login-icon{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.text-subtitle h2 {
+  margin-left: auto;
+  margin-top: 15vh;
+  font-weight: 600;
+  margin-right: 20vh;
+  line-height: 100%;
+  font-size: 60px;
+  font-family: "Poppins", sans-serif;
+  color: white;
+}
+
+.buttons-group{
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  width: 30vh;
+  flex-direction: column;
+  margin-left: 7vh;
+}
+
+.buttons-group .first-button{
+  color: white;
+  background-color: #CF0000;
+  border: none;
+  font-size: 25px;
+  font-family: "Poppins", sans-serif;
+  border-radius: 6px;
+  width: 277px;
+  height: 40px;
+}
+
+.buttons-group .second-button{
+  color: white;
+  background-color: #001EFF;
+  border: none;
+  font-size: 25px;
+  font-family: "Poppins", sans-serif;
+  border-radius: 6px;
+  width: 277px;
+  height: 40px;
+}
+
+@media (max-width: 1024px) {
+  .principal-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px; /* Añade espacio para evitar que el contenido salga */
+  }
+
+  .left-content img {
+    max-width: 80%;
+    height: auto;
+    margin: 20px 0;
+  }
+
+  .left-content p {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+
+  .right-content {
+    width: 100%;
+    margin: 0;
+  }
+
+  .text-subtitle h2 {
+    font-size: 1.8rem;
+    margin: 15px 0;
+  }
+
+  .buttons-group {
+    gap: 10px;
+    width: 100%; /* Ocupa todo el ancho */
+    margin: 10px 0;
+  }
+
+  .buttons-group .first-button,
+  .buttons-group .second-button {
+    width: 90%;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-content img {
+    max-width: 90%;
+    margin: 15px 0;
+  }
+
+  .left-content p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  .right-content {
+    position: absolute;
+    margin-top: 40vh;
+    margin-left: 10vh;
+  }
+  .login-btn{
+    position: relative;
+    margin-left: 20vh;
+  }
+
+  .text-subtitle h2 {
+    font-size: 1.5rem;
+  }
+
+  .buttons-group .first-button,
+  .buttons-group .second-button {
+    font-size: 14px;
+    height: 40px;
+    width: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-content img {
+    max-width: 90%;
+    margin: 15px 0;
+  }
+
+  .left-content p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  .right-content {
+    position: absolute;
+    margin-top: 40vh;
+    margin-left: 10vh;
+  }
+
+  .text-subtitle h2 {
+    font-size: 1.5rem;
+  }
+
+  .buttons-group .first-button,
+  .buttons-group .second-button {
+    font-size: 14px;
+    height: 40px;
+    width: 85%;
+  }
+}

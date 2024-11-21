@@ -1,0 +1,115 @@
+<div class="content">
+  <div class="msg">
+    <img src="info.png" alt="info" />
+    <h3>Toca en algún chat para continuar la conversación</h3>
+  </div>
+
+  <div class="chat-box">
+    <div class="title"><p>Chats</p></div>
+
+    <div class="c-box-messages">
+      <div class="conversations">
+        <div
+          class="conversation"
+          *ngFor="let viewContact of contactsView; let i = index"
+          (click)="joinConversation(viewContact.conversationId, i)"
+          [ngClass]="{ selected: selectedIndex === i }"
+        >
+          <img [src]="photoUrls[viewContact.photo]" alt="photo" />
+          <p>{{ viewContact.name }}</p>
+        </div>
+      </div>
+
+      <div class="box-messages" *ngIf="currentConversationId; else image">
+        <ul
+          class="messages"
+          #messageContainer
+          *ngIf="rol_access === 'donor'; else donee"
+        >
+          <li
+            *ngFor="let message of messages"
+            [class]="
+              message.senderId === 'donor' && rol_access === 'donor'
+                ? 'sender'
+                : 'received'
+            "
+          >
+            <div
+              [ngClass]="
+                message.senderId === 'donor' && rol_access === 'donor'
+                  ? 'msg-sender'
+                  : 'msg-received'
+              "
+            >
+              <p>{{ message.content }}</p>
+            </div>
+            <small>{{ message.timestamp | date : "short" }}</small>
+          </li>
+        </ul>
+
+        <ng-template #donee>
+          <ul class="messages" #messageContainer>
+            <li
+              *ngFor="let message of messages"
+              [class]="
+                message.senderId === 'donee' && rol_access === 'donee'
+                  ? 'sender'
+                  : 'received'
+              "
+            >
+              <div
+                [ngClass]="
+                  message.senderId === 'donee' && rol_access === 'donee'
+                    ? 'msg-sender'
+                    : 'msg-received'
+                "
+              >
+                <p>{{ message.content }}</p>
+              </div>
+              <small>{{ message.timestamp | date : "short" }}</small>
+            </li>
+          </ul>
+        </ng-template>
+
+        <div class="sendMessage">
+          <form (submit)="sendMessage($event)">
+            <input
+              name="message"
+              type="text"
+              [(ngModel)]="newMessage"
+              placeholder="Escribe un mensaje..."
+              required
+            />
+            <button type="submit">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#EA454C"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-send-2"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M4.698 4.034l16.302 7.966l-16.302 7.966a.503 .503 0 0 1 -.546 -.124a.555 .555 0 0 1 -.12 -.568l2.468 -7.274l-2.468 -7.274a.555 .555 0 0 1 .12 -.568a.503 .503 0 0 1 .546 -.124z"
+                />
+                <path d="M6.5 12h14.5" />
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <ng-template #image>
+        <div class="content-img">
+          <img src="message1.png" alt="photo" />
+          <h1>Espera por mensajes</h1>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
