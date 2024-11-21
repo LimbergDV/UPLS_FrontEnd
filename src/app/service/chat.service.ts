@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ChatService {
   private socket: Socket;
-  private URL_BASE = 'http://localhost:3000'; // URL de tu backend
+  private URL_BASE = 'https://unidosporlasangreapi2.integrador.xyz'; // URL de tu backend
   private token = localStorage.getItem('token');
 
   constructor(private _http: HttpClient) {

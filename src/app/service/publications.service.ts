@@ -7,7 +7,7 @@ import { IPublications } from './../models/i-publications';
   providedIn: 'root',
 })
 export class PublicationService {
-  private apiUrl = 'http://localhost:3000/publications';
+  private apiUrl = 'https://unidosporlasangreapi2.integrador.xyz/publications';
 
   constructor(private http: HttpClient) {}
 
