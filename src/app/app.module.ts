@@ -14,10 +14,8 @@ import { PublicationsModule } from './publications/publications.module';
 import { SearchesModule } from './searches/searches.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatTooltip } from '@angular/material/tooltip';
+import { ChatModule } from './chat/chat.module';
 import { PrincipalModule } from './principal/principal.module';
-
-
-
 
 
 @NgModule({
@@ -34,11 +32,11 @@ import { PrincipalModule } from './principal/principal.module';
     PublicationsModule,
     SearchesModule,
     MatTooltip,
+    ChatModule,
     PrincipalModule
   ],
-  providers: [
-    provideAnimationsAsync()
-  ],
+
+  providers: [provideAnimationsAsync(), ChatModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

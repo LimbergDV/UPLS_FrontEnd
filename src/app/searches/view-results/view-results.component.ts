@@ -4,6 +4,9 @@ import { AfterViewInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { ChatService } from '../../service/chat.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'view-results',
@@ -27,7 +30,7 @@ export class ViewResultsComponent implements AfterViewInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor() {
+  constructor(private chatService: ChatService, private router: Router) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.donors);
   }
@@ -37,9 +40,25 @@ export class ViewResultsComponent implements AfterViewInit {
       this.dataSource.data = this.donors;
     }
   }
-  
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  createConversation(id_donor: number) {
+    this.chatService.createConversation(id_donor).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.router.navigate(['/chats']);
+      },
+      error: (error) => {
+        console.log(error);
+        if (error.status != 400) {
+          Swal.fire('Opss...!', 'Ocurrió un error.', 'error');
+        }
+        this.router.navigate(['/chats']);
+      },
+    });
   }
 }
