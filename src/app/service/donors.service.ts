@@ -173,4 +173,10 @@ export class DonorsService {
       responseType: 'blob',
     });
   }
+
+  getDonorById(id: string): Observable<iDonor> {
+    return this._http.get<iDonor>(
+      `${this.URL_BASE}/profile/search/${parseInt(id)}`
+    );
+  }
 }
