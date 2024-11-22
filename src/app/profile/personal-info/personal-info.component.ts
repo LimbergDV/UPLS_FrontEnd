@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { iAccess } from '../../models/iAccess';
 import { DoneesService } from '../../service/donees.service';
 import { ChatService } from '../../service/chat.service';
+import { PublicationService } from '../../service/publications.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -47,7 +48,8 @@ export class PersonalInfoComponent implements OnInit {
     private _donorsService: DonorsService,
     private _doneesService: DoneesService,
     private router: Router,
-    private _chatService: ChatService
+    private _chatService: ChatService,
+    private _publication: PublicationService
   ) {}
 
   ngOnInit(): void {
@@ -292,12 +294,19 @@ export class PersonalInfoComponent implements OnInit {
             this._chatService.deleteConversation('Donee').subscribe({
               next: (response) => {
                 console.log(response);
-                Swal.fire({
-                  title: 'Eliminado!',
-                  text: 'Gracias por ser parte del movimeinto.',
-                  icon: 'success',
+                this._publication.deleteAllByDonee().subscribe({
+                  next: () => {
+                    Swal.fire({
+                      title: 'Eliminado!',
+                      text: 'Gracias por ser parte del movimeinto.',
+                      icon: 'success',
+                    });
+                    this.router.navigate(['/signUp']);
+                  },
+                  error: (err) => {
+                    console.log(err);
+                  },
                 });
-                this.router.navigate(['/signUp']);
               },
             });
           },
