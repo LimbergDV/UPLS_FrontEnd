@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './account-info.component.css',
 })
 export class AccountInfoComponent implements OnInit {
+  profileDonor: string = localStorage.getItem('profileDonor') || '';
   donor: iDonor = {
     blood_type: '',
     health_status: '',
@@ -19,15 +20,27 @@ export class AccountInfoComponent implements OnInit {
   constructor(private _sevice: DonorsService, private router: Router) {}
 
   ngOnInit(): void {
-    this._sevice.getDonor().subscribe({
-      next: (response) => {
-        this.donor = response;
-        console.log(this.donor);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+    if (this.profileDonor != '') {
+      this._sevice.getDonorById(this.profileDonor).subscribe({
+        next: (response) => {
+          this.donor = response;
+          console.log(this.donor);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    } else {
+      this._sevice.getDonor().subscribe({
+        next: (response) => {
+          this.donor = response;
+          console.log(this.donor);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    }
   }
 
   idDisabled: boolean = true;

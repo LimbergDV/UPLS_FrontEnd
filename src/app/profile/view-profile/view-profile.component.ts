@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CheckJWTService } from '../../service/check-jwt.service';
 
@@ -7,11 +7,19 @@ import { CheckJWTService } from '../../service/check-jwt.service';
   templateUrl: './view-profile.component.html',
   styleUrl: './view-profile.component.css',
 })
-export class ViewProfileComponent implements OnInit {
+export class ViewProfileComponent implements OnInit, OnDestroy {
   rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
+  profileDonor: string = localStorage.getItem('profileDonor') || '';
+  profileDonee: string = localStorage.getItem('profileDonee') || '';
   flag: boolean = false;
 
   constructor(private router: Router, private _check: CheckJWTService) {}
+
+  ngOnDestroy(): void {
+    localStorage.setItem('profileDonor', '');
+    localStorage.setItem('profileDonee', '');
+  }
+
   ngOnInit(): void {
     this._check.checkToken().subscribe({
       next(value) {
@@ -28,8 +36,12 @@ export class ViewProfileComponent implements OnInit {
       this.router.navigate(['/signIn']);
     }
 
-    if (this.rol_access === 'donor') {
+    if (this.rol_access === 'donor' || this.profileDonor != '') {
       this.flag = true;
+    }
+
+    if (this.profileDonee != '') {
+      this.flag = false;
     }
   }
 }

@@ -93,18 +93,19 @@
   </div>
 </div>
 
-<div class="profile-buttons">
-  <button class="edit-profile-button" (click)="editPersonalInfo()">
+<div class="profile-buttons" *ngIf="profileDonee != '' || profileDonor == ''">
+  <button class="edit-profile-button" (click)="editPersonalInfo()" *ngIf="profileDonee == '' || profileDonor != ''">
     Editar
   </button>
   <button
     class="edit-profile-button"
     (click)="saveInfo()"
     [disabled]="idDisabled"
+    *ngIf="profileDonee == '' || profileDonor != ''"
   >
     Guardar
   </button>
-  <button class="edit-password-button" (click)="editPassword()">
+  <button class="edit-password-button" (click)="editPassword()" *ngIf="profileDonee == '' || profileDonor != ''">
     Editar contraseña
   </button>
   <button

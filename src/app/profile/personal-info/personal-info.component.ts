@@ -15,6 +15,8 @@ import { DoneesService } from '../../service/donees.service';
   styleUrl: './personal-info.component.css',
 })
 export class PersonalInfoComponent implements OnInit {
+  profileDonor: string = localStorage.getItem('profileDonor') || '';
+  profileDonee: string = localStorage.getItem('profileDonee') || '';
   rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
 
   address: iAddress = {
@@ -45,13 +47,19 @@ export class PersonalInfoComponent implements OnInit {
     private _doneesService: DoneesService,
     private router: Router
   ) {}
-  
+
   ngOnInit(): void {
-    if (this.rol_access == 'donor') {
-      this.getDonor();
-    }
-    if (this.rol_access == 'donee') {
-      this.getDonoe();
+    if (this.profileDonee != '') {
+      this.getDoneeNT();
+    } else if (this.profileDonor != '') {
+      this.getDonorNT();
+    } else {
+      if (this.rol_access == 'donor') {
+        this.getDonor();
+      }
+      if (this.rol_access == 'donee') {
+        this.getDonee();
+      }
     }
   }
 
@@ -73,7 +81,22 @@ export class PersonalInfoComponent implements OnInit {
     });
   }
 
-  getDonoe(): void {
+  getDonorNT(): void {
+    this._donorsService.getDonorById(this.profileDonor).subscribe({
+      next: (respose) => {
+        this.userData = respose;
+        this.address.postal_code = this.userData.address?.postal_code || '';
+        this.address.state = this.userData.address?.state || '';
+        this.address.locality = this.userData.address?.locality || '';
+        this.address.distrits.push(this.userData.address?.distrit || '');
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  getDonee(): void {
     this._doneesService.getDonee().subscribe({
       next: (respose) => {
         this.userData = respose;
@@ -87,6 +110,21 @@ export class PersonalInfoComponent implements OnInit {
         if (err.status == 401) {
           this.router.navigate(['/signIn']);
         }
+      },
+    });
+  }
+
+  getDoneeNT(): void {
+    this._doneesService.getDoneeById(this.profileDonee).subscribe({
+      next: (respose) => {
+        this.userData = respose;
+        this.address.postal_code = this.userData.address?.postal_code || '';
+        this.address.state = this.userData.address?.state || '';
+        this.address.locality = this.userData.address?.locality || '';
+        this.address.distrits.push(this.userData.address?.distrit || '');
+      },
+      error: (err) => {
+        console.log(err);
       },
     });
   }

@@ -15,7 +15,7 @@
           (click)="joinConversation(viewContact.conversationId, i)"
           [ngClass]="{ selected: selectedIndex === i }"
         >
-          <img [src]="photoUrls[viewContact.photo]" alt="photo" />
+          <img [src]="photoUrls[viewContact.photo]" alt="photo" (click)="seeProfile(viewContact.id_donor || viewContact.id_donee)" />
           <p>{{ viewContact.name }}</p>
         </div>
       </div>
