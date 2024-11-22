@@ -11,13 +11,11 @@ export class PublicationService {
 
   constructor(private http: HttpClient) {}
 
-
   private token: string = localStorage.getItem('token') || '';
-
 
   addPublication(publication: IPublications): Observable<any> {
     const token = this.token;  
-
+j
     // Configurar las cabeceras con el token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
@@ -32,13 +30,25 @@ export class PublicationService {
     return this.http.get<IPublications>(`${this.apiUrl}/${id}`);
   }
 
-
-  updatePublication(id: string, publication: IPublications): Observable<IPublications> {
+  updatePublication(
+    id: string,
+    publication: IPublications
+  ): Observable<IPublications> {
     return this.http.put<IPublications>(`${this.apiUrl}/${id}`, publication);
   }
 
   deletePublication(id: string): Observable<{ message: string }> {
     return this.http.delete<{ message: string }>(`${this.apiUrl}/${id}`);
+  }
+
+  deleteAllByDonee(): Observable<{ message: string }> {
+    const token = this.token; // Obtener el token
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete<{ message: string }>(`${this.apiUrl}/allByDonee`, {
+      headers,
+    });
   }
 
   addImg(file: File | null): Observable<{ fileId: string }> {
@@ -49,7 +59,10 @@ export class PublicationService {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post<{ fileId: string }>(`${this.apiUrl}/upload`, formData);
+    return this.http.post<{ fileId: string }>(
+      `${this.apiUrl}/upload`,
+      formData
+    );
   }
 
   showImg(image: string): Observable<Blob> {
@@ -57,8 +70,8 @@ export class PublicationService {
       throw new Error('No se ha proporcionado el ID de la imagen');
     }
 
-    return this.http.get(`${this.apiUrl}/download/${image}`, { responseType: 'blob' });
+    return this.http.get(`${this.apiUrl}/download/${image}`, {
+      responseType: 'blob',
+    });
   }
-
-
 }

@@ -91,4 +91,14 @@ export class DoneesService {
       responseType: 'blob',
     });
   }
+
+  getDoneeById(id: string): Observable<iDonee> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+
+    return this._http.get<iDonee>(`${this.URL_BASE}/search/${parseInt(id)}`, {
+      headers,
+    });
+  }
 }
