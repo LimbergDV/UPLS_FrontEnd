@@ -3,6 +3,7 @@ import { DonorsService } from '../../service/donors.service';
 import { iDonor } from '../../models/i-donor';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { ChatService } from '../../service/chat.service';
 
 @Component({
   selector: 'app-account-info',
@@ -17,7 +18,11 @@ export class AccountInfoComponent implements OnInit {
     availability: '',
   };
 
-  constructor(private _sevice: DonorsService, private router: Router) {}
+  constructor(
+    private _sevice: DonorsService,
+    private router: Router,
+    private _chatService: ChatService
+  ) {}
 
   ngOnInit(): void {
     if (this.profileDonor != '') {
@@ -89,12 +94,18 @@ export class AccountInfoComponent implements OnInit {
         this._sevice.deleteAccount().subscribe({
           next: (response) => {
             console.log(response);
-            Swal.fire({
-              title: 'Eliminado!',
-              text: 'Gracias por ser parte del movimeinto.',
-              icon: 'success',
+
+            this._chatService.deleteConversation('Donor').subscribe({
+              next: (response) => {
+                console.log(response);
+                Swal.fire({
+                  title: 'Eliminado!',
+                  text: 'Gracias por ser parte del movimeinto.',
+                  icon: 'success',
+                });
+                this.router.navigate(['/signUp']);
+              },
             });
-            this.router.navigate(['/signUp']);
           },
           error: (err) => {
             console.log(err);
