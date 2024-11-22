@@ -11,7 +11,7 @@ import { iDonorSearch } from '../models/iDonorSearch';
   providedIn: 'root',
 })
 export class DonorsService {
-  private URL_BASE: string = 'http://localhost:5000';
+  private URL_BASE: string = 'https://unidosporlasangreapi.integrador.xyz';
   private token: string = localStorage.getItem('token') || '';
 
   constructor(private _http: HttpClient) {}

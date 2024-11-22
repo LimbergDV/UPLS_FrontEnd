@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class CheckJWTService {
   constructor(private _http: HttpClient) {}
   private token = localStorage.getItem('token');
-  private URL = 'http://localhost:3000/check/';
+  private URL = 'https://unidosporlasangreapi.integrador.xyz/check/';
 
   checkToken(): Observable<any> {
     const headers = new HttpHeaders({
