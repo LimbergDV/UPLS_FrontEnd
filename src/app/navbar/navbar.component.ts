@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit, DoCheck {
   flag: boolean = true;
   rol_access = localStorage.getItem('rolAccess');
+  menuOpen: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -33,5 +34,13 @@ export class NavbarComponent implements OnInit, DoCheck {
     if (this.rol_access === 'NoAccess') {
       this.router.navigate(['/signIn']);
     }
+  }
+
+  toggleMenu(){
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu(){
+    this.menuOpen = false;
   }
 }
