@@ -43,7 +43,8 @@
             >
               <p>{{ message.content }}</p>
             </div>
-            <small>{{ message.timestamp | date : "short" }}</small>
+            <small>{{ message.timestamp | date: 'dd-MM-yyyy' : 'America/Mexico_City' }}</small>
+
           </li>
         </ul>
 
