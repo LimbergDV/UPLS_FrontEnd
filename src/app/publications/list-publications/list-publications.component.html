@@ -6,10 +6,22 @@
   </div>
 
   <div *ngFor="let publication of publications" class="publication-card">
+    
     <div class="profile-header">
-      <img src="ruta-de-tu-imagen.jpg" alt="Foto de perfil" class="profile-image">
-      <span class="profile-name">Jesus Madero Ruíz</span>
-    </div>
+      <!-- Mostrar mini perfil asociado a la publicación -->
+      <div *ngIf="miniProfileView.length > 0">
+        <div *ngFor="let profile of miniProfileView">
+          <div *ngIf="profile.publicationId === publication._id">
+            <img *ngIf="profile.photo" [src]="photoUrls[profile.photo]" alt="Foto de perfil" class="profile-image">
+            <span class="profile-name">
+              {{ profile.name }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>  
+    
+    
     <div class="publication-content">
       <h3>{{ publication.title }}</h3>
       <p class="description">{{ publication.description }}</p>
