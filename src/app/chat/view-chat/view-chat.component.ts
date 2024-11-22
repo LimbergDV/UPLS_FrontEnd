@@ -53,7 +53,7 @@ export class ViewChatComponent implements OnInit, AfterViewChecked {
 
     if (this.rol_access == 'NoAccess') {
       this.router.navigate(['/signIn']);
-    } 
+    }
 
     this.loadConversations();
     this.socketService.onNewMessage().subscribe((message) => {
