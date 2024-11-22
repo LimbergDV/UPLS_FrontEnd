@@ -34,6 +34,7 @@ select {
   background: none;
   border: none;
   color: #fff;
+  padding: 5px;
 }
 
 select:focus {
@@ -41,7 +42,7 @@ select:focus {
 }
 
 option {
-  background: #000;
+  background: #91262A;
 }
 
 button {
@@ -66,5 +67,5 @@ button:hover {
 
 button:active {
   transition: 0.4s;
-  background: #b43239;
+  background: #91262A;
 }

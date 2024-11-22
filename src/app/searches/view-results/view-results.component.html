@@ -11,32 +11,35 @@
 
       <!-- Progress Column -->
       <ng-container matColumnDef="address">
-        <th  *matHeaderCellDef mat-sort-header>Ubicación</th>
-        <td mat-cell *matCellDef="let row"> Col. 
-          {{ row.address.distrit }}, {{ row.address.locality }}, CP.
+        <th *matHeaderCellDef mat-sort-header>Ubicación</th>
+        <td mat-cell *matCellDef="let row">
+          Col. {{ row.address.distrit }}, {{ row.address.locality }}, CP.
           {{ row.address.postal_code }}, {{ row.address.state }}
         </td>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="blood_type">
-        <th *matHeaderCellDef mat-sort-header>
-          Tipo de sangre
-        </th>
+        <th *matHeaderCellDef mat-sort-header>Tipo de sangre</th>
         <td mat-cell *matCellDef="let row">{{ row.blood_type }}</td>
       </ng-container>
 
       <!-- Fruit Column -->
       <ng-container matColumnDef="compatibility">
-        <th *matHeaderCellDef mat-sort-header>
-          Compatibilidad
-        </th>
+        <th *matHeaderCellDef mat-sort-header>Compatibilidad</th>
         <td mat-cell *matCellDef="let row">{{ row.compatibility }}</td>
       </ng-container>
 
       <ng-container matColumnDef="chat">
         <th *matHeaderCellDef mat-sort-header>Chatear</th>
-        <td mat-cell *matCellDef="let row"><button matTooltip="Inicia una conversación">Chat</button></td>
+        <td mat-cell *matCellDef="let row">
+          <button
+            matTooltip="Inicia una conversación"
+            (click)="createConversation(row.id_donor)"
+          >
+            Chat
+          </button>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

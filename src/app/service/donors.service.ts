@@ -117,30 +117,60 @@ export class DonorsService {
 
   // Búsquedas
   getByBloodType(type: string): Observable<iDonorSearch[]> {
-    return this._http.get<iDonorSearch[]>(`${this.URL_BASE}/profile/searchByBlood/${type}`); 
+    return this._http.get<iDonorSearch[]>(
+      `${this.URL_BASE}/profile/searchByBlood/${type}`
+    );
   }
 
   getByLocality(locality: string): Observable<iDonorSearch[]> {
-    return this._http.get<iDonorSearch[]>(`${this.URL_BASE}/profile/searchByLocality/${locality}`);
+    return this._http.get<iDonorSearch[]>(
+      `${this.URL_BASE}/profile/searchByLocality/${locality}`
+    );
   }
 
   getByCompatibility(type: string): Observable<iDonorSearch[]> {
-    return this._http.get<iDonorSearch[]>(`${this.URL_BASE}/profile/searchByCompatibility/${type}`);
-  }
-  
-  getByBloodTypeLocality(type: string, locality: string): Observable<iDonorSearch[]> {
-    const body = {
-      blood_type: type,
-      locality: locality
-    }
-    return this._http.post<iDonorSearch[]>(`${this.URL_BASE}/profile/BloodLocality`, body);
+    return this._http.get<iDonorSearch[]>(
+      `${this.URL_BASE}/profile/searchByCompatibility/${type}`
+    );
   }
 
-  getByCompatibilityLocality(type: string, locality: string): Observable<iDonorSearch[]> {
+  getByBloodTypeLocality(
+    type: string,
+    locality: string
+  ): Observable<iDonorSearch[]> {
     const body = {
       blood_type: type,
-      locality: locality
-    }
-    return this._http.post<iDonorSearch[]>(`${this.URL_BASE}/profile/CompatibilityLocality`, body);
+      locality: locality,
+    };
+    return this._http.post<iDonorSearch[]>(
+      `${this.URL_BASE}/profile/BloodLocality`,
+      body
+    );
+  }
+
+  getByCompatibilityLocality(
+    type: string,
+    locality: string
+  ): Observable<iDonorSearch[]> {
+    const body = {
+      blood_type: type,
+      locality: locality,
+    };
+    return this._http.post<iDonorSearch[]>(
+      `${this.URL_BASE}/profile/CompatibilityLocality`,
+      body
+    );
+  }
+
+  getDonorNT(id_donor: number): Observable<iDonor> {
+    return this._http.get<iDonor>(
+      `${this.URL_BASE}/profile/search/${id_donor}`
+    );
+  }
+
+  getPhotoNT(id: string) {
+    return this._http.get(`${this.URL_BASE}/profile/photo/user/${id}`, {
+      responseType: 'blob',
+    });
   }
 }
