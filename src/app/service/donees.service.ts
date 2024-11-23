@@ -8,7 +8,7 @@ import { iDonee } from '../models/i-donee';
   providedIn: 'root',
 })
 export class DoneesService {
-  private URL_BASE: string = 'https://unidosporlasangreapi.integrador.xyz/donees';
+  private URL_BASE: string = 'http://127.0.0.1:5000/donees';
   private token: string = localStorage.getItem('token') || '';
 
   constructor(private _http: HttpClient) {}

@@ -25,6 +25,16 @@
         <p><strong>Donantes requeridos:</strong> {{ publication.donors_number }}</p>
       </div>
 
+      <div class="comments-section">
+        <h3>Comentarios</h3>
+        <div class="comments-list">
+          <div class="comment" *ngFor="let comment of publication.comments">
+            <p class="comment-text"></p>
+            <span class="timestamp"></span>
+          </div>
+        </div>
+      </div>
+
       <div class="comment-section">
         <form >
           <div class="form-group">
@@ -38,14 +48,3 @@
           </div>
         </form>
       </div>
-
-      <!-- Lista de comentarios -->
-      <div class="comments-list">
-        <div *ngFor="let comment of publication.comments" class="comment">
-          <p></p>
-          <span class="timestamp"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

@@ -9,7 +9,7 @@ import { iBankInfo } from '../models/iBankInfo';
   providedIn: 'root',
 })
 export class MapsService {
-  private URL_BASE: string = 'https://unidosporlasangreapi.integrador.xyz/locations';
+  private URL_BASE: string = 'http://127.0.0.1:5000/locations';
 
   constructor(private _http: HttpClient) {}
 
