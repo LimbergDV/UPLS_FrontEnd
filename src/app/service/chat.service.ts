@@ -61,5 +61,13 @@ export class ChatService {
     );
   }
 
+  deleteConversation(user: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
 
+    return this._http.delete(`${this.URL_BASE}/conversations/for${user}`, {
+      headers,
+    });
+  }
 }

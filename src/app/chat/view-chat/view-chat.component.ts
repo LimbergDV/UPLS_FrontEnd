@@ -73,11 +73,6 @@ export class ViewChatComponent implements OnInit, AfterViewChecked {
       },
       (error) => {
         console.error('Error al cargar las conversaciones:', error);
-        Swal.fire({
-          title: '¡Opss...!',
-          text: 'Occurrió un error',
-          icon: 'error',
-        });
       }
     );
   }
@@ -87,7 +82,13 @@ export class ViewChatComponent implements OnInit, AfterViewChecked {
       this.conversations.forEach((conversation) => {
         this._donors.getDonorNT(conversation.participants.id_donor).subscribe({
           next: (response) => {
-            this.loadViewContact(response, conversation._id);
+            const contactView = {
+              id_donor: response.id_donor,
+              conversationId: conversation._id,
+              name: response.first_name + ' ' + response.last_name,
+              photo: response.photo,
+            };
+            this.loadViewContact(contactView);
           },
           error: (err) => {
             console.log(err);
@@ -99,7 +100,13 @@ export class ViewChatComponent implements OnInit, AfterViewChecked {
       this.conversations.forEach((conversation) => {
         this._donees.getDoneeNT(conversation.participants.id_donee).subscribe({
           next: (response) => {
-            this.loadViewContact(response, conversation._id);
+            const contactView = {
+              id_donor: response.id_donee,
+              conversationId: conversation._id,
+              name: response.first_name + ' ' + response.last_name,
+              photo: response.photo,
+            };
+            this.loadViewContact(contactView);
           },
           error: (err) => {
             console.log(err);
@@ -109,44 +116,40 @@ export class ViewChatComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  loadViewContact(contact: any, id_conversation: string) {
-    const contactView = {
-      conversationId: id_conversation,
-      name: contact.first_name + ' ' + contact.last_name,
-      photo: contact.photo,
-    };
+  loadViewContact(contactView: any) {
+    console.log(contactView);
     this.contactsView.push(contactView);
     if (this.rol_access == 'donee') {
-      this.loadPhotosDonors(contact);
+      this.loadPhotosDonors(contactView.photo);
     }
 
     if (this.rol_access == 'donor') {
-      this.loadPhotosDonees(contact);
+      this.loadPhotosDonees(contactView.photo);
     }
   }
 
-  loadPhotosDonors(contact: any) {
+  loadPhotosDonors(photo: string) {
     console.log('Hola');
-    this._donors.getPhotoNT(contact.photo).subscribe({
+    this._donors.getPhotoNT(photo).subscribe({
       next: (blob) => {
         const url = URL.createObjectURL(blob);
-        this.photoUrls[contact.photo] = url;
+        this.photoUrls[photo] = url;
       },
       error: (err) => {
-        console.error('Error loading photo for', contact.name, err);
+        console.log('Error loading photo for', err);
       },
     });
   }
 
-  loadPhotosDonees(contact: any) {
+  loadPhotosDonees(photo: string) {
     console.log('Hola');
-    this._donees.getPhotoNT(contact.photo).subscribe({
+    this._donees.getPhotoNT(photo).subscribe({
       next: (blob) => {
         const url = URL.createObjectURL(blob);
-        this.photoUrls[contact.photo] = url;
+        this.photoUrls[photo] = url;
       },
       error: (err) => {
-        console.error('Error loading photo for', contact.name, err);
+        console.log('Error loading photo for', err);
       },
     });
   }
@@ -160,12 +163,7 @@ export class ViewChatComponent implements OnInit, AfterViewChecked {
     this.socketService.getMessagesConversation(conversationId).subscribe(
       (messages) => (this.messages = messages),
       (error) => {
-        console.error('Error al cargar las conversaciones:', error);
-        Swal.fire({
-          title: '¡Opss...!',
-          text: 'Occurrió un error',
-          icon: 'error',
-        });
+        console.log('Error al cargar las conversaciones:', error);
       }
     );
 
@@ -201,6 +199,17 @@ export class ViewChatComponent implements OnInit, AfterViewChecked {
     if (this.messageContainer?.nativeElement) {
       this.messageContainer.nativeElement.scrollTop =
         this.messageContainer.nativeElement.scrollHeight;
+    }
+  }
+
+  seeProfile(id: number): void {
+    if (this.rol_access == 'donor') {
+      localStorage.setItem('profileDonee', id.toString());
+      this.router.navigate(['/profile']);
+    }
+    if (this.rol_access == 'donee') {
+      localStorage.setItem('profileDonor', id.toString());
+      this.router.navigate(['/profile']);
     }
   }
 }

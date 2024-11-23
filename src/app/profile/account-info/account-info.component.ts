@@ -3,6 +3,7 @@ import { DonorsService } from '../../service/donors.service';
 import { iDonor } from '../../models/i-donor';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { ChatService } from '../../service/chat.service';
 
 @Component({
   selector: 'app-account-info',
@@ -10,24 +11,41 @@ import { Router } from '@angular/router';
   styleUrl: './account-info.component.css',
 })
 export class AccountInfoComponent implements OnInit {
+  profileDonor: string = localStorage.getItem('profileDonor') || '';
   donor: iDonor = {
     blood_type: '',
     health_status: '',
     availability: '',
   };
 
-  constructor(private _sevice: DonorsService, private router: Router) {}
+  constructor(
+    private _sevice: DonorsService,
+    private router: Router,
+    private _chatService: ChatService
+  ) {}
 
   ngOnInit(): void {
-    this._sevice.getDonor().subscribe({
-      next: (response) => {
-        this.donor = response;
-        console.log(this.donor);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+    if (this.profileDonor != '') {
+      this._sevice.getDonorById(this.profileDonor).subscribe({
+        next: (response) => {
+          this.donor = response;
+          console.log(this.donor);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    } else {
+      this._sevice.getDonor().subscribe({
+        next: (response) => {
+          this.donor = response;
+          console.log(this.donor);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    }
   }
 
   idDisabled: boolean = true;
@@ -76,12 +94,18 @@ export class AccountInfoComponent implements OnInit {
         this._sevice.deleteAccount().subscribe({
           next: (response) => {
             console.log(response);
-            Swal.fire({
-              title: 'Eliminado!',
-              text: 'Gracias por ser parte del movimeinto.',
-              icon: 'success',
+
+            this._chatService.deleteConversation('Donor').subscribe({
+              next: (response) => {
+                console.log(response);
+                Swal.fire({
+                  title: 'Eliminado!',
+                  text: 'Gracias por ser parte del movimeinto.',
+                  icon: 'success',
+                });
+                this.router.navigate(['/signUp']);
+              },
             });
-            this.router.navigate(['/signUp']);
           },
           error: (err) => {
             console.log(err);

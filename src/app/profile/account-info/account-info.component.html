@@ -56,7 +56,7 @@
     </div>
   </div>
 </div>
-<div class="profile-buttons">
+<div class="profile-buttons" *ngIf="profileDonor == ''">
   <button class="edit-profile-button" (click)="editAccountInfo()">
     Editar
   </button>

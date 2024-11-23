@@ -54,10 +54,10 @@ export class ViewResultsComponent implements AfterViewInit {
       },
       error: (error) => {
         console.log(error);
-        if (error.status != 400) {
+        if (error.status != 403) {
           Swal.fire('Opss...!', 'Ocurrió un error.', 'error');
         }
-        this.router.navigate(['/chats']);
+        this.router.navigate(['/signIn']);
       },
     });
   }
