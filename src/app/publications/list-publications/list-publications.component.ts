@@ -8,12 +8,9 @@ import { PublicationService } from '../../service/publications.service';
   styleUrl: './list-publications.component.css'
 })
 export class ListPublicationsComponent implements OnInit {
-  publications: IPublications [] = []
-  imagesMap: Map<string, Blob> = new Map();  // Mapa para almacenar los Blobs de las imágenes
+  publications: IPublications[] = [];
 
-
-
-  constructor(private publicationService: PublicationService){}
+  constructor(private publicationService: PublicationService) {}
 
   ngOnInit(): void {
     this.loadPublications();
@@ -24,13 +21,13 @@ export class ListPublicationsComponent implements OnInit {
       next: (data: IPublications[]) => {
         this.publications = data;
 
-        // Iterar por cada publicación y cargar la imagen si el atributo "image" está presente
+        // Cargar la imagen y asignar la URL a cada publicación
         this.publications.forEach((publication) => {
           if (publication.image) {
             this.publicationService.showImg(publication.image).subscribe({
               next: (blob) => {
-                // Guardar el Blob en el Map utilizando el atributo "image" como clave
-                this.imagesMap.set(publication.image, blob);
+                // Crear una URL a partir del blob y asignarlo a la propiedad imagePreview
+                publication.image = URL.createObjectURL(blob);
               },
               error: (error) =>
                 console.error(`Error al cargar la imagen para la publicación ${publication.image}:`, error),
@@ -42,23 +39,13 @@ export class ListPublicationsComponent implements OnInit {
     });
   }
 
-  createImageFromBlob(imageId: string): string | null {
-    const blob = this.imagesMap.get(imageId);
-    return blob ? URL.createObjectURL(blob) : null;
-  }
-
-
   deletePublications(id: number): void {
     this.publicationService.deletePublication(id.toString()).subscribe({
       next: () => {
         console.log('Publicación eliminada');
         this.loadPublications();
       },
-      error: (error) => console.error('Error al eliminar publicación', error)
+      error: (error) => console.error('Error al eliminar publicación', error),
     });
   }
-
-  downloadIMG(){}
-
-
 }

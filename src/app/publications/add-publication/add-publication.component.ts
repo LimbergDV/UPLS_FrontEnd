@@ -50,7 +50,7 @@ export class AddPublicationComponent {
       });
       return;
     }
-  
+
     // Crear el objeto base sin la imagen
     const newPublicationBase = {
       title: this.title,
@@ -59,25 +59,25 @@ export class AddPublicationComponent {
       blood_type: this.blood_type,
       donors_number: this.donors_number
     };
-  
+
     // Subir la imagen primero y luego completar el objeto
     this.publicationService.addImg(this.image).pipe(
       switchMap((response: { fileId: string }) => {
         console.log('ID de imagen recibido:', response.fileId);
-  
+
         // Crear el objeto completo con la imagen
         const newPublication: IPublications = {
           ...newPublicationBase,
           image: response.fileId // Añadir la imagen (ID)
         };
-  
+
         // Retornar el observable para agregar la publicación
         return this.publicationService.addPublication(newPublication);
       })
     ).subscribe({
       next: (response) => {
         console.log('Publicación agregada:', response);
-  
+
         Swal.fire({
           title: '¡Éxito!',
           text: 'Tu publicación ha sido realizada con éxito.',
@@ -88,7 +88,7 @@ export class AddPublicationComponent {
       },
       error: (error) => {
         console.error('Error al agregar publicación:', error);
-  
+
         Swal.fire({
           title: 'Error',
           text: 'Hubo un problema al agregar la publicación. Intenta nuevamente.',
