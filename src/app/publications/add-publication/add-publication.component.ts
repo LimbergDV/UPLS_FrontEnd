@@ -41,6 +41,70 @@ export class AddPublicationComponent {
 
   // Método para agregar una publicación
   onSubmit(): void {
+
+    if(!this.title.trim()){
+      Swal.fire({
+        title:'Error',
+        text: 'El título es obligatorio.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    if(!this.description.trim()){
+      Swal.fire({
+        title:'Error',
+        text: 'La descripción es obligatoria.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    if(!this.date_limit){
+      Swal.fire({
+        title:'Error',
+        text: 'La fecha limite es obligatoria.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    const currentDate = new Date();
+    const selectedDate = new Date(this.date_limit);
+
+    if(selectedDate <= currentDate){
+      Swal.fire({
+        title:'Error',
+        text: 'La fecha debe de ser mayor a la fecha actual',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    if(!this.blood_type){
+      Swal.fire({
+        title:'Error',
+        text: 'El tipo de sangre es obligatorio.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    if(this.donors_number <= 0){
+      Swal.fire({
+        title:'Error',
+        text: 'El número de donantes debe ser mayor que cero.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
     if (!this.image) {
       Swal.fire({
         title: 'Error',
