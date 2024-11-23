@@ -9,7 +9,7 @@ import { iBankInfo } from '../models/iBankInfo';
   providedIn: 'root',
 })
 export class MapsService {
-  private URL_BASE: string = 'http://localhost:5000/locations';
+  private URL_BASE: string = 'http://127.0.0.1:5000/locations';
 
   constructor(private _http: HttpClient) {}
 

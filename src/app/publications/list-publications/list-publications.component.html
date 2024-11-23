@@ -27,14 +27,24 @@
       <p class="description">{{ publication.description }}</p>
 
       <div class="image-display">
-        <!-- Usamos el método createImageFromBlob pasando el atributo "image" -->
-        <img *ngIf="createImageFromBlob(publication.image)" [src]="createImageFromBlob(publication.image)" alt="Imagen de publicación">
+        <img *ngIf="publication.image" [src]="publication.image" alt="Imagen de publicación">
       </div>
+
 
       <div class="details">
         <p><strong>Fecha límite:</strong> {{ publication.date_limit | date }}</p>
         <p><strong>Tipo de sangre:</strong> {{ publication.blood_type }}</p>
         <p><strong>Donantes requeridos:</strong> {{ publication.donors_number }}</p>
+      </div>
+
+      <div class="comments-section">
+        <h3>Comentarios</h3>
+        <div class="comments-list">
+          <div class="comment" *ngFor="let comment of publication.comments">
+            <p class="comment-text"></p>
+            <span class="timestamp"></span>
+          </div>
+        </div>
       </div>
 
       <div class="comment-section">

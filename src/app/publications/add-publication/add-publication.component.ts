@@ -41,6 +41,70 @@ export class AddPublicationComponent {
 
   // Método para agregar una publicación
   onSubmit(): void {
+
+    if(!this.title.trim()){
+      Swal.fire({
+        title:'Error',
+        text: 'El título es obligatorio.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    if(!this.description.trim()){
+      Swal.fire({
+        title:'Error',
+        text: 'La descripción es obligatoria.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    if(!this.date_limit){
+      Swal.fire({
+        title:'Error',
+        text: 'La fecha limite es obligatoria.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    const currentDate = new Date();
+    const selectedDate = new Date(this.date_limit);
+
+    if(selectedDate <= currentDate){
+      Swal.fire({
+        title:'Error',
+        text: 'La fecha debe de ser mayor a la fecha actual',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    if(!this.blood_type){
+      Swal.fire({
+        title:'Error',
+        text: 'El tipo de sangre es obligatorio.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    if(this.donors_number <= 0){
+      Swal.fire({
+        title:'Error',
+        text: 'El número de donantes debe ser mayor que cero.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
     if (!this.image) {
       Swal.fire({
         title: 'Error',
@@ -50,7 +114,7 @@ export class AddPublicationComponent {
       });
       return;
     }
-  
+
     // Crear el objeto base sin la imagen
     const newPublicationBase = {
       title: this.title,
@@ -59,25 +123,25 @@ export class AddPublicationComponent {
       blood_type: this.blood_type,
       donors_number: this.donors_number
     };
-  
+
     // Subir la imagen primero y luego completar el objeto
     this.publicationService.addImg(this.image).pipe(
       switchMap((response: { fileId: string }) => {
         console.log('ID de imagen recibido:', response.fileId);
-  
+
         // Crear el objeto completo con la imagen
         const newPublication: IPublications = {
           ...newPublicationBase,
           image: response.fileId // Añadir la imagen (ID)
         };
-  
+
         // Retornar el observable para agregar la publicación
         return this.publicationService.addPublication(newPublication);
       })
     ).subscribe({
       next: (response) => {
         console.log('Publicación agregada:', response);
-  
+
         Swal.fire({
           title: '¡Éxito!',
           text: 'Tu publicación ha sido realizada con éxito.',
@@ -88,7 +152,7 @@ export class AddPublicationComponent {
       },
       error: (error) => {
         console.error('Error al agregar publicación:', error);
-  
+
         Swal.fire({
           title: 'Error',
           text: 'Hubo un problema al agregar la publicación. Intenta nuevamente.',

@@ -1,15 +1,20 @@
 <nav class="navbar">
   <div class="elements-left">
     <img class="logo" src="assets/logo-chico.png" alt="" />
-    <ul class="menu">
-      <li><a routerLink="/home">Inicio</a></li>
-      <li><a routerLink="/publications">Publicaciones</a></li>
-    </ul>
+    <div class="hamburger" (click)="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
+  <ul class="menu" [class.active]="menuOpen">
+    <li><a routerLink="/home" (click)="closeMenu()">Inicio</a></li>
+    <li><a routerLink="/publications" (click)="closeMenu()">Publicaciones</a></li>
+  </ul>
   <div class="elements-right">
-    <a routerLink="/search" matTooltip="Buscar" *ngIf="flag"><img src="assets/search-icon.png" alt="Buscar" class="icon-img1"/></a>
+    <a routerLink="/search" matTooltip="Buscar" *ngIf="flag"><img src="assets/search-icon.png" alt="Buscar" class="icon-img1" /></a>
     <a href="#" matTooltip="Educación"><img src="assets/library-icon.png" alt="Publicaciones" class="icon-img2" /></a>
-    <a routerLink="/maps" matTooltip="Mapas" ><img src="assets/location-icon.png" alt="Mapa" class="icon-img3" /></a>
+    <a routerLink="/maps" matTooltip="Mapas"><img src="assets/location-icon.png" alt="Mapa" class="icon-img3" /></a>
     <a routerLink="/chats" matTooltip="Chats"><img src="assets/chats-icon.png" alt="Chat" class="icon-img4" /></a>
     <a routerLink="/profile" matTooltip="Perfil"><img src="assets/user-icon.png" alt="Perfil" class="icon-img5" /></a>
     <a routerLink="/signIn" matTooltip="Cerrar sesión"><img src="assets/logout-icon.png" alt="Salir" class="icon-img6" /></a>
