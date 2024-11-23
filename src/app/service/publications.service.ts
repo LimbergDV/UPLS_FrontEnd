@@ -15,7 +15,7 @@ export class PublicationService {
 
   addPublication(publication: IPublications): Observable<any> {
     const token = this.token;  
-j
+
     // Configurar las cabeceras con el token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
@@ -74,4 +74,8 @@ j
       responseType: 'blob',
     });
   }
+
+  
+
+  showComent(){}
 }

@@ -38,26 +38,29 @@
       </div>
 
       <div class="comment-section">
-        <form >
+        <form (ngSubmit)="addComment(publication._id!, commentContent!)" #commentForm="ngForm">
           <div class="form-group">
             <input
               type="text"
               name="comment"
               placeholder="Escribe tu comentario..."
               required
-              class="comment-input">
-            <button type="submit" class="btn submit-comment"><img src="/assets/paper-airplane.svg" alt=""></button>
+              class="comment-input"
+              [(ngModel)]="commentContent"> <!-- Enlace bidireccional -->
+            <button type="submit" class="btn submit-comment">
+              <img src="/assets/paper-airplane.svg" alt="">
+            </button>
           </div>
         </form>
       </div>
-
-      <!-- Lista de comentarios -->
+      
       <div class="comments-list">
         <div *ngFor="let comment of publication.comments" class="comment">
-          <p></p>
-          <span class="timestamp"></span>
+          <p>{{ comment }}</p> <!-- Muestra el contenido del comentario -->
         </div>
       </div>
+      
+      
     </div>
   </div>
 </div>

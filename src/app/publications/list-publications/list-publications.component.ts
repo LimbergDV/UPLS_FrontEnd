@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IPublications } from '../../models/i-publications';
 import { PublicationService } from '../../service/publications.service';
 import { DoneesService } from '../../service/donees.service';
-
+import { IComments } from '../../models/icomments';
 @Component({
   selector: 'app-list-publications',
   templateUrl: './list-publications.component.html',
@@ -13,8 +13,11 @@ export class ListPublicationsComponent implements OnInit {
   imagesMap: Map<string, Blob> = new Map();  // Mapa para almacenar los Blobs de las imágenes
   miniProfileView: any[] = [];
   photoUrls: { [id: string]: string } = {};
+  comments: IComments[] = [];
 
   rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
+  commentContent: string | undefined;
+  commentService: any;
 
   constructor(
     private publicationService: PublicationService,
@@ -104,7 +107,15 @@ export class ListPublicationsComponent implements OnInit {
     });
   }
 
-  downloadIMG(){}
-
+  addComment(_id: string, commentContent: string): void {
+    console.log('Comment content:', commentContent); // Verificar el valor aquí
+    this.commentService.addComment(_id, commentContent).subscribe({
+      next: (newComment: IComments) => {
+        this.comments.push(newComment); // Agrega el nuevo comentario al array
+      },
+      error: (error: any) => console.error('Error al agregar comentario:', error)
+    });
+  }
+  
 
 }
