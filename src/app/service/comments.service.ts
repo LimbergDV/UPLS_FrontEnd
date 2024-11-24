@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, throwError } from 'rxjs';
 import { IComments } from '../models/icomments';
 
 @Injectable({
@@ -15,10 +15,21 @@ export class CommentsService {
 
 
 
-  addComment(_id: string, content: string): Observable<IComments> {
-    const body = { id_post: _id, content };
-    return this.http.post<IComments>(`${this.apiUrl}/add`, body);
+  addComment(postId: string, content: string): Observable<IComments> {
+    const token = this.token; // Asegúrate de que `this.token` tenga el valor correcto.
+    
+    if (!token) {
+      console.error('El token JWT no está disponible.');
+      return throwError(() => new Error('Token no disponible'));
+    }
+    
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const body = { id_post: postId, content };
+    
+    return this.http.post<IComments>(`${this.apiUrl}/add`, body, { headers });
   }
+  
   
 
   showComment(){}

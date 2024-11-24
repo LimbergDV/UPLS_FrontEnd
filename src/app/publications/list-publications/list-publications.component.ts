@@ -3,25 +3,29 @@ import { IPublications } from '../../models/i-publications';
 import { PublicationService } from '../../service/publications.service';
 import { DoneesService } from '../../service/donees.service';
 import { IComments } from '../../models/icomments';
+import { CommentsService } from '../../service/comments.service';
+
 @Component({
   selector: 'app-list-publications',
   templateUrl: './list-publications.component.html',
   styleUrl: './list-publications.component.css'
 })
+
 export class ListPublicationsComponent implements OnInit {
   publications: IPublications[] = [];
-  imagesMap: Map<string, Blob> = new Map();  // Mapa para almacenar los Blobs de las imágenes
+  imagesMap: Map<string, Blob> = new Map();  
   miniProfileView: any[] = [];
   photoUrls: { [id: string]: string } = {};
   comments: IComments[] = [];
 
   rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
   commentContent: string | undefined;
-  commentService: any;
+ 
 
   constructor(
     private publicationService: PublicationService,
-    private _donees: DoneesService
+    private _donees: DoneesService,
+    private commentService: CommentsService
   ) {}
 
   ngOnInit(): void {
@@ -107,21 +111,27 @@ export class ListPublicationsComponent implements OnInit {
     });
   }
 
-  addComment(postId: string, commentContent: string): void {
-    if (!postId || !commentContent) {
-      console.error('Post ID o contenido del comentario está vacío.');
-      return;
-    }
-  
-    console.log('Comment content:', commentContent); 
-    this.commentService.addComment(postId, commentContent).subscribe({
-      next: (newComment: IComments) => {
-        this.comments.push(newComment); // Agrega el nuevo comentario al array.
-        console.log('Comentario agregado correctamente:', newComment);
-      },
-      error: (error: any) => console.error('Error al agregar comentario:', error)
-    });
+addComment(postId: string, commentContent: string): void {
+  // Validar que los datos sean correctos
+  if (!postId || !commentContent) {
+    console.error('Post ID o contenido del comentario está vacío.');
+    return;
   }
+
+  console.log('Enviando comentario:', commentContent);
+
+  this.commentService.addComment(postId, commentContent).subscribe({
+    next: (newComment: IComments) => {
+      this.comments.push(newComment); // Agregar el nuevo comentario al array de comentarios.
+      console.log('Comentario agregado correctamente:', newComment);
+    },
+    error: (error: any) => {
+      console.error('Error al agregar comentario:', error);
+      // Mostrar un mensaje de error al usuario si es necesario.
+    },
+  });
+}
+
   
 
 }

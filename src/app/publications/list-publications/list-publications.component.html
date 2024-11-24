@@ -8,7 +8,6 @@
   <div *ngFor="let publication of publications" class="publication-card">
     
     <div class="profile-header">
-      <!-- Mostrar mini perfil asociado a la publicación -->
       <div *ngIf="miniProfileView.length > 0">
         <div *ngFor="let profile of miniProfileView">
           <div *ngIf="profile.publicationId === publication._id">
@@ -66,7 +65,7 @@
       
       <div class="comments-list">
         <div *ngFor="let comment of publication.comments" class="comment">
-          <p>{{ comment }}</p> <!-- Muestra el contenido del comentario -->
+          <p>{{ comment }}</p> 
         </div>
       </div>
       
