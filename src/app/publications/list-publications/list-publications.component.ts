@@ -12,13 +12,20 @@ import Swal from 'sweetalert2';
   styleUrl: './list-publications.component.css',
 })
 export class ListPublicationsComponent implements OnInit {
+
   constructor(
     private publicationService: PublicationService,
     private _donees: DoneesService,
     private commentService: CommentsService
   ) {}
 
-  publications: IPublications[] = [];
+  publications: (IPublications & { 
+    comments: IComments[], 
+    commentContent: string, 
+    flag: boolean 
+    
+  })[] = []; // Cada publicación tiene su propio estado
+
   imagesMap: Map<string, Blob> = new Map();
   miniProfileView: any[] = [];
   photoUrls: { [id: string]: string } = {};
@@ -33,10 +40,15 @@ export class ListPublicationsComponent implements OnInit {
     this.loadPublications();
   }
 
-  loadPublications(): void {
+ loadPublications(): void {
     this.publicationService.getAllPublications().subscribe({
       next: (data: IPublications[]) => {
-        this.publications = data;
+        this.publications = data.map((publication) => ({
+          ...publication,
+          comments: [], // Inicializamos los comentarios
+          commentContent: '', // Inicializamos el contenido del comentario
+          flag: false, // Inicializamos el estado de visibilidad
+        }));
 
         this.publications.forEach((publication) => {
           if (publication.image) {
@@ -109,9 +121,9 @@ export class ListPublicationsComponent implements OnInit {
     });
   }
 
-  addComment(postId: string) {
-    // Validar que los datos sean correctos
-    if (!postId || this.commentContent == '') {
+  addComment(postId: string, publication: IPublications & { commentContent: string }){
+
+    if (!postId ) {
       Swal.fire({
         icon: 'warning',
         title: 'Comentario vacío',
@@ -121,13 +133,12 @@ export class ListPublicationsComponent implements OnInit {
       });
       return;
     }
-
-    // Verificar si el usuario tiene permisos de comentar
+  
     if (this.rol_access === 'donor') {
-      this.commentService.addComment(postId, this.commentContent).subscribe({
+      this.commentService.addComment(postId, publication.commentContent).subscribe({
         next: (newComment: IComments) => {
-          this.comments.push(newComment);
-          Swal.fire({
+          publication.comments.push(newComment);  // Aquí no debería dar error
++          Swal.fire({
             icon: 'success',
             title: 'Comentario agregado',
             text: 'Tu comentario fue agregado exitosamente.',
@@ -156,13 +167,11 @@ export class ListPublicationsComponent implements OnInit {
     }
   }
 
-  flag: boolean = false;
-  loadComments(postId: string): void {
+  loadComments(postId: string, publication: IPublications & { comments: IComments[], flag: boolean }): void {
     this.commentService.getCommentsByPost(postId).subscribe({
       next: (comments: IComments[]) => {
-        this.comments = comments;
-        this.flag = true;
-        console.log('Comentarios obtenidos:', comments);
+        publication.comments = comments; 
+        publication.flag = true; 
       },
       error: (error: any) => {
         console.error('Error al obtener comentarios:', error);
@@ -170,7 +179,7 @@ export class ListPublicationsComponent implements OnInit {
     });
   }
 
-  hiddenComments(): void {
-    this.flag = false;
+  hiddenComments(publication: IPublications & { flag: boolean }): void {
+    publication.flag = false; // Ocultar los comentarios
   }
 }

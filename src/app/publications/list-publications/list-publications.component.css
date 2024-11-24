@@ -155,6 +155,7 @@ h3 {
 }
 
 .comments-list {
+  padding-bottom: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -166,6 +167,8 @@ h3 {
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .comment-text {
@@ -182,6 +185,47 @@ h3 {
   margin-top: 5px;
 }
 
+/* Estilo del botón para cargar comentarios */
+.btn-load-comments {
+  background-color: transparent;
+  border: none;
+  color: #78222e;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacio entre el ícono y el texto */
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.btn-load-comments:hover {
+  color: #0056b3;
+  transform: scale(1.1); /* Efecto de zoom al pasar el cursor */
+}
+
+/* Estilo del botón para ocultar comentarios */
+.btn-hide-comments {
+  background-color: transparent;
+  border: none;
+  color: #a64040;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.btn-hide-comments:hover {
+  color: #a71d2a;
+  transform: scale(1.1);
+}
+
+/* Íconos dentro de los botones */
+.btn-load-comments i,
+.btn-hide-comments i {
+  font-size: 1.2rem;
+}
 
 
 @media (max-width: 768px) {

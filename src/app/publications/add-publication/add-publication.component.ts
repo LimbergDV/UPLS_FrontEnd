@@ -155,7 +155,8 @@ export class AddPublicationComponent implements OnInit {
           // Crear el objeto completo con la imagen
           const newPublication: IPublications = {
             ...newPublicationBase,
-            image: response.fileId, // Añadir la imagen (ID)
+            image: response.fileId,
+            comments: []
           };
 
           // Retornar el observable para agregar la publicación

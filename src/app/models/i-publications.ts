@@ -1,3 +1,5 @@
+import { IComments } from "./icomments";
+
 export interface IPublications {
   _id?: string,
   creator?: any;
@@ -8,5 +10,6 @@ export interface IPublications {
   date_limit?: Date;
   blood_type: string;
   donors_number?: number;
-  comments?: string[];
+  comments: IComments[];
+  showComments?: boolean;
 }
