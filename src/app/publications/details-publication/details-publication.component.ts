@@ -8,11 +8,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailsPublicationComponent implements OnInit {
   id_pubication: string = '';
-  
+
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-
     this.id_pubication = this.route.snapshot.paramMap.get('id')!;
   }
 
