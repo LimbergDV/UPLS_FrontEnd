@@ -1,0 +1,78 @@
+.header h2{
+  color: white;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Opcional, para centrar el texto */
+    padding: 10px;
+    background-color: #d9534f;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+.container {
+  margin-left: 60vh;
+  margin-top: 5vh;
+  width: 500px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.527);
+}
+
+.publication {
+  text-align: center;
+}
+
+
+
+.image-display {
+  margin-bottom: 15px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.image-display img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 5px;
+}
+
+.details p {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit {
+  background-color: #5bc0de;
+  color: white;
+}
+
+.delete {
+  background-color: #d9534f;
+  color: white;
+}
