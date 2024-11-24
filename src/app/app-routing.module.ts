@@ -11,6 +11,7 @@ import { ViewSearchComponent } from './searches/view-search/view-search.componen
 import { ViewChatComponent } from './chat/view-chat/view-chat.component';
 import { ViewPrincipalComponent } from './principal/view-principal/view-principal.component';
 import { MyPublicationsComponent } from './publications/my-publications/my-publications.component';
+import { DetailsPublicationComponent } from './publications/details-publication/details-publication.component';
 
 const routes: Routes = [
   { path: 'signIn', component: FormLoginComponent },
@@ -22,6 +23,8 @@ const routes: Routes = [
   { path: 'search', component: ViewSearchComponent },
   { path: 'chats', component: ViewChatComponent },
   { path: 'principal', component: ViewPrincipalComponent},
+  { path: 'myPublications', component: MyPublicationsComponent},
+  { path: 'detailsPublications', component: DetailsPublicationComponent}
 ];
 
 @NgModule({
