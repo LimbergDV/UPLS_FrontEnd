@@ -1,15 +1,20 @@
-* {
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+.header h2{
+  color: white;
+  font-size: 26px;
+  font-weight: 600;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  background-color: #f7f7f7;
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Opcional, para centrar el texto */
+    padding: 10px;
+    background-color: #d9534f;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+
 }
 
 .container {
@@ -26,17 +31,7 @@ body {
   text-align: center;
 }
 
-h2 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 10px;
-}
 
-.description {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 15px;
-}
 
 .image-display {
   margin-bottom: 15px;
