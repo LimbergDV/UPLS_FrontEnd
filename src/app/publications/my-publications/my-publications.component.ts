@@ -33,4 +33,8 @@ export class MyPublicationsComponent implements OnInit {
   redirectionToAdd(): void {
     this.router.navigate(['/addPublication']);
   }
+
+  showDetails(id: string) {
+    this.router.navigate(['/detailsPublications', id]);
+  }
 }

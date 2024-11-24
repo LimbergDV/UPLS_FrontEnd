@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'chats', component: ViewChatComponent },
   { path: 'principal', component: ViewPrincipalComponent},
   { path: 'myPublications', component: MyPublicationsComponent},
-  { path: 'detailsPublications', component: DetailsPublicationComponent}
+  { path: 'detailsPublications/:id', component: DetailsPublicationComponent}
 ];
 
 @NgModule({
