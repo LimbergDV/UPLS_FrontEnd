@@ -63,11 +63,12 @@
         </form>
       </div>
       
-      <div class="comments-list">
-        <div *ngFor="let comment of publication.comments" class="comment">
-          <p>{{ comment }}</p> 
+      <div *ngIf="comments.length > 0">
+        <div *ngFor="let comment of comments">
+          <p>{{ comment.content }}</p> <!-- Ajusta según el modelo de comentario -->
         </div>
       </div>
+      
       
       
     </div>

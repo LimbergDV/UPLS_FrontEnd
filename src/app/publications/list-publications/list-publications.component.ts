@@ -4,6 +4,7 @@ import { PublicationService } from '../../service/publications.service';
 import { DoneesService } from '../../service/donees.service';
 import { IComments } from '../../models/icomments';
 import { CommentsService } from '../../service/comments.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-publications',
@@ -12,15 +13,6 @@ import { CommentsService } from '../../service/comments.service';
 })
 
 export class ListPublicationsComponent implements OnInit {
-  publications: IPublications[] = [];
-  imagesMap: Map<string, Blob> = new Map();  
-  miniProfileView: any[] = [];
-  photoUrls: { [id: string]: string } = {};
-  comments: IComments[] = [];
-
-  rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
-  commentContent: string | undefined;
- 
 
   constructor(
     private publicationService: PublicationService,
@@ -28,8 +20,20 @@ export class ListPublicationsComponent implements OnInit {
     private commentService: CommentsService
   ) {}
 
+  publications: IPublications[] = [];
+  imagesMap: Map<string, Blob> = new Map();  
+  miniProfileView: any[] = [];
+  photoUrls: { [id: string]: string } = {};
+
+  comments: IComments[] = [];
+  postId: string = "67426f61f8504a0cabbc5e01";
+
+  rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
+  commentContent: string | undefined;
+ 
   ngOnInit(): void {
     this.loadPublications();
+    this.getCommentsByPost(this.postId)
   }
 
   loadPublications(): void {
@@ -37,20 +41,17 @@ export class ListPublicationsComponent implements OnInit {
       next: (data: IPublications[]) => {
         this.publications = data;
 
-        // Cargar la imagen y asignar la URL a cada publicación
         this.publications.forEach((publication) => {
           if (publication.image) {
             this.publicationService.showImg(publication.image).subscribe({
               next: (blob) => {
-                // Crear una URL a partir del blob y asignarlo a la propiedad imagePreview
+                
                 publication.image = URL.createObjectURL(blob);
               },
               error: (error) =>
                 console.error(`Error al cargar la imagen para la publicación ${publication.image}:`, error),
             });
           }
-
-          // Llamar a searchUserData para cargar mini perfil de cada publicación
           this.searchUserData(publication);
         });
       },
@@ -111,24 +112,62 @@ export class ListPublicationsComponent implements OnInit {
     });
   }
 
-addComment(postId: string, commentContent: string): void {
+addComment(postId: string, commentContent: string){
   // Validar que los datos sean correctos
   if (!postId || !commentContent) {
-    console.error('Post ID o contenido del comentario está vacío.');
+    Swal.fire({
+      icon: 'warning',
+      title: 'Comentario vacío',
+      text: 'Por favor, escribe algo antes de enviar tu comentario.',
+      confirmButtonText: 'Entendido',
+      confirmButtonColor: '#3085d6',
+    });
     return;
   }
 
-  console.log('Enviando comentario:', commentContent);
+  // Verificar si el usuario tiene permisos de comentar
+  if (this.rol_access === 'donor') {
+    this.commentService.addComment(postId, commentContent).subscribe({
+      next: (newComment: IComments) => {
+        this.comments.push(newComment); 
+        Swal.fire({
+          icon: 'success',
+          title: 'Comentario agregado',
+          text: 'Tu comentario fue agregado exitosamente.',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#28a745',
+        });
+      },
+      error: (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Ocurrió un problema al agregar tu comentario. Por favor, intenta nuevamente.',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#d33',
+        });
+      },
+    });
+  } else {
+    Swal.fire({
+      icon: 'info',
+      title: 'Regístrate para comentar',
+      text: 'Crea una cuenta para poder dejar comentarios.',
+      confirmButtonText: 'Entendido',
+      confirmButtonColor: '#007bff',
+    });
+  }
+}
 
-  this.commentService.addComment(postId, commentContent).subscribe({
-    next: (newComment: IComments) => {
-      this.comments.push(newComment); // Agregar el nuevo comentario al array de comentarios.
-      console.log('Comentario agregado correctamente:', newComment);
+getCommentsByPost(postId: string): void {
+  this.commentService.getCommentsByPost(postId).subscribe({
+    next: (comments: IComments[]) => {
+      this.comments = comments;  
+      console.log('Comentarios obtenidos:', comments);
     },
     error: (error: any) => {
-      console.error('Error al agregar comentario:', error);
-      // Mostrar un mensaje de error al usuario si es necesario.
-    },
+      console.error('Error al obtener comentarios:', error);
+    }
   });
 }
 
