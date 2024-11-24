@@ -1,4 +1,6 @@
 export interface IPublications {
+  _id?: string,
+  creator?: any;
   id_donee?: number;
   title: string;
   description: string;

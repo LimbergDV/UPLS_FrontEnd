@@ -6,10 +6,21 @@
   </div>
 
   <div *ngFor="let publication of publications" class="publication-card">
+    
     <div class="profile-header">
-      <img src="" alt="Foto de perfil" class="profile-image">
-      <span class="profile-name">Jesus Madero Ruíz</span>
-    </div>
+      <div *ngIf="miniProfileView.length > 0">
+        <div *ngFor="let profile of miniProfileView">
+          <div *ngIf="profile.publicationId === publication._id">
+            <img *ngIf="profile.photo" [src]="photoUrls[profile.photo]" alt="Foto de perfil" class="profile-image">
+            <span class="profile-name">
+              {{ profile.name }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>  
+    
+    
     <div class="publication-content">
       <h3>{{ publication.title }}</h3>
       <p class="description">{{ publication.description }}</p>
@@ -36,15 +47,29 @@
       </div>
 
       <div class="comment-section">
-        <form >
+        <form (ngSubmit)="addComment(publication._id!, commentContent!)" #commentForm="ngForm">
           <div class="form-group">
             <input
               type="text"
               name="comment"
               placeholder="Escribe tu comentario..."
               required
-              class="comment-input">
-            <button type="submit" class="btn submit-comment"><img src="/assets/paper-airplane.svg" alt=""></button>
+              class="comment-input"
+              [(ngModel)]="commentContent"> <!-- Enlace bidireccional -->
+            <button type="submit" class="btn submit-comment">
+              <img src="/assets/paper-airplane.svg" alt="">
+            </button>
           </div>
         </form>
       </div>
+      
+      <div class="comments-list">
+        <div *ngFor="let comment of publication.comments" class="comment">
+          <p>{{ comment }}</p> 
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>

@@ -14,7 +14,7 @@ export class PublicationService {
   private token: string = localStorage.getItem('token') || '';
 
   addPublication(publication: IPublications): Observable<any> {
-    const token = this.token; // Obtener el token
+    const token = this.token;  
 
     // Configurar las cabeceras con el token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -74,4 +74,8 @@ export class PublicationService {
       responseType: 'blob',
     });
   }
+
+  
+
+  showComent(){}
 }
