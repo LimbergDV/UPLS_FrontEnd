@@ -23,7 +23,7 @@ export class PublicationService {
   }
 
   getAllPublications(): Observable<IPublications[]> {
-    return this.http.get<IPublications[]>(this.apiUrl);
+    return this.http.get<IPublications[]>(`${this.apiUrl}/all`);
   }
 
   getPublicationById(id: string): Observable<IPublications> {

@@ -26,7 +26,7 @@ export class ListPublicationsComponent implements OnInit {
   photoUrls: { [id: string]: string } = {};
 
   comments: IComments[] = [];
-  postId: string = "67426f61f8504a0cabbc5e01";
+  postId: string = ""; 
 
   rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
   commentContent: string | undefined;
