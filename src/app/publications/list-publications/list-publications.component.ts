@@ -55,7 +55,7 @@ export class ListPublicationsComponent implements OnInit {
   }
 
   searchUserData(publication: IPublications): void {
-    if (this.rol_access == 'donee' && publication.id_donee) {
+    if (publication.id_donee) {
       this._donees.getDoneeNT(publication.id_donee).subscribe({
         next: (response) => {
           this.loadViewMiniProfile(response, publication._id || '' );
@@ -79,7 +79,7 @@ export class ListPublicationsComponent implements OnInit {
   }
 
   loadPhotosDonees(profile: any) {
-    console.log('hola :'+ profile);
+    console.log('' /*profile*/ );
     this._donees.getPhotoNT(profile).subscribe({
       next: (blob) => {
         const url = URL.createObjectURL(blob);
@@ -107,11 +107,17 @@ export class ListPublicationsComponent implements OnInit {
     });
   }
 
-  addComment(_id: string, commentContent: string): void {
-    console.log('Comment content:', commentContent); // Verificar el valor aquí
-    this.commentService.addComment(_id, commentContent).subscribe({
+  addComment(postId: string, commentContent: string): void {
+    if (!postId || !commentContent) {
+      console.error('Post ID o contenido del comentario está vacío.');
+      return;
+    }
+  
+    console.log('Comment content:', commentContent); 
+    this.commentService.addComment(postId, commentContent).subscribe({
       next: (newComment: IComments) => {
-        this.comments.push(newComment); // Agrega el nuevo comentario al array
+        this.comments.push(newComment); // Agrega el nuevo comentario al array.
+        console.log('Comentario agregado correctamente:', newComment);
       },
       error: (error: any) => console.error('Error al agregar comentario:', error)
     });
