@@ -13,5 +13,6 @@
     *ngFor="let publication of listPublications"
     [title]="publication.title"
     [idImage]="publication.image"
+    (click)="showDetails(publication._id!)"
   ></app-cards>
 </div>
