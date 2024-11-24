@@ -47,7 +47,7 @@ export class ListPublicationsComponent implements OnInit {
           ...publication,
           comments: [], // Inicializamos los comentarios
           commentContent: '', // Inicializamos el contenido del comentario
-          flag: false, // Inicializamos el estado de visibilidad
+          flag:  false
         }));
 
         this.publications.forEach((publication) => {
@@ -179,7 +179,7 @@ export class ListPublicationsComponent implements OnInit {
     });
   }
 
-  hiddenComments(publication: IPublications & { flag: boolean }): void {
+  hiddenComments(publication: IPublications & { flag: boolean }) {
     publication.flag = false; // Ocultar los comentarios
   }
 }
