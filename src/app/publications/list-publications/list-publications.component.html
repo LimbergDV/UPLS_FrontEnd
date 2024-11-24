@@ -6,34 +6,44 @@
   </div>
 
   <div *ngFor="let publication of publications" class="publication-card">
-    
     <div class="profile-header">
       <div *ngIf="miniProfileView.length > 0">
         <div *ngFor="let profile of miniProfileView">
           <div *ngIf="profile.publicationId === publication._id">
-            <img *ngIf="profile.photo" [src]="photoUrls[profile.photo]" alt="Foto de perfil" class="profile-image">
+            <img
+              *ngIf="profile.photo"
+              [src]="photoUrls[profile.photo]"
+              alt="Foto de perfil"
+              class="profile-image"
+            />
             <span class="profile-name">
               {{ profile.name }}
             </span>
           </div>
         </div>
       </div>
-    </div>  
-    
-    
+    </div>
+
     <div class="publication-content">
       <h3>{{ publication.title }}</h3>
       <p class="description">{{ publication.description }}</p>
 
       <div class="image-display">
-        <img *ngIf="publication.image" [src]="publication.image" alt="Imagen de publicación">
+        <img
+          *ngIf="publication.image"
+          [src]="publication.image"
+          alt="Imagen de publicación"
+        />
       </div>
 
-
       <div class="details">
-        <p><strong>Fecha límite:</strong> {{ publication.date_limit | date }}</p>
+        <p>
+          <strong>Fecha límite:</strong> {{ publication.date_limit | date }}
+        </p>
         <p><strong>Tipo de sangre:</strong> {{ publication.blood_type }}</p>
-        <p><strong>Donantes requeridos:</strong> {{ publication.donors_number }}</p>
+        <p>
+          <strong>Donantes requeridos:</strong> {{ publication.donors_number }}
+        </p>
       </div>
 
       <div class="comments-section">
@@ -47,7 +57,7 @@
       </div>
 
       <div class="comment-section">
-        <form (ngSubmit)="addComment(publication._id!, commentContent!)" #commentForm="ngForm">
+        <form (ngSubmit)="addComment(publication._id!)" #commentForm="ngForm">
           <div class="form-group">
             <input
               type="text"
@@ -55,22 +65,24 @@
               placeholder="Escribe tu comentario..."
               required
               class="comment-input"
-              [(ngModel)]="commentContent"> <!-- Enlace bidireccional -->
+              [(ngModel)]="commentContent"
+            />
+            <!-- Enlace bidireccional -->
             <button type="submit" class="btn submit-comment">
-              <img src="/assets/paper-airplane.svg" alt="">
+              <img src="/assets/paper-airplane.svg" alt="" />
             </button>
           </div>
         </form>
       </div>
-      
-      <div *ngIf="comments.length > 0">
+
+      <button (click)="loadComments(publication._id!)">Ver comentarios</button>
+      <div *ngIf="comments.length > 0 && this.flag">
         <div *ngFor="let comment of comments">
-          <p>{{ comment.content }}</p> <!-- Ajusta según el modelo de comentario -->
+          <p>{{ comment.content }}</p>
+          <!-- Ajusta según el modelo de comentario -->
         </div>
       </div>
-      
-      
-      
+      <button (click)="hiddenComments()">Oculatar comentarios</button>
     </div>
   </div>
 </div>
