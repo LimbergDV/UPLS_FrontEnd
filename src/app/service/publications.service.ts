@@ -30,6 +30,14 @@ export class PublicationService {
     return this.http.get<IPublications>(`${this.apiUrl}/${id}`);
   }
 
+  getPublicationByIdDonee(): Observable<IPublications[]> {
+    const token = this.token; // Obtener el token
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<IPublications[]>(`${this.apiUrl}/`, { headers });
+  }
+
   updatePublication(
     id: string,
     publication: IPublications
