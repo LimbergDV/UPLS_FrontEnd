@@ -23,11 +23,19 @@ export class PublicationService {
   }
 
   getAllPublications(): Observable<IPublications[]> {
-    return this.http.get<IPublications[]>(this.apiUrl);
+    return this.http.get<IPublications[]>(`${this.apiUrl}/all`);
   }
 
   getPublicationById(id: string): Observable<IPublications> {
     return this.http.get<IPublications>(`${this.apiUrl}/${id}`);
+  }
+
+  getPublicationByIdDonee(): Observable<IPublications[]> {
+    const token = this.token; // Obtener el token
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<IPublications[]>(`${this.apiUrl}/`, { headers });
   }
 
   updatePublication(

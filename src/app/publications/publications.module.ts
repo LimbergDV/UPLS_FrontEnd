@@ -6,9 +6,7 @@ import { ListPublicationsComponent } from './list-publications/list-publications
 import { FormsModule } from '@angular/forms';
 import { MyPublicationsComponent } from './my-publications/my-publications.component';
 import { CardsComponent } from './cards/cards.component';
-
-
-
+import { MatTooltip } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -16,11 +14,8 @@ import { CardsComponent } from './cards/cards.component';
     ViewPublicationComponent,
     ListPublicationsComponent,
     MyPublicationsComponent,
-    CardsComponent
+    CardsComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule
-  ]
+  imports: [CommonModule, FormsModule, MatTooltip],
 })
-export class PublicationsModule { }
+export class PublicationsModule {}
