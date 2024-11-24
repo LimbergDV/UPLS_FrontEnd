@@ -14,7 +14,7 @@ export class PublicationService {
   private token: string = localStorage.getItem('token') || '';
 
   addPublication(publication: IPublications): Observable<any> {
-    const token = this.token;  
+    const token = this.token;
 
     // Configurar las cabeceras con el token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -42,11 +42,22 @@ export class PublicationService {
     id: string,
     publication: IPublications
   ): Observable<IPublications> {
-    return this.http.put<IPublications>(`${this.apiUrl}/${id}`, publication);
+    const token = this.token; // Obtener el token
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<IPublications>(`${this.apiUrl}/${id}`, publication, {
+      headers,
+    });
   }
 
   deletePublication(id: string): Observable<{ message: string }> {
-    return this.http.delete<{ message: string }>(`${this.apiUrl}/${id}`);
+    const token = this.token; // Obtener el token
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete<{ message: string }>(`${this.apiUrl}/${id}`, {
+      headers,
+    });
   }
 
   deleteAllByDonee(): Observable<{ message: string }> {
@@ -83,7 +94,5 @@ export class PublicationService {
     });
   }
 
-  
-
-  showComent(){}
+  showComent() {}
 }

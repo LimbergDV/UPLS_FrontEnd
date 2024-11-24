@@ -1,52 +1,117 @@
 <div class="publications-list">
   <div class="publication-card">
-    <div class="profile-header">
-      <img src="path-to-profile-image.jpg" alt="Foto de perfil" class="profile-image">
-      <span class="profile-name">Jesus Madero Ruíz</span>
-    </div>
+    <div class="profile-header"></div>
     <div class="action-buttons">
-    <button class="edit-btn"><img src="/assets/file.png" alt=""></button>
-    <button class="delete-btn"><img src="/assets/recycle-bote.png" alt=""></button>
+      <button class="edit-btn" (click)="editData()">
+        <img src="/assets/file.png" alt="Editar" />
+      </button>
+      <button class="delete-btn" (click)="delete()">
+        <img src="/assets/recycle-bote.png" alt="Eliminar" />
+      </button>
     </div>
-    <div class="publication-content">
-      <h3>Título de la publicación</h3>
-      <p class="description">Descripción de la publicación. Esta es una descripción breve de lo que está sucediendo en esta publicación. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-      <div class="image-display">
-        <img src="/assets/ejemplo-donacion.jpg" alt="Imagen de publicación">
+    <form (submit)="onSubmit()" class="form">
+      <div class="form-group">
+        <label for="title">Título:</label>
+        <input
+          type="text"
+          id="title"
+          [(ngModel)]="publication.title"
+          name="title"
+          placeholder="Mi primera donación"
+          [disabled]="isDisabled"
+        />
       </div>
 
-      <div class="details">
-        <p><strong>Fecha límite:</strong> 2024-12-31</p>
-        <p><strong>Tipo de sangre:</strong> O+</p>
-        <p><strong>Donantes requeridos:</strong> 5</p>
+      <div class="form-group">
+        <label for="description">Descripción:</label>
+        <textarea
+          id="description"
+          [(ngModel)]="publication.description"
+          name="description"
+          placeholder="Mi primera donación"
+          min="1"
+          required
+          [disabled]="isDisabled"
+        ></textarea>
       </div>
 
-      <div class="comments-section">
-        <h3>Comentarios</h3>
-        <div class="comments-list">
-          <div class="comment">
-            <p class="comment-text">Este es un comentario de ejemplo sobre la publicación.</p>
-            <span class="timestamp">Hace 2 horas</span>
+      <div class="form-group image-upload">
+        <label for="image" class="image-label">
+          <div class="upload-icon">
+            <img src="/assets/Upload icon.svg" alt="Subir imagen" />
           </div>
+          <p>Sube tu imagen</p>
+          <small>Soporta formatos: JPEG, PNG</small>
+        </label>
+        <input
+          type="file"
+          id="image"
+          (change)="onFileSelected($event)"
+          accept="image/jpeg, image/png"
+          [disabled]="isDisabled"
+        />
+      </div>
+
+      <div *ngIf="imagePreview" class="image-preview">
+        <p>Vista previa</p>
+        <img [src]="imagePreview" alt="Imagen previa" class="preview-image" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="deadline">Fecha límite:</label>
+          <input
+            type="date"
+            id="deadline"
+            [(ngModel)]="publication.date_limit"
+            name="date_limit"
+            required
+            [disabled]="isDisabled"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="blood-type">Tipo de sangre:</label>
+          <select
+            id="blood-type"
+            [(ngModel)]="publication.blood_type"
+            name="blood_type"
+            required
+            [disabled]="isDisabled"
+          >
+            <option
+              *ngFor="
+                let type of ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-']
+              "
+            >
+              {{ type }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="donors-required">Donantes req:</label>
+          <input
+            type="number"
+            id="donors-required"
+            [(ngModel)]="publication.donors_number"
+            name="donors_number"
+            [disabled]="isDisabled"
+          />
         </div>
       </div>
 
-      <div class="comment-section">
-        <form>
-          <div class="form-group">
-            <input
-              type="text"
-              name="comment"
-              placeholder="Escribe tu comentario..."
-              required
-              class="comment-input">
-            <button type="submit" class="btn submit-comment">
-              <img src="/assets/paper-airplane.svg" alt="">
-            </button>
-          </div>
-        </form>
+      <div class="button-group">
+        <button type="button" class="btn cancel" (click)="cancel()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn publish" [disabled]="isDisabled">Guardar</button>
       </div>
+    </form>
+
+    <div class="comments" *ngFor="let comment of comments">
+      <li>{{ comment.content }}</li>
     </div>
   </div>
 </div>
+<br> <br>
