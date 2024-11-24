@@ -13,105 +13,29 @@ body {
 }
 
 .publications-list {
-  width: 550px;
-  padding: 20px;
-  background-color: none;
-  border-radius: 10px;
-  margin: auto;
-}
-
-h2 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .publication-card {
-  margin-bottom: 20px;
-  padding: 0px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  width: 90%;
+  max-width: 600px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.527);
+  margin: 10px;
+  margin-top: 5vh;
 }
 
-.publication-content {
-  text-align: center;
-  padding: 10px;
-}
-
-h3 {
-  font-size: 22px;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.description {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 15px;
-}
-
-.image-display {
-  margin-bottom: 15px;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.image-display img {
-  width: 100%;
-  max-width: 500px;
-  border-radius: 5px;
-}
-
-.details p {
-  font-size: 14px;
-  color: #666;
-  margin: 5px 0;
-}
-
-.button-group {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.profile-header {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background-color: #d9534f;
-  color: white;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.profile-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.profile-name {
-  font-weight: bold;
-}
 
 .action-buttons {
   display: flex;
   justify-content: end;
   gap: 30px;
   margin-top: 20px;
-  margin-right: 23px;
+
 }
 
 .edit-btn, .delete-btn {
@@ -124,8 +48,7 @@ h3 {
   border: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.edit-btn:hover, .delete-btn:hover{
+.edit-btn:hover, .delete-btn:hover {
   background-color: #31a0c1;
   transform: translateY(-10px);
 }
@@ -133,124 +56,170 @@ h3 {
 .delete-btn {
   background-color: #f44336;
 }
-.comment-section {
-  margin-top: 20px;
+
+.form {
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.form-group textarea {
+  resize: none;
+  height: 60px;
+}
+
+.image-upload {
+  text-align: center;
+  border: 1px dashed #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #F8F8FF;
+  cursor: pointer;
+  position: relative;
+}
+
+.image-upload input[type="file"] {
+  display: none;
+}
+
+.image-label {
+  color: #333333;
+}
+
+.upload-icon {
+  font-size: 30px;
+  color: #000000;
+}
+
+.form-row {
   display: flex;
-  align-items: center;
   gap: 10px;
 }
 
-.comment-input {
-  width: 90%;
-  padding: 10px;
-  font-size: 14px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
+.form-row .form-group {
+  flex: 1;
 }
 
-.submit-comment {
-  background-color: transparent;
-  color: white;
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
-  padding: 4px 16px;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.comments-section {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+.cancel {
+  background-color: #d9534f;
+  color: white;
 }
 
-.comments-section h3 {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 5px;
+.publish {
+  background-color: #d9534f;
+  color: white;
 }
 
-.comments-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.image-preview {
+  margin-top: 15px;
+  text-align: center;
 }
 
-.comment {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.comment-text {
+.image-preview p {
   font-size: 14px;
-  color: #333;
-  margin: 0;
+  color: #555;
 }
 
-.timestamp {
-  font-size: 12px;
-  color: #666;
-  text-align: right;
-  display: block;
+.preview-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
   margin-top: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Estilos para pantallas pequeñas */
 @media (max-width: 768px) {
-  .publications-list {
-    width: 95%;
-    padding: 15px;
-  }
-
-  .profile-header {
+  .form-row {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 20px;
   }
 
-  .profile-name {
-    font-size: 14px;
+  .form-group {
+    margin-bottom: 20px;
   }
 
-  h3 {
-    font-size: 18px;
-  }
-
-  .description {
-    font-size: 14px;
-  }
-
-  .comment-input {
-    font-size: 12px;
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
   }
 
   .btn {
-    font-size: 14px;
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  h2 {
-    font-size: 20px;
+  body {
+    padding: 10px;
   }
 
-  .profile-header {
-    align-items: acenter;
-    text-align: center;
+  .container {
+    width: 100%;
+    padding: 15px;
   }
 
-  .comment-input {
+  .form-group label {
+    font-size: 14px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 12px;
     padding: 8px;
   }
 
+  .image-upload {
+    padding: 15px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .btn {
-    padding: 8px 16px;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .image-preview p {
+    font-size: 12px;
   }
 }

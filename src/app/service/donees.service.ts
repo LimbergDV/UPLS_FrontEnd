@@ -8,11 +8,11 @@ import { iDonee } from '../models/i-donee';
   providedIn: 'root',
 })
 
-//http://localhost:5000/donees 
+//http://localhost:5000/donees
 //https://unidosporlasangreapi.integrador.xyz/donees
 
 export class DoneesService {
-  private URL_BASE: string ='http://localhost:5000/donees';
+  private URL_BASE: string ='http://127.0.0.1:5000/donees';
   private token: string = localStorage.getItem('token') || '';
 
   constructor(private _http: HttpClient) {}
