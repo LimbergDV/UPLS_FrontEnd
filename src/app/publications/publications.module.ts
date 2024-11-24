@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { MyPublicationsComponent } from './my-publications/my-publications.component';
 import { CardsComponent } from './cards/cards.component';
 import { MatTooltip } from '@angular/material/tooltip';
+import { DetailsCardsComponent } from './details-cards/details-cards.component';
+import { DetailsPublicationComponent } from './details-publication/details-publication.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,10 @@ import { MatTooltip } from '@angular/material/tooltip';
     ListPublicationsComponent,
     MyPublicationsComponent,
     CardsComponent,
+    DetailsCardsComponent,
+    DetailsPublicationComponent,
   ],
   imports: [CommonModule, FormsModule, MatTooltip],
+  exports: [],
 })
 export class PublicationsModule {}
