@@ -6,6 +6,8 @@ import { ListPublicationsComponent } from './list-publications/list-publications
 import { FormsModule } from '@angular/forms';
 import { MyPublicationsComponent } from './my-publications/my-publications.component';
 import { CardsComponent } from './cards/cards.component';
+import { DetailsCardsComponent } from './details-cards/details-cards.component';
+import { DetailsPublicationComponent } from './details-publication/details-publication.component';
 
 
 
@@ -16,11 +18,16 @@ import { CardsComponent } from './cards/cards.component';
     ViewPublicationComponent,
     ListPublicationsComponent,
     MyPublicationsComponent,
-    CardsComponent
+    CardsComponent,
+    DetailsCardsComponent,
+    DetailsPublicationComponent
   ],
   imports: [
     CommonModule,
     FormsModule
+  ],
+  exports: [
+    DetailsCardsComponent
   ]
 })
 export class PublicationsModule { }

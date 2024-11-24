@@ -1,0 +1,256 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f7f7f7;
+}
+
+.publications-list {
+  width: 550px;
+  padding: 20px;
+  background-color: none;
+  border-radius: 10px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.publication-card {
+  margin-bottom: 20px;
+  padding: 0px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.527);
+}
+
+.publication-content {
+  text-align: center;
+  padding: 10px;
+}
+
+h3 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.image-display {
+  margin-bottom: 15px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.image-display img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 5px;
+}
+
+.details p {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #d9534f;
+  color: white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.profile-name {
+  font-weight: bold;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: end;
+  gap: 30px;
+  margin-top: 20px;
+  margin-right: 23px;
+}
+
+.edit-btn, .delete-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-btn:hover, .delete-btn:hover{
+  background-color: #31a0c1;
+  transform: translateY(-10px);
+}
+
+.delete-btn {
+  background-color: #f44336;
+}
+.comment-section {
+  margin-top: 20px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.comment-input {
+  width: 90%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.submit-comment {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 4px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comments-section {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.comments-section h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-text {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #666;
+  text-align: right;
+  display: block;
+  margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  .publications-list {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-name {
+    font-size: 14px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .comment-input {
+    font-size: 12px;
+  }
+
+  .btn {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 20px;
+  }
+
+  .profile-header {
+    align-items: acenter;
+    text-align: center;
+  }
+
+  .comment-input {
+    padding: 8px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+  }
+}
