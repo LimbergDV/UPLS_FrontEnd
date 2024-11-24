@@ -1,2 +1,2 @@
-<app-add-publication></app-add-publication>
-<app-list-publications></app-list-publications>
+<app-my-publications *ngIf="flag" />
+<app-list-publications *ngIf="!flag"></app-list-publications>

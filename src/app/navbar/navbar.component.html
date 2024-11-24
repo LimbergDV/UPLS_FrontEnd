@@ -10,7 +10,6 @@
   <ul class="menu" [class.active]="menuOpen">
     <li><a routerLink="/home" (click)="closeMenu()">Inicio</a></li>
     <li><a routerLink="/publications" (click)="closeMenu()">Publicaciones</a></li>
-    <li><a routerLink="/myPublications" (click)="closeMenu()">Mis publicaciones</a></li>
   </ul>
   <div class="elements-right">
     <a routerLink="/search" matTooltip="Buscar" *ngIf="flag"><img src="assets/search-icon.png" alt="Buscar" class="icon-img1" /></a>

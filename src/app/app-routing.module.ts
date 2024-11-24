@@ -22,7 +22,6 @@ const routes: Routes = [
   { path: 'search', component: ViewSearchComponent },
   { path: 'chats', component: ViewChatComponent },
   { path: 'principal', component: ViewPrincipalComponent},
-  { path: 'myPublications', component: MyPublicationsComponent}
 ];
 
 @NgModule({
