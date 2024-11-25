@@ -7,6 +7,10 @@ import { iDonee } from '../models/i-donee';
 @Injectable({
   providedIn: 'root',
 })
+
+//http://localhost:5000/donees
+//https://unidosporlasangreapi.integrador.xyz/donees
+
 export class DoneesService {
   private URL_BASE: string = 'https://unidosporlasangreapi.integrador.xyz/donees';
   private token: string = localStorage.getItem('token') || '';
@@ -85,6 +89,16 @@ export class DoneesService {
   getPhotoNT(id: string) {
     return this._http.get(`${this.URL_BASE}/photo/${id}`, {
       responseType: 'blob',
+    });
+  }
+
+  getDoneeById(id: string): Observable<iDonee> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`,
+    });
+
+    return this._http.get<iDonee>(`${this.URL_BASE}/search/${parseInt(id)}`, {
+      headers,
     });
   }
 }

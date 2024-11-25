@@ -50,7 +50,7 @@ export class FormLoginComponent implements OnInit {
           const token = response.access_token;
           localStorage.setItem('token', token);
           localStorage.setItem('rolAccess', 'donee');
-          this.router.navigate(['/home']);
+          this.router.navigate(['/publications']);
         },
         error: (err) => {
           if (err.status == 404) {
@@ -76,7 +76,7 @@ export class FormLoginComponent implements OnInit {
           const token = response.access_token;
           localStorage.setItem('token', token);
           localStorage.setItem('rolAccess', 'donor');
-          this.router.navigate(['/home']);
+          this.router.navigate(['/publications']);
         },
         error: (err) => {
           if (err.status == 404) {

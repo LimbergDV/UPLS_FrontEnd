@@ -6,14 +6,14 @@
   align-items: flex-start;
 }
 
-.left-content img{
-  width: 700px;
-  height: 300px;
+.left-content img {
+  width: 500px;
+  height: 220px;
   margin-left: 12vh;
   margin-top: 10vh;
 }
 
-.left-content p{
+.left-content p {
   font-family: "Poppins", sans-serif;
   font-size: 22px;
   font-weight: 300;
@@ -25,20 +25,20 @@
   text-align: justify;
 }
 
-.right-content{
+.right-content {
   text-align: center;
   width: 40%;
 }
 
-.login-btn span{
+.login-btn span {
   font-family: "Poppins", sans-serif;
   font-weight: 300;
 }
 
-.login-btn{
+.login-btn {
   display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);;
+  background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid white;
   color: white;
   border-radius: 5px;
@@ -46,7 +46,7 @@
   cursor: pointer;
   margin-bottom: 20px;
   margin-top: 3vh;
-  margin-left: 26vh;
+  margin-left: 36vh;
   width: 180px;
   height: 37px;
 }
@@ -55,7 +55,7 @@
   margin-left: 5px;
 }
 
-.login-icon{
+.login-icon {
   width: 30px;
   height: 30px;
   margin-right: 10px;
@@ -63,7 +63,7 @@
 
 .text-subtitle h2 {
   margin-left: auto;
-  margin-top: 15vh;
+  margin-top: 5vh;
   font-weight: 600;
   margin-right: 20vh;
   line-height: 100%;
@@ -72,7 +72,7 @@
   color: white;
 }
 
-.buttons-group{
+.buttons-group {
   display: flex;
   gap: 50px;
   justify-content: center;
@@ -81,26 +81,36 @@
   margin-left: 7vh;
 }
 
-.buttons-group .first-button{
+.buttons-group .first-button {
   color: white;
-  background-color: #CF0000;
+  background-color: #cf0000;
   border: none;
   font-size: 25px;
   font-family: "Poppins", sans-serif;
   border-radius: 6px;
   width: 277px;
   height: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.buttons-group .second-button{
+.buttons-group .second-button {
   color: white;
-  background-color: #001EFF;
+  background-color: #4182f9;
   border: none;
   font-size: 25px;
   font-family: "Poppins", sans-serif;
   border-radius: 6px;
   width: 277px;
   height: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.first-button:hover,
+.second-button:hover {
+  transform: scale(1.15);
+  color: rgb(44, 255, 72);
 }
 
 @media (max-width: 1024px) {
@@ -108,7 +118,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 20px; /* Añade espacio para evitar que el contenido salga */
+    padding: 20px;
   }
 
   .left-content img {
@@ -160,7 +170,7 @@
     margin-top: 40vh;
     margin-left: 10vh;
   }
-  .login-btn{
+  .login-btn {
     position: relative;
     margin-left: 20vh;
   }

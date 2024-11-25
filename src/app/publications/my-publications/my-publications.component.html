@@ -1,0 +1,19 @@
+<div class="principal-container">
+  <div class="header-container">
+    <h1>Mis publicaciones</h1>
+    <button
+      class="add-btn"
+      matTooltip="Crear publicación"
+      (click)="redirectionToAdd()"
+    >
+      +
+    </button>
+  </div>
+  <br />
+  <app-cards
+    *ngFor="let publication of listPublications"
+    [title]="publication.title"
+    [idImage]="publication.image"
+    (click)="showDetails(publication._id!)"
+  ></app-cards>
+</div>

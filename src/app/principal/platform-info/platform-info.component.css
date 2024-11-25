@@ -24,10 +24,6 @@
   width: 71%;
 }
 
-.container-cards {
-
-}
-
 .container-1{
   display: flex;
   flex-wrap: wrap;
@@ -49,6 +45,15 @@
   width: 370px;
   margin-top: 4vh;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 2.0s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  color: #000000;
+  text-shadow: 5px 5px 5px #535353;
+  transition: text-shadow 0.5s ease, color 0.1s ease;
+  outline: 5px solid #a61414;
 }
 
 .card-content{
