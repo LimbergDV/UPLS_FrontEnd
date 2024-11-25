@@ -25,6 +25,7 @@ export class DetailsCardsComponent implements OnInit {
     description: '',
     image: '',
     blood_type: '',
+    comments:[]
   };
 
   constructor(
@@ -188,7 +189,8 @@ export class DetailsCardsComponent implements OnInit {
           // Crear el objeto completo con la imagen
           const newPublication: IPublications = {
             ...newPublicationBase,
-            image: response.fileId, // Añadir la imagen (ID)
+            image: response.fileId, 
+            comments:[]// Añadir la imagen (ID)
           };
 
           // Retornar el observable para agregar la publicación

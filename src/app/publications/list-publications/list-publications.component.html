@@ -1,10 +1,12 @@
 <div class="publications-list">
   <h2>Publicaciones</h2>
 
+  <!-- Si no hay publicaciones -->
   <div *ngIf="publications.length === 0" class="no-publications">
     <p>No hay publicaciones disponibles.</p>
   </div>
 
+  <!-- Iterar sobre las publicaciones -->
   <div *ngFor="let publication of publications" class="publication-card">
     <div *ngIf="miniProfileView.length > 0">
       <div *ngFor="let profile of miniProfileView">
@@ -30,14 +32,12 @@
       <h3>{{ publication.title }}</h3>
       <p class="description">{{ publication.description }}</p>
 
+      <!-- Mostrar imagen de la publicación -->
       <div class="image-display">
-        <img
-          *ngIf="publication.image"
-          [src]="publication.image"
-          alt="Imagen de publicación"
-        />
+        <img *ngIf="publication.image" [src]="publication.image" alt="Imagen de publicación" />
       </div>
 
+      <!-- Detalles de la publicación -->
       <div class="details">
         <p>
           <strong>Fecha límite:</strong> {{ publication.date_limit | date }}
@@ -48,27 +48,39 @@
         </p>
       </div>
 
+      <!-- Sección de comentarios -->
       <div class="comments-section">
         <h3>Comentarios</h3>
-        <div class="comments-list">
-          <div class="comment" *ngFor="let comment of publication.comments">
-            <p class="comment-text"></p>
-            <span class="timestamp"></span>
+        <button 
+          (click)="loadComments(publication._id!, publication)" 
+          class="btn-load-comments"
+          title="Ver comentarios">
+          <i class="fas fa-eye"></i> Ver comentarios
+        </button>
+        
+        <!-- Mostrar comentarios específicos de la publicación -->
+        <div *ngIf="publication.flag && publication.comments && publication.comments.length > 0">
+          <div *ngFor="let comment of publication.comments" class="comment">
+            <p class="comment-text">{{ comment.content }}</p>
           </div>
         </div>
+        
+        <!-- Botón para ocultar comentarios -->
+        <button 
+          (click)="hiddenComments(publication)" 
+          class="btn-hide-comments"
+          title="Ocultar comentarios">
+          <i class="fas fa-eye-slash"></i> Ocultar comentarios
+        </button>
       </div>
+      
 
+      <!-- Formulario para agregar un comentario -->
       <div class="comment-section">
-        <form (ngSubmit)="addComment(publication._id!)" #commentForm="ngForm">
+        <form (ngSubmit)="addComment(publication._id!, publication)" #commentForm="ngForm">
           <div class="form-group">
-            <input
-              type="text"
-              name="comment"
-              placeholder="Escribe tu comentario..."
-              required
-              class="comment-input"
-              [(ngModel)]="commentContent"
-            />
+            <input type="text" name="comment" placeholder="Escribe tu comentario..." required class="comment-input"
+              [(ngModel)]="publication.commentContent" />
             <!-- Enlace bidireccional -->
             <button type="submit" class="btn submit-comment">
               <img src="/assets/paper-airplane.svg" alt="" />
@@ -77,14 +89,6 @@
         </form>
       </div>
 
-      <button (click)="loadComments(publication._id!)">Ver comentarios</button>
-      <div *ngIf="comments.length > 0 && this.flag">
-        <div *ngFor="let comment of comments">
-          <p>{{ comment.content }}</p>
-          <!-- Ajusta según el modelo de comentario -->
-        </div>
-      </div>
-      <button (click)="hiddenComments()">Oculatar comentarios</button>
     </div>
   </div>
 </div>

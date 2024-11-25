@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './list-publications.component.css',
 })
 export class ListPublicationsComponent implements OnInit {
+
   constructor(
     private publicationService: PublicationService,
     private _donees: DoneesService,
@@ -20,7 +21,13 @@ export class ListPublicationsComponent implements OnInit {
     private router: Router
   ) {}
 
-  publications: IPublications[] = [];
+  publications: (IPublications & { 
+    comments: IComments[], 
+    commentContent: string, 
+    flag: boolean 
+    
+  })[] = []; // Cada publicación tiene su propio estado
+
   imagesMap: Map<string, Blob> = new Map();
   miniProfileView: any[] = [];
   photoUrls: { [id: string]: string } = {};
@@ -35,10 +42,15 @@ export class ListPublicationsComponent implements OnInit {
     this.loadPublications();
   }
 
-  loadPublications(): void {
+ loadPublications(): void {
     this.publicationService.getAllPublications().subscribe({
       next: (data: IPublications[]) => {
-        this.publications = data;
+        this.publications = data.map((publication) => ({
+          ...publication,
+          comments: [], 
+          commentContent: '', 
+          flag:  false
+        }));
 
         this.publications.forEach((publication) => {
           if (publication.image) {
@@ -112,31 +124,31 @@ export class ListPublicationsComponent implements OnInit {
     });
   }
 
-  addComment(postId: string) {
-    // Validar que los datos sean correctos
-    if (!postId || this.commentContent == '') {
+  addComment(postId: string, publication: IPublications & { commentContent: string }){
+
+    if (!postId || !publication.commentContent) {
       Swal.fire({
         icon: 'warning',
         title: 'Comentario vacío',
         text: 'Por favor, escribe algo antes de enviar tu comentario.',
-        confirmButtonText: 'Entendido',
-        confirmButtonColor: '#3085d6',
+        showConfirmButton: false,
+        timer: 1000
       });
       return;
     }
-
-    // Verificar si el usuario tiene permisos de comentar
+  
     if (this.rol_access === 'donor') {
-      this.commentService.addComment(postId, this.commentContent).subscribe({
+      this.commentService.addComment(postId, publication.commentContent).subscribe({
         next: (newComment: IComments) => {
-          this.comments.push(newComment);
-          Swal.fire({
+          publication.comments.push(newComment);  // Aquí no debería dar error
++          Swal.fire({
             icon: 'success',
             title: 'Comentario agregado',
             text: 'Tu comentario fue agregado exitosamente.',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#28a745',
+            showConfirmButton: false,
+            timer: 1500
           });
+          publication.commentContent = ''; 
         },
         error: (error: any) => {
           Swal.fire({
@@ -159,13 +171,11 @@ export class ListPublicationsComponent implements OnInit {
     }
   }
 
-  flag: boolean = false;
-  loadComments(postId: string): void {
+  loadComments(postId: string, publication: IPublications & { comments: IComments[], flag: boolean }): void {
     this.commentService.getCommentsByPost(postId).subscribe({
       next: (comments: IComments[]) => {
-        this.comments = comments;
-        this.flag = true;
-        console.log('Comentarios obtenidos:', comments);
+        publication.comments = comments; 
+        publication.flag = true; 
       },
       error: (error: any) => {
         console.error('Error al obtener comentarios:', error);
@@ -173,8 +183,9 @@ export class ListPublicationsComponent implements OnInit {
     });
   }
 
-  hiddenComments(): void {
-    this.flag = false;
+  hiddenComments(publication: IPublications & { flag: boolean }): void {
+    console.log(`Ocultando comentarios para la publicación con ID: ${publication._id}`);
+    publication.flag = false;
   }
 
   seeProfile(id: number): void {
