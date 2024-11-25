@@ -9,6 +9,7 @@ import { CardsComponent } from './cards/cards.component';
 import { MatTooltip } from '@angular/material/tooltip';
 import { DetailsCardsComponent } from './details-cards/details-cards.component';
 import { DetailsPublicationComponent } from './details-publication/details-publication.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { DetailsPublicationComponent } from './details-publication/details-publi
     DetailsCardsComponent,
     DetailsPublicationComponent,
   ],
-  imports: [CommonModule, FormsModule, MatTooltip],
+  imports: [CommonModule, FormsModule, MatTooltip, RouterModule],
   exports: [],
 })
 export class PublicationsModule {}
