@@ -45,8 +45,8 @@ export class ListPublicationsComponent implements OnInit {
       next: (data: IPublications[]) => {
         this.publications = data.map((publication) => ({
           ...publication,
-          comments: [], // Inicializamos los comentarios
-          commentContent: '', // Inicializamos el contenido del comentario
+          comments: [], 
+          commentContent: '', 
           flag:  false
         }));
 
@@ -123,13 +123,13 @@ export class ListPublicationsComponent implements OnInit {
 
   addComment(postId: string, publication: IPublications & { commentContent: string }){
 
-    if (!postId ) {
+    if (!postId || !publication.commentContent) {
       Swal.fire({
         icon: 'warning',
         title: 'Comentario vacío',
         text: 'Por favor, escribe algo antes de enviar tu comentario.',
-        confirmButtonText: 'Entendido',
-        confirmButtonColor: '#3085d6',
+        showConfirmButton: false,
+        timer: 1000
       });
       return;
     }
@@ -142,9 +142,10 @@ export class ListPublicationsComponent implements OnInit {
             icon: 'success',
             title: 'Comentario agregado',
             text: 'Tu comentario fue agregado exitosamente.',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#28a745',
+            showConfirmButton: false,
+            timer: 1500
           });
+          publication.commentContent = ''; 
         },
         error: (error: any) => {
           Swal.fire({
@@ -179,7 +180,8 @@ export class ListPublicationsComponent implements OnInit {
     });
   }
 
-  hiddenComments(publication: IPublications & { flag: boolean }) {
-    publication.flag = false; // Ocultar los comentarios
+  hiddenComments(publication: IPublications & { flag: boolean }): void {
+    console.log(`Ocultando comentarios para la publicación con ID: ${publication._id}`);
+    publication.flag = false;
   }
 }

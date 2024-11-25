@@ -52,7 +52,7 @@
         </button>
         
         <!-- Mostrar comentarios específicos de la publicación -->
-        <div *ngIf="publication.comments && publication.comments.length > 0">
+        <div *ngIf="publication.flag && publication.comments && publication.comments.length > 0">
           <div *ngFor="let comment of publication.comments" class="comment">
             <p class="comment-text">{{ comment.content }}</p>
           </div>
