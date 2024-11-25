@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IPublications } from '../../models/i-publications';
 import { PublicationService } from '../../service/publications.service';
 import { DoneesService } from '../../service/donees.service';
@@ -6,6 +6,7 @@ import { DonorsService } from '../../service/donors.service';
 import { IComments } from '../../models/icomments';
 import { CommentsService } from '../../service/comments.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-publications',
@@ -19,7 +20,8 @@ export class ListPublicationsComponent implements OnInit {
     private publicationService: PublicationService,
     private _donees: DoneesService,
     private commentService: CommentsService,
-    private _donors: DonorsService
+    private _donors: DonorsService,
+    private router: Router
   ) {}
 
   publications: (IPublications & { 
@@ -82,7 +84,7 @@ donorProfiles: Array<{ publicationId: string; commentId: string; name: string; p
     if (publication.id_donee) {
       this._donees.getDoneeNT(publication.id_donee).subscribe({
         next: (response) => {
-          this.loadDoneeProfile(response, publication._id || '');
+          this.loadViewMiniProfile(response, publication._id || '');
         },
         error: (err) => {
           console.log('Error loading donee data:', err);
@@ -114,16 +116,17 @@ donorProfiles: Array<{ publicationId: string; commentId: string; name: string; p
     });
   }
   
-  loadDoneeProfile(profile: any, id_publication: string): void {
-    const doneeProfile = {
+  loadViewMiniProfile(profile: any, id_publication: string) {
+    const miniProfileView = {
+      id_donee: profile.id_donee,
       publicationId: id_publication,
-      name: `${profile.first_name} ${profile.last_name}`,
+      name: profile.first_name + ' ' + profile.last_name,
       photo: profile.photo,
     };
-    this.doneeProfiles.push(doneeProfile);
-    this.loadPhotosDonees(doneeProfile.photo);
+    this.miniProfileView.push(miniProfileView);
+    this.loadPhotosDonees(miniProfileView.photo);
   }
-  
+
   loadDonorProfile(profile: any, id_publication: string, commentId: string): void {
     const donorProfile = {
       publicationId: id_publication,
@@ -243,5 +246,10 @@ donorProfiles: Array<{ publicationId: string; commentId: string; name: string; p
   hiddenComments(publication: IPublications & { flag: boolean }): void {
     console.log(`Ocultando comentarios para la publicación con ID: ${publication._id}`);
     publication.flag = false;
+  }
+
+  seeProfile(id: number): void {
+    localStorage.setItem('profileDonee', id.toString());
+    this.router.navigate(['/profile']);
   }
 }

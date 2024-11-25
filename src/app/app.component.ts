@@ -19,7 +19,7 @@ export class AppComponent {
       // Obtén la ruta actual
       const currentRoute = this.router.url;
       // Define las rutas en las que no quieres mostrar el navbar
-      const routesWithoutNavbar = ['/signIn', '/signUp', '/principal'];
+      const routesWithoutNavbar = ['/signIn', '/signUp', '/'];
 
       // Cambia la visibilidad del navbar según la ruta
       this.showNavbar = !routesWithoutNavbar.includes(currentRoute);

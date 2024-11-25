@@ -118,4 +118,26 @@ export class AccountInfoComponent implements OnInit {
       }
     });
   }
+
+  createConversation() {
+    this._chatService
+      .createConversation(parseInt(this.profileDonor) || 0)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.router.navigate(['/chats']);
+        },
+        error: (error) => {
+          console.log(error);
+          if (error.status == 403) {
+            this.router.navigate(['/signIn']);
+          }
+          if (error.status == 400) {
+            this.router.navigate(['/chats']);
+          } else {
+            Swal.fire('Opss...!', 'Ocurrió un error.', 'error');
+          }
+        },
+      });
+  }
 }

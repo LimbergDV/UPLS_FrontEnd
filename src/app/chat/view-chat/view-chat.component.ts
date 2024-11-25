@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { ChatService } from '../../service/chat.service';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { DonorsService } from '../../service/donors.service';
 import { iDonor } from '../../models/i-donor';
 import { DoneesService } from '../../service/donees.service';

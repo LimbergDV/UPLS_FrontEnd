@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPublications } from '../../models/i-publications';
 import { PublicationService } from '../../service/publications.service';
+import { CheckJWTService } from '../../service/check-jwt.service';
 
 @Component({
   selector: 'app-my-publications',
