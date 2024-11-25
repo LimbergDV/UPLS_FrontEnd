@@ -227,6 +227,17 @@ h3 {
   font-size: 1.2rem;
 }
 
+.comment-author {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.comment-text {
+  margin-left: 15px;
+  color: #555;
+}
+
 
 @media (max-width: 768px) {
   .publications-list {

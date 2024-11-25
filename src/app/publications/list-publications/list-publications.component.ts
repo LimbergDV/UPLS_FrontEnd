@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IPublications } from '../../models/i-publications';
 import { PublicationService } from '../../service/publications.service';
 import { DoneesService } from '../../service/donees.service';
+import { DonorsService } from '../../service/donors.service';
 import { IComments } from '../../models/icomments';
 import { CommentsService } from '../../service/comments.service';
 import Swal from 'sweetalert2';
@@ -11,12 +12,14 @@ import Swal from 'sweetalert2';
   templateUrl: './list-publications.component.html',
   styleUrl: './list-publications.component.css',
 })
+
 export class ListPublicationsComponent implements OnInit {
 
   constructor(
     private publicationService: PublicationService,
     private _donees: DoneesService,
-    private commentService: CommentsService
+    private commentService: CommentsService,
+    private _donors: DonorsService
   ) {}
 
   publications: (IPublications & { 
@@ -29,9 +32,13 @@ export class ListPublicationsComponent implements OnInit {
   imagesMap: Map<string, Blob> = new Map();
   miniProfileView: any[] = [];
   photoUrls: { [id: string]: string } = {};
+  miniProfileCommentView: any[] = [];
 
   comments: IComments[] = [];
   postId: string = '';
+
+  doneeProfiles: Array<{ publicationId: string; name: string; photo: string }> = [];
+donorProfiles: Array<{ publicationId: string; commentId: string; name: string; photo: string }> = [];
 
   rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
   commentContent: string = '';
@@ -71,10 +78,11 @@ export class ListPublicationsComponent implements OnInit {
   }
 
   searchUserData(publication: IPublications): void {
+    // Lógica para manejar el donee
     if (publication.id_donee) {
       this._donees.getDoneeNT(publication.id_donee).subscribe({
         next: (response) => {
-          this.loadViewMiniProfile(response, publication._id || '');
+          this.loadDoneeProfile(response, publication._id || '');
         },
         error: (err) => {
           console.log('Error loading donee data:', err);
@@ -83,25 +91,72 @@ export class ListPublicationsComponent implements OnInit {
     }
   }
 
-  loadViewMiniProfile(profile: any, id_publication: string) {
-    const miniProfileView = {
+  searchUserDonors(publication: IPublications): void {
+    // Lógica para manejar los comentarios de donors
+    publication.comments.forEach(comment => {
+      if (comment.id_donor) {
+        // Verificar si el donor ya está cargado para evitar duplicados
+        const isDonorLoaded = this.donorProfiles.some(
+          profile => profile.commentId === comment._id && profile.publicationId === publication._id
+        );
+  
+        if (!isDonorLoaded) {
+          this._donors.getDonorNT(comment.id_donor).subscribe({
+            next: (response) => {
+              this.loadDonorProfile(response, publication._id || '', comment._id || '');
+            },
+            error: (err) => {
+              console.log('Error loading donor data for comment:', err);
+            },
+          });
+        }
+      }
+    });
+  }
+  
+  loadDoneeProfile(profile: any, id_publication: string): void {
+    const doneeProfile = {
       publicationId: id_publication,
-      name: profile.first_name + ' ' + profile.last_name,
+      name: `${profile.first_name} ${profile.last_name}`,
       photo: profile.photo,
     };
-    this.miniProfileView.push(miniProfileView);
-    this.loadPhotosDonees(miniProfileView.photo);
+    this.doneeProfiles.push(doneeProfile);
+    this.loadPhotosDonees(doneeProfile.photo);
   }
-
-  loadPhotosDonees(profile: any) {
-    console.log('' /*profile*/);
-    this._donees.getPhotoNT(profile).subscribe({
+  
+  loadDonorProfile(profile: any, id_publication: string, commentId: string): void {
+    const donorProfile = {
+      publicationId: id_publication,
+      commentId: commentId,
+      name: `${profile.first_name} ${profile.last_name}`,
+      photo: profile.photo,
+    };
+    this.donorProfiles.push(donorProfile);
+    this.loadPhotosDonors(donorProfile.photo)
+  }
+  
+  loadPhotosDonees(photo: any): void {
+    console.log('Cargando foto de donee');
+    this._donees.getPhotoNT(photo).subscribe({
       next: (blob) => {
         const url = URL.createObjectURL(blob);
-        this.photoUrls[profile] = url;
+        this.photoUrls[photo] = url;
       },
       error: (err) => {
-        console.error('Error loading photo for', profile.name, err);
+        console.error('Error loading photo for donee:', err);
+      },
+    });
+  }
+
+  loadPhotosDonors(photo: any): void {
+    console.log('Cargando foto de donor');
+    this._donors.getPhotoNT(photo).subscribe({
+      next: (blob) => {
+        const url = URL.createObjectURL(blob);
+        this.photoUrls[photo] = url;
+      },
+      error: (err) => {
+        console.error('Error loading photo for donor:', err);
       },
     });
   }
@@ -152,7 +207,8 @@ export class ListPublicationsComponent implements OnInit {
             icon: 'error',
             title: 'Error',
             text: 'Ocurrió un problema al agregar tu comentario. Por favor, intenta nuevamente.',
-            confirmButtonText: 'OK',
+            showConfirmButton: false,
+            timer: 1500,
             confirmButtonColor: '#d33',
           });
         },
@@ -172,14 +228,18 @@ export class ListPublicationsComponent implements OnInit {
     this.commentService.getCommentsByPost(postId).subscribe({
       next: (comments: IComments[]) => {
         publication.comments = comments; 
-        publication.flag = true; 
+        publication.flag = true;
+  
+        // Solo llamamos a los donors aquí
+        this.searchUserDonors(publication);
       },
       error: (error: any) => {
         console.error('Error al obtener comentarios:', error);
       },
     });
   }
-
+   
+  
   hiddenComments(publication: IPublications & { flag: boolean }): void {
     console.log(`Ocultando comentarios para la publicación con ID: ${publication._id}`);
     publication.flag = false;
