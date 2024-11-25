@@ -1,9 +1,9 @@
-.info-title{
+.info-title {
   margin-left: 20vh;
   margin-top: 10vh;
 }
 
-.form-account-info{
+.form-account-info {
   display: flex;
   justify-content: space-between;
   padding: 2% 5% 2% 5%;
@@ -18,7 +18,7 @@
 }
 
 label {
-  margin-left: .5%;
+  margin-left: 0.5%;
   font-weight: 500;
   font-weight: 400;
 }
@@ -45,11 +45,12 @@ select {
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
-.content-account-rigth, .content-account-left{
+.content-account-rigth,
+.content-account-left {
   width: 45%;
 }
 
-.edit-password-button{
+.edit-password-button {
   display: block;
   border: none;
   margin-top: 5px;
@@ -57,7 +58,7 @@ select {
   width: 250px;
   border-radius: 10px;
   border: none;
-  background-color: #4182F9;
+  background-color: #4182f9;
   color: white;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
@@ -67,7 +68,7 @@ select {
   font-size: 20px;
 }
 
-.password-button{
+.password-button {
   margin-top: 20px;
 }
 
@@ -79,7 +80,7 @@ select {
   width: 250px;
   border-radius: 10px;
   border: none;
-  background-color: #4182F9;
+  background-color: #4182f9;
   color: white;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
@@ -97,7 +98,7 @@ select {
   width: 250px;
   border-radius: 10px;
   border: none;
-  background-color: #CF0000;
+  background-color: #cf0000;
   color: white;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
@@ -114,7 +115,9 @@ select {
   padding: 2% 5% 2% 5%;
 }
 
-input:disabled, select:disabled, option:disabled {
+input:disabled,
+select:disabled,
+option:disabled {
   color: #000;
 }
 
@@ -128,5 +131,19 @@ h2 {
   font-weight: 500;
   font-style: normal;
   font-size: 28px;
+}
+
+.btn-createConversation > svg {
+  width: 50px;
+  height: 50px;
+}
+
+.btn-createConversation {
+  background: none;
+  border: none;
+}
+
+h1 {
+  margin: 0;
 }
 
