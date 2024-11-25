@@ -119,8 +119,30 @@
       </div>
     </form>
 
-    <div class="comments" *ngFor="let comment of comments">
-      <li>{{ comment.content }}</li>
+    <!-- Sección de comentarios -->
+    <div class="comments-section">
+      <h3>Comentarios</h3>
+      <button 
+        (click)="loadComments()" 
+        class="btn-load-comments"
+        title="Ver comentarios">
+        <i class="fas fa-eye"></i> Ver comentarios
+      </button>
+      
+      <!-- Mostrar comentarios específicos de la publicación -->
+      <div *ngIf="flag && comments.length > 0">
+        <div *ngFor="let comment of comments" class="comment">
+          <p class="comment-text">{{ comment.content }}</p>
+        </div>
+      </div>
+      
+      <!-- Botón para ocultar comentarios -->
+      <button 
+        (click)="hiddenComments()" 
+        class="btn-hide-comments"
+        title="Ocultar comentarios">
+        <i class="fas fa-eye-slash"></i> Ocultar comentarios
+      </button>
     </div>
   </div>
 </div>

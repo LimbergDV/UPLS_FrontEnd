@@ -8,7 +8,6 @@ import { ProfileModule } from './profile/profile.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterModule } from './register/register.module';
 import { RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { MapsModule } from './maps/maps.module';
 import { PublicationsModule } from './publications/publications.module';
 import { SearchesModule } from './searches/searches.module';
@@ -19,7 +18,7 @@ import { PrincipalModule } from './principal/principal.module';
 
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, HomeComponent],
+  declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

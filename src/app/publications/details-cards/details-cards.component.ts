@@ -19,13 +19,14 @@ export class DetailsCardsComponent implements OnInit {
   comments: IComments[] = [];
   image: File | null = null; // almacenar la imagen
   imagePreview: any;
+  flag: boolean = false;
 
   publication: IPublications = {
     title: '',
     description: '',
     image: '',
     blood_type: '',
-    comments:[]
+    comments: [],
   };
 
   constructor(
@@ -68,6 +69,7 @@ export class DetailsCardsComponent implements OnInit {
     this.commentService.getCommentsByPost(this.id_publication).subscribe({
       next: (comments: IComments[]) => {
         this.comments = comments;
+        this.flag = true;
         console.log('Comentarios obtenidos:', comments);
       },
       error: (error: any) => {
@@ -189,8 +191,8 @@ export class DetailsCardsComponent implements OnInit {
           // Crear el objeto completo con la imagen
           const newPublication: IPublications = {
             ...newPublicationBase,
-            image: response.fileId, 
-            comments:[]// Añadir la imagen (ID)
+            image: response.fileId,
+            comments: [], // Añadir la imagen (ID)
           };
 
           // Retornar el observable para agregar la publicación
@@ -251,5 +253,9 @@ export class DetailsCardsComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  hiddenComments(): void {
+    this.flag = false;
   }
 }

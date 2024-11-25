@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormLoginComponent } from './login/form-login/form-login.component';
 import { ViewProfileComponent } from './profile/view-profile/view-profile.component';
 import { FormRegisterComponent } from './register/form-register/form-register.component';
-import { HomeComponent } from './home/home.component';
 import { ViewMapComponent } from './maps/view-map/view-map.component';
 import { ViewPublicationComponent } from './publications/view-publication/view-publication.component';
 import { ViewSearchComponent } from './searches/view-search/view-search.component';
@@ -18,13 +17,12 @@ const routes: Routes = [
   { path: 'signIn', component: FormLoginComponent },
   { path: 'profile', component: ViewProfileComponent },
   { path: 'signUp', component: FormRegisterComponent },
-  { path: 'home', component: HomeComponent },
   { path: 'maps', component: ViewMapComponent },
   { path: 'publications', component: ViewPublicationComponent },
   { path: 'addPublication', component: AddPublicationComponent},
   { path: 'search', component: ViewSearchComponent },
   { path: 'chats', component: ViewChatComponent },
-  { path: 'principal', component: ViewPrincipalComponent},
+  { path: '', component: ViewPrincipalComponent},
   { path: 'myPublications', component: MyPublicationsComponent},
   { path: 'detailsPublications/:id', component: DetailsPublicationComponent},
   { path: 'education', component: ViewEducationComponent}
