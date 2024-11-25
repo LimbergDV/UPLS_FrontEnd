@@ -10,17 +10,9 @@
   <div *ngFor="let publication of publications" class="publication-card">
     <div *ngIf="miniProfileView.length > 0">
       <div *ngFor="let profile of miniProfileView">
-        <div
-          class="profile-header"
-          *ngIf="profile.publicationId === publication._id"
-        >
-          <img
-            *ngIf="profile.photo"
-            [src]="photoUrls[profile.photo]"
-            alt="Foto de perfil"
-            class="profile-image"
-            (click)="seeProfile(profile.id_donee)"
-          />
+        <div class="profile-header" *ngIf="profile.publicationId === publication._id">
+          <img *ngIf="profile.photo" [src]="photoUrls[profile.photo]" alt="Foto de perfil" class="profile-image"
+            (click)="seeProfile(profile.id_donee)" />
           <span class="profile-name">
             {{ profile.name }}
           </span>
@@ -51,44 +43,47 @@
       <!-- Sección de comentarios -->
       <div class="comments-section">
         <h3>Comentarios</h3>
-        <button 
-          (click)="loadComments(publication._id!, publication)" 
-          class="btn-load-comments"
-          title="Ver comentarios">
+        <button (click)="loadComments(publication._id!, publication)" class="btn-load-comments" title="Ver comentarios">
           <i class="fas fa-eye"></i> Ver comentarios
         </button>
-        
+
         <!-- Mostrar comentarios específicos de la publicación -->
         <div *ngIf="publication.flag && publication.comments && publication.comments.length > 0">
           <div *ngFor="let comment of publication.comments" class="comment">
+            <!-- Contenido del comentario -->
+            <div *ngFor="let profile of donorProfiles">
+              <div *ngIf="profile.publicationId === publication._id && profile.commentId === comment._id">
+                <img *ngIf="profile.photo" [src]="photoUrls[profile.photo]" alt="Foto de perfil del donor"
+                  class="comment-profile-image" />
+                <span class="comment-profile-name">{{ profile.name }}</span>
+              </div>
+            </div>
             <p class="comment-text">{{ comment.content }}</p>
+
+
           </div>
+
+          <!-- Botón para ocultar comentarios -->
+          <button (click)="hiddenComments(publication)" class="btn-hide-comments" title="Ocultar comentarios">
+            <i class="fas fa-eye-slash"></i> Ocultar comentarios
+          </button>
         </div>
-        
-        <!-- Botón para ocultar comentarios -->
-        <button 
-          (click)="hiddenComments(publication)" 
-          class="btn-hide-comments"
-          title="Ocultar comentarios">
-          <i class="fas fa-eye-slash"></i> Ocultar comentarios
-        </button>
-      </div>
-      
 
-      <!-- Formulario para agregar un comentario -->
-      <div class="comment-section">
-        <form (ngSubmit)="addComment(publication._id!, publication)" #commentForm="ngForm">
-          <div class="form-group">
-            <input type="text" name="comment" placeholder="Escribe tu comentario..." required class="comment-input"
-              [(ngModel)]="publication.commentContent" />
-            <!-- Enlace bidireccional -->
-            <button type="submit" class="btn submit-comment">
-              <img src="/assets/paper-airplane.svg" alt="" />
-            </button>
-          </div>
-        </form>
-      </div>
 
+        <!-- Formulario para agregar un comentario -->
+        <div class="comment-section">
+          <form (ngSubmit)="addComment(publication._id!, publication)" #commentForm="ngForm">
+            <div class="form-group">
+              <input type="text" name="comment" placeholder="Escribe tu comentario..." required class="comment-input"
+                [(ngModel)]="publication.commentContent" />
+              <!-- Enlace bidireccional -->
+              <button type="submit" class="btn submit-comment">
+                <img src="/assets/paper-airplane.svg" alt="" />
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
