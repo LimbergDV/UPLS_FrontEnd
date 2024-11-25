@@ -13,6 +13,7 @@ import { ViewPrincipalComponent } from './principal/view-principal/view-principa
 import { MyPublicationsComponent } from './publications/my-publications/my-publications.component';
 import { AddPublicationComponent } from './publications/add-publication/add-publication.component';
 import { DetailsPublicationComponent } from './publications/details-publication/details-publication.component';
+import { ViewEducationComponent } from './education/view-education/view-education.component';
 
 const routes: Routes = [
   { path: 'signIn', component: FormLoginComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'chats', component: ViewChatComponent },
   { path: 'principal', component: ViewPrincipalComponent},
   { path: 'myPublications', component: MyPublicationsComponent},
-  { path: 'detailsPublications/:id', component: DetailsPublicationComponent}
+  { path: 'detailsPublications/:id', component: DetailsPublicationComponent},
+  { path: 'education', component: ViewEducationComponent}
 ];
 
 @NgModule({

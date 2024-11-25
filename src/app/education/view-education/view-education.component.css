@@ -1,0 +1,134 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 7vh 13vh 0;
+}
+
+.principal-container h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  margin: 0;
+}
+
+.principal-content {
+  background-image: url("../../../../public/assets/background-info.png");
+  min-height: 80vh;
+  background-repeat: no-repeat;
+}
+
+.principal-title {
+  position: relative;
+  padding-top: 50px;
+}
+
+.principal-title h2 {
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 1vh;
+  margin-left: 20vh;
+  font-size: 50px;
+  font-weight: 500;
+}
+
+.container-1{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 11vh;
+}
+
+.container-2{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 11vh;
+}
+
+.card {
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  height: 283px;
+  width: 570px;
+  margin-top: 4vh;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 2.0s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  color: #000000;
+  transition: text-shadow 0.5s ease, color 0.1s ease;
+  outline: 5px solid #a61414;
+}
+
+.card-content{
+  display: flex;
+  width: 100%;
+}
+
+.card-image{
+  margin-left: 3vh;
+  margin-top: 10vh;
+  width: 120px;
+  height: 120px;
+}
+
+.card-text{
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 27px;
+  font-weight: 600;
+  margin-top: 5vh;
+  margin-left: 3vh;
+  margin-right: 5vh;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+  font-family: "Poppins", sans-serif;
+}
+
+.card-description {
+  font-size: 20px;
+  text-align: justify;
+  margin-left: 3vh;
+  margin-right: 5vh;
+  font-family: "League Spartan", sans-serif;
+  color: #000000;
+}
+
+
+.card-content2{
+  display: flex;
+  width: 100%;
+}
+
+.card-image2{
+  margin-left: 5vh;
+  margin-top: 10vh;
+  width: 100px;
+  height: 100px;
+}
+
+.card-text2{
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title2 {
+  font-size: 27px;
+  font-weight: 600;
+  line-height: 100%;
+  margin-top: 2vh;
+  font-family: "Poppins", sans-serif;
+}
+
+.card-description2 {
+  font-size: 20px;
+  margin-right: 5vh;
+  font-family: "League Spartan", sans-serif;
+  text-align: justify;
+  color: #000000;
+}
+
