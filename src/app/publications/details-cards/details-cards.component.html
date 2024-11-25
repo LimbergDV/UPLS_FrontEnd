@@ -1,0 +1,171 @@
+<div class="publications-list">
+  <div class="publication-card">
+    <div class="profile-header"></div>
+    <div class="action-buttons">
+      <button
+        class="edit-btn"
+        (click)="editData()"
+        matTooltip="Editar publicación"
+      >
+        <img src="/assets/file.png" alt="Editar" />
+      </button>
+      <button
+        class="delete-btn"
+        (click)="delete()"
+        matTooltip="Eliminar publicación"
+      >
+        <img src="/assets/recycle-bote.png" alt="Eliminar" />
+      </button>
+    </div>
+    <form (submit)="onSubmit()" class="form">
+      <div class="form-group">
+        <label for="title">Título:</label>
+        <input
+          type="text"
+          id="title"
+          [(ngModel)]="publication.title"
+          name="title"
+          placeholder="Mi primera donación"
+          [disabled]="isDisabled"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descripción:</label>
+        <textarea
+          id="description"
+          [(ngModel)]="publication.description"
+          name="description"
+          placeholder="Mi primera donación"
+          min="1"
+          required
+          [disabled]="isDisabled"
+        ></textarea>
+      </div>
+
+      <div class="form-group image-upload">
+        <label for="image" class="image-label">
+          <div class="upload-icon">
+            <img src="/assets/Upload icon.svg" alt="Subir imagen" />
+          </div>
+          <p>Sube tu imagen</p>
+          <small>Soporta formatos: JPEG, PNG</small>
+        </label>
+        <input
+          type="file"
+          id="image"
+          (change)="onFileSelected($event)"
+          accept="image/jpeg, image/png"
+          [disabled]="isDisabled"
+        />
+      </div>
+
+      <div *ngIf="imagePreview" class="image-preview">
+        <p>Vista previa</p>
+        <img [src]="imagePreview" alt="Imagen previa" class="preview-image" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="deadline">Fecha límite:</label>
+          <input
+            type="date"
+            id="deadline"
+            [(ngModel)]="publication.date_limit"
+            name="date_limit"
+            required
+            [disabled]="isDisabled"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="blood-type">Tipo de sangre:</label>
+          <select
+            id="blood-type"
+            [(ngModel)]="publication.blood_type"
+            name="blood_type"
+            required
+            [disabled]="isDisabled"
+          >
+            <option
+              *ngFor="
+                let type of ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-']
+              "
+            >
+              {{ type }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="donors-required">Donantes req:</label>
+          <input
+            type="number"
+            id="donors-required"
+            [(ngModel)]="publication.donors_number"
+            name="donors_number"
+            [disabled]="isDisabled"
+          />
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="btn cancel" (click)="cancel()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn publish" [disabled]="isDisabled">
+          Guardar
+        </button>
+      </div>
+    </form>
+
+    <!-- Sección de comentarios -->
+    <div class="comments-section">
+      <h3>Comentarios</h3>
+      <button
+        (click)="loadComments()"
+        class="btn-load-comments"
+        title="Ver comentarios"
+      >
+        <i class="fas fa-eye"></i> Ver comentarios
+      </button>
+
+      <!-- Mostrar comentarios específicos de la publicación -->
+      <div *ngIf="flag && comments.length > 0">
+        <div *ngFor="let comment of comments" class="comment">
+          <!-- Contenido del comentario -->
+          <div *ngFor="let profile of donorProfiles" class="comment-div1">
+            <div
+              class="comment-div2"
+              *ngIf="
+                profile.publicationId === publication._id &&
+                profile.commentId === comment._id
+              "
+            >
+              <img
+                *ngIf="profile.photo"
+                [src]="photoUrls[profile.photo]"
+                alt="Foto de perfil del donor"
+                class="comment-profile-image"
+                (click)="seeProfile(profile.id_donor)"
+              />
+              <span class="comment-profile-name">{{ profile.name }}</span>
+            </div>
+          </div>
+          <p class="comment-text">{{ comment.content }}</p>
+        </div>
+
+        <!-- Botón para ocultar comentarios -->
+        <button
+          (click)="hiddenComments()"
+          class="btn-hide-comments"
+          title="Ocultar comentarios"
+        >
+          <i class="fas fa-eye-slash"></i> Ocultar comentarios
+        </button>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+</div>

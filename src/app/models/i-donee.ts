@@ -1,4 +1,5 @@
 export interface iDonee {
+  id_donee?: string;
   first_name?: string;
   last_name?: string;
   email?: string;
@@ -11,4 +12,5 @@ export interface iDonee {
     postal_code: string;
     distrit: string;
   };
+  photo?: string;
 }

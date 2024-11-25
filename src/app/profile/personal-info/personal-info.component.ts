@@ -8,6 +8,8 @@ import { DonorsService } from '../../service/donors.service';
 import { Router } from '@angular/router';
 import { iAccess } from '../../models/iAccess';
 import { DoneesService } from '../../service/donees.service';
+import { ChatService } from '../../service/chat.service';
+import { PublicationService } from '../../service/publications.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -15,6 +17,8 @@ import { DoneesService } from '../../service/donees.service';
   styleUrl: './personal-info.component.css',
 })
 export class PersonalInfoComponent implements OnInit {
+  profileDonor: string = localStorage.getItem('profileDonor') || '';
+  profileDonee: string = localStorage.getItem('profileDonee') || '';
   rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
 
   address: iAddress = {
@@ -43,15 +47,23 @@ export class PersonalInfoComponent implements OnInit {
     private _addressService: AddressService,
     private _donorsService: DonorsService,
     private _doneesService: DoneesService,
-    private router: Router
+    private router: Router,
+    private _chatService: ChatService,
+    private _publication: PublicationService
   ) {}
-  
+
   ngOnInit(): void {
-    if (this.rol_access == 'donor') {
-      this.getDonor();
-    }
-    if (this.rol_access == 'donee') {
-      this.getDonoe();
+    if (this.profileDonee != '') {
+      this.getDoneeNT();
+    } else if (this.profileDonor != '') {
+      this.getDonorNT();
+    } else {
+      if (this.rol_access == 'donor') {
+        this.getDonor();
+      }
+      if (this.rol_access == 'donee') {
+        this.getDonee();
+      }
     }
   }
 
@@ -73,7 +85,22 @@ export class PersonalInfoComponent implements OnInit {
     });
   }
 
-  getDonoe(): void {
+  getDonorNT(): void {
+    this._donorsService.getDonorById(this.profileDonor).subscribe({
+      next: (respose) => {
+        this.userData = respose;
+        this.address.postal_code = this.userData.address?.postal_code || '';
+        this.address.state = this.userData.address?.state || '';
+        this.address.locality = this.userData.address?.locality || '';
+        this.address.distrits.push(this.userData.address?.distrit || '');
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  getDonee(): void {
     this._doneesService.getDonee().subscribe({
       next: (respose) => {
         this.userData = respose;
@@ -87,6 +114,21 @@ export class PersonalInfoComponent implements OnInit {
         if (err.status == 401) {
           this.router.navigate(['/signIn']);
         }
+      },
+    });
+  }
+
+  getDoneeNT(): void {
+    this._doneesService.getDoneeById(this.profileDonee).subscribe({
+      next: (respose) => {
+        this.userData = respose;
+        this.address.postal_code = this.userData.address?.postal_code || '';
+        this.address.state = this.userData.address?.state || '';
+        this.address.locality = this.userData.address?.locality || '';
+        this.address.distrits.push(this.userData.address?.distrit || '');
+      },
+      error: (err) => {
+        console.log(err);
       },
     });
   }
@@ -249,12 +291,24 @@ export class PersonalInfoComponent implements OnInit {
         this._doneesService.deleteAccount().subscribe({
           next: (response) => {
             console.log(response);
-            Swal.fire({
-              title: 'Eliminado!',
-              text: 'Gracias por ser parte del movimeinto.',
-              icon: 'success',
+            this._chatService.deleteConversation('Donee').subscribe({
+              next: (response) => {
+                console.log(response);
+                this._publication.deleteAllByDonee().subscribe({
+                  next: () => {
+                    Swal.fire({
+                      title: 'Eliminado!',
+                      text: 'Gracias por ser parte del movimeinto.',
+                      icon: 'success',
+                    });
+                    this.router.navigate(['/signUp']);
+                  },
+                  error: (err) => {
+                    console.log(err);
+                  },
+                });
+              },
             });
-            this.router.navigate(['/signUp']);
           },
           error: (err) => {
             console.log(err);

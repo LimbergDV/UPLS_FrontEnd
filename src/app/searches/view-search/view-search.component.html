@@ -3,7 +3,7 @@
     <div class="btn-return">
       <div class="return-content">
         <img src="return.png" alt="volver" />
-        <p routerLink="/home">Volver</p>
+        <p routerLink="/publications">Volver</p>
       </div>
     </div>
 
@@ -37,12 +37,13 @@
       <div class="info-notf">
         <h3>Tips para la búsqueda</h3>
         <ul>
-          <li>Selecciona más de un filto de búsquda</li>
+          <li>Selecciona más de un filto de búsqueda</li>
           <li>Puedes hacer consultas individuales</li>
           <li>
             Si no encuentras a donadores puedes ver nuestro mapa para encontrar
             a un banco de sangre <br />
-            <a routerLink="/maps">Ver ubicaciones</a>
+
+            <a routerLink="/maps"><p>Ver ubicaciones</p></a>
           </li>
         </ul>
       </div>
@@ -50,7 +51,7 @@
 
     <div class="init" *ngIf="notFoud">
       <div class="img-notf">
-        <img src="notFound.png" alt="img" id="notF"/>
+        <img src="notFound.png" alt="img" id="notF" />
       </div>
       <div class="info-notf">
         <h3>Tips para la búsqueda</h3>

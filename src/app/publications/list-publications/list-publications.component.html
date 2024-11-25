@@ -1,49 +1,129 @@
 <div class="publications-list">
   <h2>Publicaciones</h2>
 
+  <!-- Si no hay publicaciones -->
   <div *ngIf="publications.length === 0" class="no-publications">
     <p>No hay publicaciones disponibles.</p>
   </div>
 
+  <!-- Iterar sobre las publicaciones -->
   <div *ngFor="let publication of publications" class="publication-card">
-    <div class="profile-header">
-      <img src="ruta-de-tu-imagen.jpg" alt="Foto de perfil" class="profile-image">
-      <span class="profile-name">Jesus Madero Ruíz</span>
+    <div *ngIf="miniProfileView.length > 0">
+      <div *ngFor="let profile of miniProfileView">
+        <div
+          class="profile-header"
+          *ngIf="profile.publicationId === publication._id"
+        >
+          <img
+            *ngIf="profile.photo"
+            [src]="photoUrls[profile.photo]"
+            alt="Foto de perfil"
+            class="profile-image"
+            (click)="seeProfile(profile.id_donee)"
+          />
+          <span class="profile-name">
+            {{ profile.name }}
+          </span>
+        </div>
+      </div>
     </div>
+
     <div class="publication-content">
       <h3>{{ publication.title }}</h3>
       <p class="description">{{ publication.description }}</p>
 
+      <!-- Mostrar imagen de la publicación -->
       <div class="image-display">
-        <!-- Usamos el método createImageFromBlob pasando el atributo "image" -->
-        <img *ngIf="createImageFromBlob(publication.image)" [src]="createImageFromBlob(publication.image)" alt="Imagen de publicación">
+        <img
+          *ngIf="publication.image"
+          [src]="publication.image"
+          alt="Imagen de publicación"
+        />
       </div>
 
+      <!-- Detalles de la publicación -->
       <div class="details">
-        <p><strong>Fecha límite:</strong> {{ publication.date_limit | date }}</p>
+        <p>
+          <strong>Fecha límite:</strong> {{ publication.date_limit | date }}
+        </p>
         <p><strong>Tipo de sangre:</strong> {{ publication.blood_type }}</p>
-        <p><strong>Donantes requeridos:</strong> {{ publication.donors_number }}</p>
+        <p>
+          <strong>Donantes requeridos:</strong> {{ publication.donors_number }}
+        </p>
       </div>
 
-      <div class="comment-section">
-        <form >
-          <div class="form-group">
-            <input
-              type="text"
-              name="comment"
-              placeholder="Escribe tu comentario..."
-              required
-              class="comment-input">
-            <button type="submit" class="btn submit-comment"><img src="/assets/paper-airplane.svg" alt=""></button>
+      <!-- Sección de comentarios -->
+      <div class="comments-section">
+        <h3>Comentarios</h3>
+        <button
+          (click)="loadComments(publication._id!, publication)"
+          class="btn-load-comments"
+          title="Ver comentarios"
+        >
+          <i class="fas fa-eye"></i> Ver comentarios
+        </button>
+
+        <!-- Mostrar comentarios específicos de la publicación -->
+        <div
+          *ngIf="
+            publication.flag &&
+            publication.comments &&
+            publication.comments.length > 0
+          "
+        >
+          <div *ngFor="let comment of publication.comments" class="comment">
+            <!-- Contenido del comentario -->
+            <div *ngFor="let profile of donorProfiles" class="comment-div1">
+              <div
+                class="comment-div2"
+                *ngIf="
+                  profile.publicationId === publication._id &&
+                  profile.commentId === comment._id
+                "
+              >
+                <img
+                  *ngIf="profile.photo"
+                  [src]="photoUrls[profile.photo]"
+                  alt="Foto de perfil del donor"
+                  class="comment-profile-image"
+                />
+                <span class="comment-profile-name">{{ profile.name }}</span>
+              </div>
+            </div>
+            <p class="comment-text">{{ comment.content }}</p>
           </div>
-        </form>
-      </div>
 
-      <!-- Lista de comentarios -->
-      <div class="comments-list">
-        <div *ngFor="let comment of publication.comments" class="comment">
-          <p></p>
-          <span class="timestamp"></span>
+          <!-- Botón para ocultar comentarios -->
+          <button
+            (click)="hiddenComments(publication)"
+            class="btn-hide-comments"
+            title="Ocultar comentarios"
+          >
+            <i class="fas fa-eye-slash"></i> Ocultar comentarios
+          </button>
+        </div>
+
+        <!-- Formulario para agregar un comentario -->
+        <div class="comment-section">
+          <form
+            (ngSubmit)="addComment(publication._id!, publication)"
+            #commentForm="ngForm"
+          >
+            <div class="form-group">
+              <input
+                type="text"
+                name="comment"
+                placeholder="Escribe tu comentario..."
+                required
+                class="comment-input"
+                [(ngModel)]="publication.commentContent"
+              />
+              <!-- Enlace bidireccional -->
+              <button type="submit" class="btn submit-comment">
+                <img src="/assets/paper-airplane.svg" alt="" />
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

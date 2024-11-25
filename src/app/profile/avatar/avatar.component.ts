@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import Cropper from 'cropperjs';
 import Swal from 'sweetalert2';
 import { DonorsService } from '../../service/donors.service';
@@ -14,6 +14,8 @@ import { iDonee } from '../../models/i-donee';
 })
 export class AvatarComponent implements OnInit {
   imagenSrc: any;
+  profileDonor: string = localStorage.getItem('profileDonor') || '';
+  profileDonee: string = localStorage.getItem('profileDonee') || '';
   rol_access: string = localStorage.getItem('rolAccess') || 'NoAccess';
 
   userData: iDonor | iDonee = {
@@ -27,15 +29,21 @@ export class AvatarComponent implements OnInit {
   constructor(
     private _donorsService: DonorsService,
     private _doneesService: DoneesService,
-    private sanitizer: DomSanitizer,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
-    if (this.rol_access == 'donor') {
-      this.sessionDonor();
-    }
-    if (this.rol_access == 'donee') {
-      this.sessionDonee();
+    if (this.profileDonee != '') {
+      this.sessionDoneeNT();
+    } else if (this.profileDonor != '') {
+      this.sessionDonorNT();
+    } else {
+      if (this.rol_access == 'donor') {
+        this.sessionDonor();
+      }
+      if (this.rol_access == 'donee') {
+        this.sessionDonee();
+      }
     }
   }
 
@@ -59,6 +67,26 @@ export class AvatarComponent implements OnInit {
     });
   }
 
+  sessionDonorNT(): void {
+    this._donorsService.getDonorById(this.profileDonor).subscribe({
+      next: (response) => {
+        this.userData = response;
+        this._donorsService.getPhotoNT(this.userData.photo || '').subscribe({
+          next: (imgBlob) => {
+            const objectURL = URL.createObjectURL(imgBlob);
+            this.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
   sessionDonee(): void {
     this._doneesService.getPhoto().subscribe({
       next: (imgBlob) => {
@@ -72,6 +100,26 @@ export class AvatarComponent implements OnInit {
     this._doneesService.getDonee().subscribe({
       next: (response) => {
         this.userData = response;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  sessionDoneeNT(): void {
+    this._doneesService.getDoneeById(this.profileDonee).subscribe({
+      next: (response) => {
+        this.userData = response;
+        this._doneesService.getPhotoNT(this.userData.photo || '').subscribe({
+          next: (imgBlob) => {
+            const objectURL = URL.createObjectURL(imgBlob);
+            this.imagenSrc = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
       },
       error: (err) => {
         console.log(err);
@@ -103,7 +151,7 @@ export class AvatarComponent implements OnInit {
       },
       preConfirm: () => {
         return new Promise((resolve) => {
-          if (this.cropper) { 
+          if (this.cropper) {
             const croppedCanvas = this.cropper.getCroppedCanvas({
               width: 200,
               height: 200,

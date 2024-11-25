@@ -22,6 +22,12 @@
   align-items: center;
 }
 
+.return-content:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.4s;
+}
+
 .return-content > img {
   height: 50px;
 }
