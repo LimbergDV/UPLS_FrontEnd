@@ -122,29 +122,50 @@
     <!-- Sección de comentarios -->
     <div class="comments-section">
       <h3>Comentarios</h3>
-      <button 
-        (click)="loadComments()" 
+      <button
+        (click)="loadComments()"
         class="btn-load-comments"
-        title="Ver comentarios">
+        title="Ver comentarios"
+      >
         <i class="fas fa-eye"></i> Ver comentarios
       </button>
-      
+
       <!-- Mostrar comentarios específicos de la publicación -->
       <div *ngIf="flag && comments.length > 0">
         <div *ngFor="let comment of comments" class="comment">
+          <!-- Contenido del comentario -->
+          <div *ngFor="let profile of donorProfiles" class="comment-div1">
+            <div
+              class="comment-div2"
+              *ngIf="
+                profile.publicationId === publication._id &&
+                profile.commentId === comment._id
+              "
+            >
+              <img
+                *ngIf="profile.photo"
+                [src]="photoUrls[profile.photo]"
+                alt="Foto de perfil del donor"
+                class="comment-profile-image"
+                (click)="seeProfile(profile.id_donor)"
+              />
+              <span class="comment-profile-name">{{ profile.name }}</span>
+            </div>
+          </div>
           <p class="comment-text">{{ comment.content }}</p>
         </div>
+
+        <!-- Botón para ocultar comentarios -->
+        <button
+          (click)="hiddenComments()"
+          class="btn-hide-comments"
+          title="Ocultar comentarios"
+        >
+          <i class="fas fa-eye-slash"></i> Ocultar comentarios
+        </button>
       </div>
-      
-      <!-- Botón para ocultar comentarios -->
-      <button 
-        (click)="hiddenComments()" 
-        class="btn-hide-comments"
-        title="Ocultar comentarios">
-        <i class="fas fa-eye-slash"></i> Ocultar comentarios
-      </button>
     </div>
   </div>
+  <br />
+  <br />
 </div>
-<br />
-<br />

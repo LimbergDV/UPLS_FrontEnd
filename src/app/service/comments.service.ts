@@ -4,18 +4,13 @@ import { map, Observable, throwError } from 'rxjs';
 import { IComments } from '../models/icomments';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CommentsService {
-
-  
-
   private apiUrl = 'http://localhost:3000/comments';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   private token: string = localStorage.getItem('token') || '';
-
-
 
   addComment(postId: string, content: string): Observable<IComments> {
     const token = this.token; // Asegúrate de que `this.token` tenga el valor correcto.
@@ -33,11 +28,17 @@ export class CommentsService {
   }
 
   getCommentsByPost(id_post: string): Observable<IComments[]> {
-    const url = `${this.apiUrl}/post/${id_post}`; 
+    const url = `${this.apiUrl}/post/${id_post}`;
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
     });
     return this.http.get<IComments[]>(url, { headers });
   }
 
+  deleteAllDonor(): Observable<any> {
+    const token = this.token;
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete(`${this.apiUrl}/`, { headers });
+  }
 }

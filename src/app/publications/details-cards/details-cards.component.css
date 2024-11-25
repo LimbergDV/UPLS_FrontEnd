@@ -29,26 +29,26 @@ body {
   margin-top: 5vh;
 }
 
-
 .action-buttons {
   display: flex;
   justify-content: end;
   gap: 30px;
   margin-top: 20px;
-
 }
 
-.edit-btn, .delete-btn {
+.edit-btn,
+.delete-btn {
   padding: 8px 16px;
   font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.edit-btn:hover, .delete-btn:hover {
+.edit-btn:hover,
+.delete-btn:hover {
   background-color: #31a0c1;
   transform: translateY(-10px);
 }
@@ -92,7 +92,7 @@ body {
   border: 1px dashed #ccc;
   padding: 20px;
   border-radius: 5px;
-  background-color: #F8F8FF;
+  background-color: #f8f8ff;
   cursor: pointer;
   position: relative;
 }
@@ -124,7 +124,6 @@ body {
   justify-content: space-between;
   margin-top: 20px;
 }
-
 
 .btn {
   padding: 10px 20px;
@@ -250,6 +249,34 @@ body {
 .btn-load-comments i,
 .btn-hide-comments i {
   font-size: 1.2rem;
+}
+
+.comment-author {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.comment-text {
+  margin-left: 15px;
+  color: #555;
+  text-align: start;
+}
+
+.comment-profile-image {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.comment-div2 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.comment-profile-image {
+  cursor: pointer;
 }
 
 /* Estilos para pantallas pequeñas */

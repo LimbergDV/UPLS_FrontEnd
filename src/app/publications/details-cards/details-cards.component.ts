@@ -7,6 +7,7 @@ import { CommentsService } from '../../service/comments.service';
 import Swal from 'sweetalert2';
 import { switchMap } from 'rxjs';
 import { Router } from '@angular/router';
+import { DonorsService } from '../../service/donors.service';
 
 @Component({
   selector: 'app-detailsCards',
@@ -20,6 +21,7 @@ export class DetailsCardsComponent implements OnInit {
   image: File | null = null; // almacenar la imagen
   imagePreview: any;
   flag: boolean = false;
+  photoUrls: { [id: string]: string } = {};
 
   publication: IPublications = {
     title: '',
@@ -29,11 +31,20 @@ export class DetailsCardsComponent implements OnInit {
     comments: [],
   };
 
+  donorProfiles: Array<{
+    publicationId: string;
+    commentId: string;
+    name: string;
+    photo: string;
+    id_donor: number;
+  }> = [];
+
   constructor(
     private _publications: PublicationService,
     private sanitizer: DomSanitizer,
     private commentService: CommentsService,
-    private router: Router
+    private router: Router,
+    private _donors: DonorsService
   ) {}
 
   ngOnInit(): void {
@@ -69,11 +80,74 @@ export class DetailsCardsComponent implements OnInit {
     this.commentService.getCommentsByPost(this.id_publication).subscribe({
       next: (comments: IComments[]) => {
         this.comments = comments;
-        this.flag = true;
         console.log('Comentarios obtenidos:', comments);
+        this.searchUserDonors(this.comments);
+        this.flag = true;
       },
       error: (error: any) => {
         console.error('Error al obtener comentarios:', error);
+      },
+    });
+  }
+
+  searchUserDonors(comments: IComments[]): void {
+    // Lógica para manejar los comentarios de donors
+    comments.forEach((comment) => {
+      if (comment.id_donor) {
+        // Verificar si el donor ya está cargado para evitar duplicados
+        const isDonorLoaded = this.donorProfiles.some(
+          (profile) =>
+            profile.commentId === comment._id &&
+            profile.publicationId === this.publication._id
+        );
+
+        if (!isDonorLoaded) {
+          console.log(comment);
+
+          this._donors.getDonorNT(comment.id_donor).subscribe({
+            next: (response) => {
+              this.loadDonorProfile(
+                response,
+                this.publication._id || '',
+                comment._id || ''
+              );
+            },
+            error: (err) => {
+              console.log('Error loading donor data for comment:', err);
+            },
+          });
+        }
+      }
+    });
+  }
+
+  loadDonorProfile(
+    profile: any,
+    id_publication: string,
+    commentId: string
+  ): void {
+    const donorProfile = {
+      id_donor: profile.id_donor,
+      publicationId: id_publication,
+      commentId: commentId,
+      name: `${profile.first_name} ${profile.last_name}`,
+      photo: profile.photo,
+    };
+    console.log(donorProfile);
+
+    this.donorProfiles.push(donorProfile);
+    this.loadPhotosDonors(donorProfile.photo);
+  }
+
+  loadPhotosDonors(photo: any): void {
+    console.log('Cargando foto de donor');
+    this._donors.getPhotoNT(photo).subscribe({
+      next: (blob) => {
+        const url = URL.createObjectURL(blob);
+        this.photoUrls[photo] = url;
+      },
+      error: (err) => {
+        console.error('Error loading photo for donor:', err);
       },
     });
   }
@@ -257,5 +331,10 @@ export class DetailsCardsComponent implements OnInit {
 
   hiddenComments(): void {
     this.flag = false;
+  }
+
+  seeProfile(id: number): void {
+    localStorage.setItem('profileDonor', id.toString());
+    this.router.navigate(['/profile']);
   }
 }
