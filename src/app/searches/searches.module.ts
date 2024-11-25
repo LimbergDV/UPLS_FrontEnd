@@ -11,6 +11,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [FiltersComponent, ViewSearchComponent, ViewResultsComponent],
@@ -23,7 +24,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatInputModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    RouterModule
   ],
 })
 export class SearchesModule {}

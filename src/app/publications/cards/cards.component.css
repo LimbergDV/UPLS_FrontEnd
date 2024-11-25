@@ -3,7 +3,6 @@ body{
   padding: 0;
 }
 
-
 .row {
   display: flex;
   justify-content: space-between;
@@ -82,4 +81,8 @@ body{
 .delete {
   background-color: #d9534f;
   color: white;
+}
+
+.publication:hover {
+  cursor: pointer;
 }

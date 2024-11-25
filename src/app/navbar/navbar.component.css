@@ -10,6 +10,11 @@
   position: relative;
 }
 
+* {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+}
+
 .elements-left {
   display: flex;
   align-items: center;
@@ -60,7 +65,8 @@
 .icon-img4:hover,
 .icon-img5:hover,
 .icon-img6:hover {
-  filter: brightness(0) saturate(100%) invert(26%) sepia(97%) saturate(7320%) hue-rotate(346deg) brightness(90%) contrast(93%);
+  filter: brightness(0) saturate(100%) invert(26%) sepia(97%) saturate(7320%)
+    hue-rotate(346deg) brightness(90%) contrast(93%);
 }
 
 .elements-left a:hover {

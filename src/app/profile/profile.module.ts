@@ -5,6 +5,7 @@ import { AvatarComponent } from './avatar/avatar.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { FormsModule } from '@angular/forms';
+import { MatTooltip } from '@angular/material/tooltip';
 
 
 
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    MatTooltip
   ]
 })
 export class ProfileModule { }

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IPublications } from '../../models/i-publications';
 import { PublicationService } from '../../service/publications.service';
 import { DoneesService } from '../../service/donees.service';
 import { IComments } from '../../models/icomments';
 import { CommentsService } from '../../service/comments.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-publications',
@@ -16,7 +17,8 @@ export class ListPublicationsComponent implements OnInit {
   constructor(
     private publicationService: PublicationService,
     private _donees: DoneesService,
-    private commentService: CommentsService
+    private commentService: CommentsService,
+    private router: Router
   ) {}
 
   publications: (IPublications & { 
@@ -85,6 +87,7 @@ export class ListPublicationsComponent implements OnInit {
 
   loadViewMiniProfile(profile: any, id_publication: string) {
     const miniProfileView = {
+      id_donee: profile.id_donee,
       publicationId: id_publication,
       name: profile.first_name + ' ' + profile.last_name,
       photo: profile.photo,
@@ -183,5 +186,10 @@ export class ListPublicationsComponent implements OnInit {
   hiddenComments(publication: IPublications & { flag: boolean }): void {
     console.log(`Ocultando comentarios para la publicación con ID: ${publication._id}`);
     publication.flag = false;
+  }
+
+  seeProfile(id: number): void {
+    localStorage.setItem('profileDonee', id.toString());
+    this.router.navigate(['/profile']);
   }
 }
