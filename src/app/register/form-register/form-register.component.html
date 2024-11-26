@@ -10,8 +10,7 @@
       <button
         type="button"
         [ngClass]="flag ? 'donatario' : 'donante'"
-        (click)="toggleDonorDonee($event)"
-      >
+        (click)="toggleDonorDonee($event)">
         {{ flag ? "Registrar como donador" : "Registrar como donatario" }}
       </button>
     </div> <br>
@@ -27,6 +26,8 @@
             placeholder="Ingresa tu nombre"
             [(ngModel)]="userData.first_name"
             required
+            pattern="[A-Za-z]+"
+            title="El nombre solo puede contener letras"
           />
         </div>
 
@@ -38,6 +39,8 @@
             placeholder="Ingresa tu apellido"
             [(ngModel)]="userData.last_name"
             required
+            pattern="[A-Za-z]+"
+            title="El apellido solo puede contener letras"
           />
         </div>
       </div>
@@ -45,10 +48,13 @@
       <div class="input">
         <label for="phone_number">Número de Teléfono</label> <br />
         <input
+          maxlength="10"
           type="text"
           name="phone_number"
           placeholder="Ingresa tu número de teléfono"
           [(ngModel)]="userData.phone_number"
+          pattern="\d{10}"
+          title="El número debe tener exactamente 10 dígitos numéricos."
           required
         />
         <br />
@@ -75,6 +81,8 @@
           name="email"
           placeholder="Ingresa tu correo"
           [(ngModel)]="userData.email"
+          pattern="[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|outlook\.com|gmail\.es|hotmail\.es|outlook\.es)"
+          title="Ingresa un correo valido"
           required
         />
         <br />
@@ -88,6 +96,8 @@
           placeholder="Ingresa tu contraseña"
           [(ngModel)]="userData.password"
           required
+          minlength="9"
+          title="La contraseña debe tener al menos 9 caracteres"
         />
         <br />
       </div>
