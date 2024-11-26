@@ -133,14 +133,73 @@ export class AvatarComponent implements OnInit {
     Swal.fire({
       title: 'Editar Imagen de Perfil',
       html: `
-        <input type="file" id="uploadImage" class="swal2-input" accept="image/*">
-        <div style="margin-top: 10px;">
+      <link href="https://fonts.googleapis.com/css2?family=NombreDeLaFuente&display=swap" rel="stylesheet">
+        <div class="form-group image-upload">
+      <label for="uploadImage" class="image-label">
+        <div class="upload-icon">
+          <img src="/assets/Upload icon.svg" alt="" />
+        </div>
+        <p>Sube tu imagen</p>
+        <small>Soporta formatos: JPEG, PNG</small>
+      </label>
+      <input type="file" id="uploadImage" accept="image/jpeg, image/png" onchange="previewImage(event)">
+    </div>
+       <div style="margin-top: 10px;">
           <img id="imagePreview" style="width: 100%; max-width: 300px; border-radius: 50%; display: none;">
         </div>
-      `,
+    <style>
+      .image-upload {
+        text-align: center;
+        border: 1px dashed #ccc;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: #F8F8FF;
+        cursor: pointer;
+        position: relative;
+      }
+      .image-upload input[type="file"] {
+        display: none;
+      }
+      .image-label {
+        color: #333333;
+      }
+      .upload-icon img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+      }
+      .image-preview {
+        margin-top: 15px;
+        text-align: center;
+      }
+      .image-preview p {
+        font-size: 14px;
+        color: #555;
+      }
+      .preview-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-top: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+.swal2-title-custom {
+  font-family: \'Poppins\', sans-serif; 
+  font-weight: 800; /* Puedes ajustar el peso aquí */
+  font-size: 1.5rem; /* Ajusta el tamaño de la fuente si lo deseas */
+  color: black; /* Cambia el color si es necesario */
+}
+    </style>
+      `, customClass: {
+        title: 'swal2-title-custom',
+        confirmButton: 'btn publish',
+        cancelButton: 'btn cancel'
+      },
       showCancelButton: true,
       confirmButtonText: 'Guardar',
+      confirmButtonColor: '#4182F9',
       cancelButtonText: 'Cancelar',
+      cancelButtonColor: '#cf0000',
       didOpen: () => {
         const input = document.getElementById(
           'uploadImage'
