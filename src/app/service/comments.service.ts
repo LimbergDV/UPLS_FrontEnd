@@ -7,7 +7,7 @@ import { IComments } from '../models/icomments';
   providedIn: 'root',
 })
 export class CommentsService {
-  private apiUrl = 'https://unidposporlasangreapi2.integrador.xyz/comments';
+  private apiUrl = 'https://unidosporlasangreapi2.integrador.xyz/comments';
 
   constructor(private http: HttpClient) {}
   private token: string = localStorage.getItem('token') || '';
