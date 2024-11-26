@@ -65,7 +65,7 @@ export class PublicationService {
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.delete<{ message: string }>(`${this.apiUrl}/allByDonee`, {
+    return this.http.delete<{ message: string }>(`${this.apiUrl}/`, {
       headers,
     });
   }
