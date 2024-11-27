@@ -214,8 +214,8 @@ export class ListPublicationsComponent implements OnInit {
         .addComment(postId, publication.commentContent)
         .subscribe({
           next: (newComment: IComments) => {
-            publication.comments.push(newComment); // Aquí no debería dar error
-            +Swal.fire({
+            publication.comments.push(newComment); 
+            Swal.fire({
               icon: 'success',
               title: 'Comentario agregado',
               text: 'Tu comentario fue agregado exitosamente.',

@@ -32,7 +32,7 @@ import { PrincipalModule } from './principal/principal.module';
     SearchesModule,
     MatTooltip,
     ChatModule,
-    PrincipalModule
+    PrincipalModule,
   ],
 
   providers: [provideAnimationsAsync(), ChatModule],
