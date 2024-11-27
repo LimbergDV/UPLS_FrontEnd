@@ -184,7 +184,7 @@ export class AvatarComponent implements OnInit {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
 .swal2-title-custom {
-  font-family: \'Poppins\', sans-serif; 
+  font-family: \'Poppins\', sans-serif;
   font-weight: 800; /* Puedes ajustar el peso aquí */
   font-size: 1.5rem; /* Ajusta el tamaño de la fuente si lo deseas */
   color: black; /* Cambia el color si es necesario */

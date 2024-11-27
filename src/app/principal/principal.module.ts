@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { PlatformInfoComponent } from './platform-info/platform-info.component';
 import { CollaboratorsComponent } from './collaborators/collaborators.component';
 import { RouterModule } from '@angular/router';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     PlatformInfoComponent,
     CollaboratorsComponent,
+    FooterComponent,
   ],
   imports: [CommonModule, RouterModule],
 })
